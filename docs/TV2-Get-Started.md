@@ -5,10 +5,7 @@ hide:
 
 # 
 <center>
-![TinyTV 2 hardware drawing](\images\banner-tinytv2.jpg)
-</center>
-<center>
-<img src="" alt="" />
+<img src="../images/banner-tinytv2.jpg" alt="TinyTV banner vector image" />
 </center>
 
 **Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
@@ -22,7 +19,9 @@ hide:
 ---
 
 <center>
-![TinyTV vector drawing of a TinyTV 2 entering an x-ray machine](\images\banner-tech-specs.jpg)
+![](\images\)
+
+<img src="../images/banner-tech-specs.jpg" alt="TinyTV vector drawing of a TinyTV 2 entering an x-ray machine" />
 </center>
 
 * **Dimensions**: 47.6mm x 36.6mm x 25.9mm (1.9" x 1.4" x 1.0")
@@ -36,13 +35,13 @@ hide:
 * **Connectivity**: USB-C for uploading and battery charging
 
 <center>
-![TinyTV 2 photo features](\images\TV-2-features-diagram.jpg)
+<img src="../images/TV-2-features-diagram.jpg" alt="TinyTV 2 photo features front of TV" />
 </center>
 
 <center>
-![TinyTV 2 photo features](\images\TV-2-features-diagram-back.jpg)
+<img src="../images/TV-2-features-diagram-back.jpg" alt="TinyTV 2 photo features back of TV" />
 </center>
 
 <center>
-![TinyTV 2 hardware drawing](\images\TV-2-hardware-drawing.png)
+<img src="../images/TV-2-hardware-drawing.png" alt="TinyTV 2 hardware drawing" />
 </center>

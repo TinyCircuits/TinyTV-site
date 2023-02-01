@@ -3,7 +3,7 @@ hide:
   - navigation
 ---
 # 
->
+
 <center>
 <img src="../images/banner-about-us.jpg" alt="TinyTV Team TinyCircuits about us graphic" />
 </center>
