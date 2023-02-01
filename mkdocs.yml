@@ -1,0 +1,97 @@
+site_name: TinyTV®
+
+nav:
+  - Home: index.md
+  - TinyTV Mini: Mini-Get-Started.md
+  - TinyTV 2: TV2-Get-Started.md
+  - Converter App: TinyTV-Converter-App.md
+  - Streaming: Streaming.md
+  - TinyTV History: TinyTV-Story.md
+  - About/Contact: About.md
+
+theme:
+  logo: images/television.png
+  favicon: images/television.png
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    - scheme: default
+      # primary: black
+      # accent: bl
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      # primary: white
+      # accent: yellow
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - header.autohide
+    - navigation.tabs
+    - navigation.tabs.sticky
+  name: material
+  custom_dir: docs/theme_override_home/
+
+# This sheet just has color changes
+extra_css:
+  - stylesheets/extra.css
+
+# social footer icons and links
+extra:
+  analytics:
+    provider: google
+    # property: UA-118275183-3
+    # feedback: # this feature is not available yet
+    #   title: Was this page helpful?
+    #   ratings:
+    #     - icon: material/emoticon-happy-outline
+    #       name: This page was helpful
+    #       data: 1
+    #       note: >-
+    #         Thanks for your feedback!
+    #     - icon: material/emoticon-sad-outline
+    #       name: This page could be improved
+    #       data: 0
+    #       note: >-
+    #         Thanks for your feedback! Help us improve this page by
+    #         using our <a href="https://tinycircuits.com/pages/contact-us" target=_blank>feedback form</a>.
+  homepage: https://tinytv.us
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/TinyCircuits
+      name: TinyCircuits on GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/nkwR3WBBXD
+      name: TinyCircuits on Discord
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/TinyCircuits
+      name: TinyCircuits on Twitter
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/tinycircuits/
+      name: TinyCircuits on Instagram
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/TinyCircuits/
+      name: TinyCircuits on Facebook
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCc4SQjmFcgsbvQFuYNgHuVg
+      name: TinyCircuits on YouTube
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/tinycircuits-com/
+      name: TinyCircuits on LinkedIn
+    - icon: fontawesome/brands/tiktok
+      link: https://www.tiktok.com/@tinycircuits
+      name: TinyCircuits on TikTok
+  # - icon: fontawesome/heading       # there's no logo for this that works well, so I'm leaving it off
+  #   link: https://www.hackster.io/tinycircuits
+  #   name: TinyCircuits on Hackster
+
+# This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
+  markdown_extensions:
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
