@@ -6,7 +6,7 @@ hide:
 # 
 
 <center>
-<img src="../images/Banner-tinytv-mini.jpg" alt="TinyTV Mini banner vector image" />
+<img src="images/Banner-tinytv-mini.jpg" alt="TinyTV Mini banner vector image" />
 </center>
 
 **Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
