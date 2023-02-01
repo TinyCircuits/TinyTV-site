@@ -7,6 +7,9 @@ hide:
 <center>
 ![TinyTV 2 hardware drawing](\images\banner-tinytv2.jpg)
 </center>
+<center>
+<img src="" alt="" />
+</center>
 
 **Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
 

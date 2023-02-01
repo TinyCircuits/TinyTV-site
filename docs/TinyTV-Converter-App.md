@@ -7,7 +7,7 @@ hide:
 #
 
 <center>
-![TinyTV Team TinyCircuits about us graphic](\images\Banner-video-loading.jpg)
+<img src="../images/Banner-video-loading.jpg" alt="TinyTV Team TinyCircuits about us graphic" />
 </center>
 
 
@@ -16,7 +16,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 The TinyTV Converter App is used to convert and crop videos for TinyCircuits TinyTV devices. Our TinyTVs are small and require specific video formats, so you will need to convert all videos you want on your TinyTV using the App from this tutorial.
 
 
-<center><img style="border:1px solid black;" width="60%" height="60%" src="/images/Converter-light-mode.JPG" /></center>
+<center><img style="border:1px solid black;" width="60%" height="60%" src="../images/Converter-light-mode.JPG" /></center>
 
 
 ---
@@ -55,9 +55,6 @@ To download the TinyTV Converter Application, it may help to use Google Chrome. 
 
 You will be prompted to agree to the license coupled with the software and then your computer should generate the application file. Windows users can move on to the <a href="/TinyTV-Converter-App/#open-the-app" alt="Open the app section of the tutorial">**next section**</a>.
 
-
-
-
 Mac users must add the TinyTV Converter Application to the list of accepted Apps by navigating to the Applications folder, finding the TinyTV app, and then right click to open the option menus and press "Open" - press "Open" again on the security window that pops up:
 
 <center><img width="75%" height="75%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TinyTV-App/Mac-double-open-menus.jpg"/></center>
@@ -67,7 +64,7 @@ Mac users must add the TinyTV Converter Application to the list of accepted Apps
 
 ## Open the app:
 
-<center><img width="60%" height="60%" src="/images/Converter-dark-opening-button.JPG" /></center>
+<center><img width="60%" height="60%" src="../images/Converter-dark-opening-button.JPG" /></center>
 <center>_Note: The application is available in light and dark mode and will be set automatically based on your system settings. Shown here is the dark mode version of the app._</center>
 
 Press the button to select a video you wish to convert.
@@ -80,7 +77,7 @@ Once you have selected the video file you want to convert to put on the TV, the 
 
 Select the TinyTV Model compatible with your hardware. Please note that the video output for each TV is not cross-compatible, so it is important to select the correct TV Model at this stage.
 
-<center><img width="60%" height="60%" src="/images/Converter-TV-Model.JPG" /></center>
+<center><img width="60%" height="60%" src="../images/Converter-TV-Model.JPG" /></center>
 
 ---
 
@@ -88,17 +85,17 @@ Select the TinyTV Model compatible with your hardware. Please note that the vide
 
 To customize the appearance of your video, you can select any of the 3 crop options: Contain, Cover, or Fill. The selected crop option will change the appearance of the video player to depict the resulting video format.
 
-<center><img width="50%" height="50%" src="/images/Converter-Contain.JPG" /></center>
+<center><img width="50%" height="50%" src="../images/Converter-Contain.JPG" /></center>
 <center>_Contain_</center>
 
 <p></p>
 
-<center><img width="50%" height="50%" src="/images/Converter-cover.JPG" /></center>
+<center><img width="50%" height="50%" src="../images/Converter-cover.JPG" /></center>
 <center>_Cover_</center>
 
 <p></p>
 
-<center><img width="50%" height="75%" src="/images/Converter-Fill.JPG" /></center>
+<center><img width="50%" height="75%" src="../images/Converter-Fill.JPG" /></center>
 <center>_Fill_</center>
 
 ---
@@ -158,6 +155,3 @@ If you have any questions or feedback, feel free to email us or make a post on o
 
 <center><p>Thanks for supporting TinyCircuits!</p></center>
 
-<!-- link the javascript! -->
-<script src="/assets/highlight/highlight.pack.js"></script>
-<script src="/js/TinyScript.js"></script>

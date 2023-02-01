@@ -5,7 +5,7 @@ hide:
 # 
 
 <center>
-![TinyTV Mini streaming cute vector drawing](\images\banner-usb-streaming.jpg)
+<img src="../images/banner-usb-streaming.jpg" alt="TinyTV Mini streaming cute vector drawing" />
 </center>
 
 This tutorial will show you how to connect a TinyTV 2 or TinyTV Mini to your computer and stream your computer screen to it!
@@ -38,25 +38,25 @@ This tutorial will show you how to connect a TinyTV 2 or TinyTV Mini to your com
 
 
 <center>
-<img src="\images\ConnectTV-Screenshot.jpg" alt="Screen capture of streaming site connect button" width="100%"/>
+<img src="../images/ConnectTV-Screenshot.jpg" alt="Screen capture of streaming site connect button" width="100%"/>
 </center>
     
 * Select the device with "TinyUSB Serial" in its name and then click the "Connect" button, like below _(NOTE: after the first time connecting the serial device, clicking the connect button will automatically connect your TV to the streaming tool and you won't need to choose it again)_  
 
 <center>
-<img src="\images\SelectPort-Screenshot.jpg" alt="Screen capture of " width="100%"/>
+<img src="../images/SelectPort-Screenshot.jpg" alt="Screen capture of selecting port of TinyTV" width="100%"/>
 </center>
     
 * After the page auto detects your TV's type, you will be prompted to select a screen, window, or tab to stream. In this case, we'll choose to stream a desktop screen, as shown below:  
 
 <center>
-<img src="\images\SelectScreen-Screenshot.jpg" alt="Screen capture of " width="100%"/>
+<img src="../images/SelectScreen-Screenshot.jpg" alt="Screen capture of selecting what material to stream" width="100%"/>
 </center>
 
 * At this point, your computer screen should be streaming to your TV! Click the "STOP" button or unplug your TV to go back to video playing mode, change the Crop mode to Contain, Cover, or Fill, or change the screen being streamed by clicking "STOP" and then "CONNECT TV" again.  
 
 <center>
-<img src="\images\Streaming-Screenshot.jpg" alt="Screen capture of " width="100%"/>
+<img src="../images/Streaming-Screenshot.jpg" alt="Screen capture of stop button" width="100%"/>
 </center>
       
 

@@ -5,15 +5,14 @@ hide:
 # 
 
 <center>
-![TinyTV Team TinyCircuits](\images\banner-tinytv-evolution.jpg)
+<img src="../images/banner-tinytv-evolution.jpg" alt="Evolution of TinyTV banner" />
 </center>
-
 
 
 The TinyTV 2 and TinyTV Mini are the latest in family of the TinyTV products, which began as a hobby project using the TinyCircuits TinyDuino family. Yashusi Enari, a TinyCircuits customer in Tokyo, Japan, discovered the [**TinyScreen+**](https://tinycircuits.com/products/tinyscreenplus "TinyScreen+ product page") and began creating his own tiny miniatures with these tiny screens. One of these projects was a retro miniature 3D printed television set, which he called the MAME-TV (Mame translates to "Bean" in English):
 
 <center>
-![Yashusi Enari's MAME-TV Project photos of three painted TVs](\images\panda-precision-tv.jpg)
+<img src="../images/panda-precision-tv.jpg" alt="Yashusi Enari's MAME-TV Project photos of three painted TVs" />
 </center>
 <center>*Yashusi Enari's MAME-TV Project*</center>
 
@@ -40,11 +39,14 @@ While the kit aspect of this is fun for a lot of people, we did hear from others
 ## TinyTV Comparison
 
 <center>
-![TinyTV Banner image of a TinyTV 2 teaching TinyTV Minis in a classroom setting](\images\Banner-what-is-tinytv.jpg)
+![](\images\)
+</center>
+<center>
+<img src="../images/Banner-what-is-tinytv.jpg" alt="TinyTV Banner image of a TinyTV 2 teaching TinyTV Minis in a classroom setting" />
 </center>
 
 <center>
-![TinyTV Team TinyCircuits](\images\tinytv-comparison-chart.jpg)
+<img src="../images/tinytv-comparison-chart.jpg" alt="Comparison of TinyCircuits TinyTVs including TinyTV DIY Kit, TinyTV 2, and TinyTV Mini" />
 </center>
 
 ---

@@ -3,19 +3,22 @@ hide:
   - navigation
 ---
 # 
-
+>
 <center>
-![TinyTV Team TinyCircuits about us graphic](\images\banner-about-us.jpg)
+<img src="../images/banner-about-us.jpg" alt="TinyTV Team TinyCircuits about us graphic" />
 </center>
+
+
 
 We are <a href="https://tinycircuits.com/" target="_blank" alt="TinyCircuits homepage">**TinyCircuits**</a>, and we specialize in making small electronics for makers and hobbyists. 
 
 <center>
-![TinyCircuits group photo](/images/team.jpg)
+<img src="../images/team.jpg" alt="TinyCircuits group photo" />
 </center>
 <center>
 *TinyCircuits' tiny & mighty team*
 </center>
+
 
 We house our own manufacturing operation in Akron, OH, where we assemble, test, and ship all our products. 
 
