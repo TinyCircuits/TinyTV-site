@@ -1,6 +1,6 @@
 # TinyCircuits TinyTV Website
 
-This website holds all of the documentaiton and tutorials for TinyCircuits TinyTV 2 and TinyTV Mini.
+This website holds all of the documentation and tutorials for TinyCircuits TinyTVs.
 
 ---
 
