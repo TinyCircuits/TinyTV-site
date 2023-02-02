@@ -4,10 +4,12 @@ nav:
   - Home: index.md
   - TinyTV Mini: Mini-Get-Started.md
   - TinyTV 2: TV2-Get-Started.md
+  - TinyTV DIY Kit: TinyTV-DIY-Kit.md
   - Converter App: TinyTV-Converter-App.md
   - Streaming: Streaming.md
-  - TinyTV History: TinyTV-Story.md
+  # - TinyTV History: TinyTV-Story.md
   - About/Contact: About.md
+  - JSON Testing: Testing.md
 
 theme:
   logo: images/television.png
@@ -16,28 +18,40 @@ theme:
     text: Roboto
     code: Roboto Mono
   palette:
-    - scheme: default
-      # primary: black
-      # accent: bl
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-    - scheme: slate
-      # primary: white
-      # accent: yellow
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      # primary: 
+      # accent: 
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      # primary: these values were overwritten in stylesheets/extra.css
+      # accent:
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
   features:
     - header.autohide
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.top # 'Back to top' button when scrolling up a page
   name: material
   custom_dir: docs/theme_override_home/
 
 # This sheet just has color changes
 extra_css:
   - stylesheets/extra.css
+
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  # - minify:
+  #     minify_html: true
+
 
 # social footer icons and links
 extra:

@@ -11,7 +11,7 @@ hide:
 
 **Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
 
-**Turn On / Off** - There are three buttons on the top, the middle button will turn the TV on and off. You can also us the Tiny Remote to turn the TV on and off.
+**Turn On / Off** - There are three buttons on the top, the middle button will turn the TV on and off. You can also use the Tiny Remote to turn the TV on and off.
 
 **Changing Volume** - The left button on the top of the TV will cycle between different volume settings.  
 
@@ -19,7 +19,17 @@ hide:
 
 ---
 
-## Tech Specs
+<style>
+  h4 {
+    opacity: 0; 
+  }
+</style>
+
+#### Tech Specs
+
+<center>
+<img src="../images/banner-tech-specs.jpg" alt="TinyTV vector drawing of a TinyTV 2 entering an x-ray machine" />
+</center>
 
 <center>
 <img src="../images/TV-mini-hardware-drawing.png" alt="TinyTV Mini hardware drawing" />

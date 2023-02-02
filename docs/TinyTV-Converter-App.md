@@ -62,7 +62,7 @@ Mac users must add the TinyTV Converter Application to the list of accepted Apps
 
 ---
 
-## Open the app:
+## Open the Application
 
 <center><img width="60%" height="60%" src="../images/Converter-dark-opening-button.JPG" /></center>
 <center>_Note: The application is available in light and dark mode and will be set automatically based on your system settings. Shown here is the dark mode version of the app._</center>
@@ -73,7 +73,7 @@ Once you have selected the video file you want to convert to put on the TV, the 
 
 ---
 
-## TV Option
+## TV Model
 
 Select the TinyTV Model compatible with your hardware. Please note that the video output for each TV is not cross-compatible, so it is important to select the correct TV Model at this stage.
 
@@ -116,10 +116,14 @@ DIY TinyTV Kit 96x64:
 
 TinyTV 2 and TinyTV Mini:
 
-- You can plug the TV into your computer and you can save your converted videos directly to the USB Drive directory that will appear when the TinyTV is connected in **USB mode** and powered on.
-- How to enter **USB mode**:
+-  These TinyTVs have a mass storage mode that will make your TinyTV appear on your computer just like an external drive, either in your Folder Explorer (Windows) or on your desktop/Finder Application (Mac). You can select the TinyTV device directory when converting videos to save the videos directly to your TinyTV's storage. To enter mass storage mode:
 
-      - TinyTV 2: Plug the TinyTV 2 into your computer. Turn off the TinyTV with the top power button while holding the button in for 5 seconds. After 5 seconds, release the button and then press it once. You should see a message on the screen stating the TinyTV is in "USB Mode". The USB drive will appear in your file explorer (Windows), or as a drive on your home screen (Mac):
+    - <ins>Current TinyTV Software</ins>: turn your TV on and connect it to your computer with a USB-C cable, after a few seconds the directory of the TinyTV should appear.
+    - <ins>Pre-Kickstarter TinyTV 2 Software (<a href="TODO" target="_blank" alt="TinyTV firmware updated tool">**Update Software Here**</a>)</ins>: Plug the TinyTV 2 into your computer. Turn off the TinyTV with the top power button while holding the button in for 5 seconds. After 5 seconds, release the button and then press it once. The USB drive will appear in your file explorer (Windows), or as a drive on your home screen (Mac):
+
+You can plug the TV into your computer and you can save your converted videos directly to the USB Drive directory.
+
+that will appear when the TinyTV is connected to your computer with a USB-C cable while powered on. 
 
 <center><img width="75%" height="75%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TinyTV-App/App-main-screen-USB-drive-Mac.jpg" /></center>
 <center>_Your TinyTV USB drive may show up as "untitled"_</center>
@@ -137,7 +141,7 @@ You can use a USB power cable to connect your TinyTV to your computer or another
 
 ---
 
-## Troubleshooting:
+## Troubleshooting
 
 - **"My app appears frozen while I am converting a video"** - Don't worry, this is completely normal. Your video is being converted by the TinyTV app and while it may look like the app is frozen, it's just working hard!
 - If the TinyTV 2 or TinyTV Mini USB device does not appear on your computer - your USB-C cable may not have the necessary data connections required for transferring data. Try using other USB-C cables.

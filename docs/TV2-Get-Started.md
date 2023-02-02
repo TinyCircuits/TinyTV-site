@@ -3,7 +3,8 @@ hide:
   - navigation
 ---
 
-# 
+#
+
 <center>
 <img src="../images/banner-tinytv2.jpg" alt="TinyTV banner vector image" />
 </center>
@@ -18,9 +19,15 @@ hide:
 
 ---
 
-<center>
-![](\images\)
+<style>
+  h4 {
+    opacity: 0; 
+  }
+</style>
 
+#### Tech Specs
+
+<center>
 <img src="../images/banner-tech-specs.jpg" alt="TinyTV vector drawing of a TinyTV 2 entering an x-ray machine" />
 </center>
 

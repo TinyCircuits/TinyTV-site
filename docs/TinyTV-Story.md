@@ -1,4 +1,4 @@
----
+<!-- ---
 hide:
   - navigation
 ---
@@ -39,9 +39,6 @@ While the kit aspect of this is fun for a lot of people, we did hear from others
 ## TinyTV Comparison
 
 <center>
-![](\images\)
-</center>
-<center>
 <img src="../images/Banner-what-is-tinytv.jpg" alt="TinyTV Banner image of a TinyTV 2 teaching TinyTV Minis in a classroom setting" />
 </center>
 
@@ -53,16 +50,16 @@ While the kit aspect of this is fun for a lot of people, we did hear from others
 
 ## Timeline
 
-Spring 2017: Yasushi Enari creates the first prototype of the MAME-TV in Japan using the TinyCircuits TinyScreen+.  Yasushi contacts TinyCircuits to collaborate.
-2017 - 2018: Yasushi hand makes MAME-TVs in Japan and sells to other hobbyists at conventions and it is quite popular and well received.
-Jan 2019: Yasushi Enari is hospitalized with brain tumor and begins intensive treatment.  We begin working on creating the TinyTV DIY Kit with him.
-May 1, 2019: Yasushi Enari passes away in Tokyo
-Fall 2019: The TinyCircuits TinyTV DIY Kit is released 
-April 2022: Completed redesign using the Raspberry Pi Pico processor, the RP2040
-Summer 2022: Testing and Prototyping
-Sept 2022: TinyTV 2 Beta units sent out to testers
-Oct 2022: Kickstarter Campaign Begins
-Nov 2022: Kickstarter Campaign Ends, component purchasing begins
-Dec 2022: Shipping Begins to Early Bird Kickstarter backers
-Jan 2023: Start mass production of electronics and plastic
-Spring 2023: Shipping TinyTV 2 and TinyTV Minis to all Kickstarter Backers
+* **Spring 2017**: Yasushi Enari creates the first prototype of the MAME-TV in Japan using the TinyCircuits TinyScreen+.  Yasushi contacts TinyCircuits to collaborate.
+* **2017 - 2018**: Yasushi hand makes MAME-TVs in Japan and sells to other hobbyists at conventions and it is quite popular and well received.
+* **Jan 2019**: Yasushi Enari is hospitalized with brain tumor and begins intensive treatment.  We begin working on creating the TinyTV DIY Kit with him.
+* **May 1, 2019**: Yasushi Enari passes away in Tokyo
+* **Fall 2019**: The TinyCircuits TinyTV DIY Kit is released 
+* **April 2022**: Completed redesign using the Raspberry Pi Pico processor, the RP2040
+* **Summer 2022**: Testing and Prototyping
+* **Sept 2022**: TinyTV 2 Beta units sent out to testers
+* **Oct 2022**: Kickstarter Campaign Begins
+* **Nov 2022**: Kickstarter Campaign Ends, component purchasing begins
+* **Dec 2022**: Shipping Begins to Early Bird Kickstarter backers
+* **Jan 2023**: Start mass production of electronics and plastic
+* **Spring 2023**: Shipping TinyTV 2 and TinyTV Minis to all Kickstarter Backers -->
