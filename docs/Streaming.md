@@ -24,14 +24,12 @@ This tutorial will show you how to connect a TinyTV 2 or TinyTV Mini to your com
 
 1.  Visit the streaming webpage: **[https://tinycircuits.com/pages/tinytv-live](https://tinycircuits.com/pages/tinytv-live "https://tinycircuits.com/pages/tinytv-live")**  
 2.  Connect your TinyTV to your Windows, Mac, or Linux computer using a USB-C cable. 
-    *  *NOTE: Windows 7/8 users may need to install a driver. Download the **[zadig](https://github.com/pbatard/libwdi/releases/download/v1.4.1/zadig-2.7.exe "zadig")** tool and double click the .exe file to run it, plug in the TV and turn it on, select "Board CDC (interface 0)" in zadig (make sure nothing else is plugged into the computer), select "USB Serial (CDC)" and then click "Install Driver". See this **[link](https://github.com/raspberrypi/pico-feedback/issues/118#issue-823753492 "link")** for a screenshot of what should be selected in zadig before clicking install.*
+    *  *NOTE: Windows 7/8 users may need to install a driver. Download the [**zadig**](https://github.com/pbatard/libwdi/releases/download/v1.4.1/zadig-2.7.exe "zadig downloader tool") tool and double click the .exe file to run it, plug in the TV and turn it on, select "Board CDC (interface 0)" in zadig (make sure nothing else is plugged into the computer), select "USB Serial (CDC)" and then click "Install Driver". See this [**github issue discussion**](https://github.com/raspberrypi/pico-feedback/issues/118#issue-823753492 "github issue discussion") for more information on what should be selected in zadig before clicking install.*
     *  *NOTE: Linux users may need to execute \`sudo adduser $USER dialout\` in a terminal*
-
 
 3.  Turn the TV on 
     * TinyTV 2 - power button is on the top right of the TV
     * TinyTV Mini - power button is the top middle 
-
 
 4.  Eject the TV by pressing the power button again, or eject the TV using your File Explorer (Windows) or Finder (Mac)
 5.  Click the "CONNECT TV" button in the middle of the page, as seen below:

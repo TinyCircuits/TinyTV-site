@@ -7,9 +7,9 @@ nav:
   - TinyTV DIY Kit: TinyTV-DIY-Kit.md
   - Converter App: TinyTV-Converter-App.md
   - Streaming: Streaming.md
-  # - TinyTV History: TinyTV-Story.md
-  - About/Contact: About.md
-  - JSON Testing: Testing.md
+  - Help & FAQ: help.md
+  # - About/Contact: About.md
+  # - JSON Testing: Testing.md
 
 theme:
   logo: images/television.png
@@ -18,20 +18,20 @@ theme:
     text: Roboto
     code: Roboto Mono
   palette:
-    - media: "(prefers-color-scheme: dark)"
+    # - media: "(prefers-color-scheme: dark)"
       scheme: slate
       # primary: 
       # accent: 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      # primary: these values were overwritten in stylesheets/extra.css
-      # accent:
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
+    #   toggle:
+    #     icon: material/toggle-switch
+    #     name: Switch to light mode
+    # - media: "(prefers-color-scheme: light)"
+    #   scheme: default
+    #   # primary: these values were overwritten in stylesheets/extra.css
+    #   # accent:
+    #   toggle:
+    #     icon: material/toggle-switch-off-outline
+    #     name: Switch to dark mode
   features:
     - header.autohide
     - navigation.tabs
@@ -44,6 +44,7 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+copyright: Copyright &copy; 2023 TinyCircuits
 
 # Plugins
 plugins:
