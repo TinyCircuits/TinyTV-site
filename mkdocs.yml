@@ -1,5 +1,8 @@
 site_name: TinyTV®
 
+extra_javascript:
+  - javascripts/streaming/main.js
+
 nav:
   - Home: index.md
   - TinyTV Mini: Mini-Get-Started.md
@@ -108,4 +111,3 @@ extra:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-
