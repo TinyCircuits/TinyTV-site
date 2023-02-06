@@ -162,6 +162,7 @@ self.onmessage = async (message) => {
         self.offscreenOutputCanvas.height = self.offscreenCanvas.height;
         self.offscreenOutputCanvasCtx.drawImage(bitmap, 0, 0, self.offscreenCanvas.width, self.offscreenCanvas.height);
 
+        // Close the frame
         message.data.frame.close();
         self.postMessage({messageType: "lastframesent", messageData: []});
     }else if(message.data.messageType == "connect"){

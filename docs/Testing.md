@@ -21,11 +21,20 @@ hide:
     justify-content: center;
     align-items: center;
   }
+
   .invisible{
     position: absolute;
     visibility: hidden;
     opacity: 0;
   }
+
+  .maximize{
+    width: 40vw; 
+    height: calc(135/216)vw; 
+    max-height: 40vh;
+    max-width: calc(216/135)vh;
+  }
+
 
   /* Override/add to allow centering in page */
   .md-main{
@@ -35,9 +44,36 @@ hide:
     align-items: center;
   }
 
-  /* Override and remove margin to allow complete control over centering elements */
+  /* Override and remove margin to allow complete control over centering elements, grow to max height */
   .md-main__inner{
     margin-top: 0px;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .md-grid{
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  .md-content__inner{
+    margin-top: 0px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Override/add to center elements in max height */
+  .md-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 
   /* Copy of home.html to get buttons to match buttons */
@@ -47,8 +83,6 @@ hide:
   }
 
   .tx-hero .md-button {
-    /* margin-top: .5rem;
-    margin-right: .5rem; */
     color: var(--md-primary-bg-color); /*outline button font and border color*/
     border-radius: 8px;
   }
@@ -74,27 +108,43 @@ hide:
   }
 </style>
 
+<!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/streaming/stream.js -->
+<body>
+  <section id="streamScreen0" class="tx-container flex-center" style="width:100%; height:100%">
+    <h2>TV Streaming</h2>
+    
+    <p id="description">Stream your computer to TinyTV 2 or Mini!</p>
+    <p id="browserSupportError" style="color:red" class="invisible">Browser not supported: please use a Chromium based browser like Google Chrome, Microsoft Edge, Opera, Brave, etc.</p>
+    
+    <div id="outputPreview" style="width:70%; height:70%; display:flex; flex-direction:row; justify-content:center;" class="invisible">
+      <canvas id="outputCanvas" width=216 height=135 style="image-rendering:pixelated; object-fit:contain;"></canvas>
+    </div>
+    
 
-<!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/stream.js -->
-<section id="streamScreen0" class="tx-container flex-center">
-  <h2>TV Streaming</h2>
-  <p id="description">Stream your computer to TinyTV 2 or Mini!</p>
-  <p id="browserSupportError" style="color:red" class="invisible">Browser not supported: please use a Chromium based browser like Google Chrome, Microsoft Edge, Opera, Brave, etc.</p>
-  <div class="tx-hero flex-center">
-    <button id="streamConnectButton" title="stream connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
-      class="md-button md-button--primary">
-      Connect TV
-    </button>
-  </div>
-</section>
+    <div class="tx-hero" style="display:flex; flex-direction:row justify-content:center; align-items:center">
+      <button id="streamConnectButton" title="stream connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
+        class="md-button md-button--primary">
+        Connect TV
+      </button>
+      <div id="cropContainer" class="invisible" style="height:100%; background-color:var(--md-primary-fg-color); border-radius:8px; margin-left:8px; display:flex; justify-content:center; align-items:center; padding:8px;">
+        <label style="display:flex; flex-direction:column; margin-left:8px; margin-right:8px;">
+          <span class="ml-1 text-lg">Contain</span> 
+          <input id="inputContain" type="radio" name="radio-10" class="radio radio-sm radio-primary" checked />
+        </label>
+        <label style="display:flex; flex-direction:column; margin-left:8px; margin-right:8px;">
+          <span class="ml-1 text-lg">Cover</span> 
+          <input id="inputCover" type="radio" name="radio-10" class="radio radio-sm radio-primary" />
+        </label>
+        <label style="display:flex; flex-direction:column; margin-left:8px; margin-right:8px;">
+          <span class="ml-1 text-lg">Fill</span> 
+          <input id="inputFill" type="radio" name="radio-10" class="radio radio-sm radio-primary" />
+        </label>
+      </div>
+    </div>
 
-<section id="streamScreen1" class="tx-container flex-center invisible">
-  <h2>TV Streaming</h2>
-  <p>Stream your computer to TinyTV 2 or Mini!</p>
-  <div class="tx-hero flex-center">
-    <button title="stream connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
-      class="md-button md-button--primary">
-      Connect TV
-    </button>
-  </div>
-</section>
+    <h3 id="infoOutput" class="invisible">Detecting TV...</h3>
+  </section>
+
+
+  <script type="module" src="/javascripts/streaming/main.js"></script>
+</body>
