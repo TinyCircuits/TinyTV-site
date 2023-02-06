@@ -9,7 +9,6 @@ nav:
   - Streaming: Streaming.md
   # - TinyTV History: TinyTV-Story.md
   - About/Contact: About.md
-  - JSON Testing: Testing.md
 
 theme:
   logo: images/television.png

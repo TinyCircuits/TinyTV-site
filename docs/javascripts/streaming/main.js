@@ -8,6 +8,7 @@ let description = document.getElementById("description");
 let outputPreview = document.getElementById("outputPreview");
 let outputCanvas = document.getElementById("outputCanvas");
 let infoOutput = document.getElementById("infoOutput");
+let audioSupportMessage = document.getElementById("audioSupportMessage");
 
 let cropContainer = document.getElementById("cropContainer");
 let inputContain = document.getElementById("inputContain");
@@ -25,7 +26,8 @@ if(streamScreen0 &&
    cropContainer &&
    inputContain &&
    inputCover &&
-   inputFill){
+   inputFill &&
+   audioSupportMessage){
     if (!("serial" in navigator)){
         streamConnectButton.disabled = true;
         browserSupportError.classList.remove("invisible");
@@ -51,6 +53,7 @@ if(streamScreen0 &&
         cropContainer.classList.add("invisible");
         infoOutput.classList.add("invisible");
         description.classList.remove("invisible");
+        audioSupportMessage.classList.remove("invisible");
     }
     jpegStreamer.onTVDetected = (tvString) => {
         infoOutput.innerText = tvString + " detected!";
@@ -60,6 +63,7 @@ if(streamScreen0 &&
         cropContainer.classList.remove("invisible");
         description.classList.add("invisible");
         infoOutput.classList.add("invisible");
+        audioSupportMessage.classList.add("invisible");
     }
 
 
