@@ -6,8 +6,6 @@ hide:
 
 <!-- All that up there hides the navigation (left pane) and table of contents (right pane) -->
 
-
-<<<<<<< HEAD
 <style>
   /* Remove page title */
   h1{
@@ -45,12 +43,6 @@ hide:
     width: 100%;
   }
 
-  .md-grid{
-    margin-left: 0;
-    margin-right: 0;
-    max-width: 100%;
-  }
-
   .md-content__inner{
     margin-top: 0px;
     flex-grow: 1;
@@ -60,6 +52,7 @@ hide:
     align-items: center;
     width: 100%;
     height: 100%;
+    padding-top: 0;
   }
 
 
@@ -104,7 +97,7 @@ hide:
     <p id="browserSupportError" style="color:red" class="invisible">Browser not supported: please use a Chromium based browser like Google Chrome, Microsoft Edge, Opera, Brave, etc.</p>
     <p id="audioSupportMessage">(Audio currently not supported)</p>
 
-    <div id="outputPreview" style="width:70%; height:70%; display:flex; flex-direction:row; justify-content:center;" class="invisible">
+    <div id="outputPreview" style="width:60%; height:60%; display:flex; flex-direction:row; justify-content:center;" class="invisible">
       <canvas id="outputCanvas" width=216 height=135 style="image-rendering:pixelated; object-fit:contain;"></canvas>
     </div>
     
