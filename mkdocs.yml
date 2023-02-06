@@ -17,32 +17,33 @@ theme:
     text: Roboto
     code: Roboto Mono
   palette:
-    - media: "(prefers-color-scheme: dark)"
+    # - media: "(prefers-color-scheme: dark)"
       scheme: slate
       # primary: 
       # accent: 
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      # primary: these values were overwritten in stylesheets/extra.css
-      # accent:
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
+    #   toggle:
+    #     icon: material/toggle-switch
+    #     name: Switch to light mode
+    # - media: "(prefers-color-scheme: light)"
+    #   scheme: default
+    #   # primary: these values were overwritten in stylesheets/extra.css
+    #   # accent:
+    #   toggle:
+    #     icon: material/toggle-switch-off-outline
+    #     name: Switch to dark mode
   features:
     - header.autohide
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top # 'Back to top' button when scrolling up a page
   name: material
-  custom_dir: docs/theme_override_home/
+  custom_dir: docs/overrides/
 
 # This sheet just has color changes
 extra_css:
   - stylesheets/extra.css
 
+copyright: Copyright &copy; 2023 TinyCircuits
 
 # Plugins
 plugins:
@@ -55,8 +56,8 @@ plugins:
 # social footer icons and links
 extra:
   analytics:
-    provider: google
-    # property: UA-118275183-3
+    provider: google # TODO
+    # property: UA-118275183-3 
     # feedback: # this feature is not available yet
     #   title: Was this page helpful?
     #   ratings:
@@ -71,7 +72,7 @@ extra:
     #       note: >-
     #         Thanks for your feedback! Help us improve this page by
     #         using our <a href="https://tinycircuits.com/pages/contact-us" target=_blank>feedback form</a>.
-  homepage: https://tinytv.us
+  homepage: https://tinytv.us # TODO
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/TinyCircuits

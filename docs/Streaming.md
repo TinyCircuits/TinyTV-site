@@ -7,6 +7,7 @@ hide:
 <!-- All that up there hides the navigation (left pane) and table of contents (right pane) -->
 
 
+<<<<<<< HEAD
 <style>
   /* Remove page title */
   h1{

@@ -116,7 +116,7 @@ DIY TinyTV Kit 96x64:
 
 TinyTV 2 and TinyTV Mini:
 
--  These TinyTVs have a mass storage mode that will make your TinyTV appear on your computer just like an external drive, either in your Folder Explorer (Windows) or on your desktop/Finder Application (Mac). You can select the TinyTV device directory when converting videos to save the videos directly to your TinyTV's storage. To enter mass storage mode:
+-  These TinyTVs have a USB Mode that will make your TinyTV appear on your computer just like an external drive, either in your Folder Explorer (Windows) or on your desktop/Finder Application (Mac). You can select the TinyTV device directory when converting videos to save the videos directly to your TinyTV's storage. To enter USB Mode:
 
     - <ins>Current TinyTV Software</ins>: turn your TV on and connect it to your computer with a USB-C cable, after a few seconds the directory of the TinyTV should appear.
     - <ins>Pre-Kickstarter TinyTV 2 Software (<a href="TODO" target="_blank" alt="TinyTV firmware updated tool">**Update Software Here**</a>)</ins>: Plug the TinyTV 2 into your computer. Turn off the TinyTV with the top power button while holding the button in for 5 seconds. After 5 seconds, release the button and then press it once. The USB drive will appear in your file explorer (Windows), or as a drive on your home screen (Mac):
