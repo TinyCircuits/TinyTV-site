@@ -28,13 +28,6 @@ hide:
     opacity: 0;
   }
 
-  .maximize{
-    width: 40vw; 
-    height: calc(135/216)vw; 
-    max-height: 40vh;
-    max-width: calc(216/135)vh;
-  }
-
 
   /* Override/add to allow centering in page */
   .md-main{
@@ -65,16 +58,9 @@ hide:
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
   }
 
-  /* Override/add to center elements in max height */
-  .md-content{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
 
   /* Copy of home.html to get buttons to match buttons */
   .tx-hero {
@@ -122,12 +108,12 @@ hide:
     </div>
     
 
-    <div class="tx-hero" style="display:flex; flex-direction:row justify-content:center; align-items:center">
+    <div class="tx-hero" style="display:flex; flex-direction:row; justify-content:center; align-items:center">
       <button id="streamConnectButton" title="stream connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
         class="md-button md-button--primary">
         Connect TV
       </button>
-      <div id="cropContainer" class="invisible" style="height:100%; background-color:var(--md-primary-fg-color); border-radius:8px; margin-left:8px; display:flex; justify-content:center; align-items:center; padding:8px;">
+      <div id="cropContainer" class="invisible" style="background-color:var(--md-primary-fg-color); border-radius:8px; margin-left:8px; display:flex; justify-content:center; align-items:center; padding:8px;">
         <label style="display:flex; flex-direction:column; margin-left:8px; margin-right:8px;">
           <span class="ml-1 text-lg">Contain</span> 
           <input id="inputContain" type="radio" name="radio-10" class="radio radio-sm radio-primary" checked />
