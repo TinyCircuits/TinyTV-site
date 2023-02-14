@@ -28,6 +28,7 @@ class Serial{
         this.onConnect = () => {};
         this.onDisconnect = () => {};
         this.onData = (data) => {};
+        this.onConnectionCanceled = () => {};
     }
 
 
@@ -83,7 +84,7 @@ class Serial{
     }
 
 
-    async disconnect(){
+    async disconnect(fireCallback=true){
         if(this.connected){
             this.reader.releaseLock();
             this.writer.releaseLock();
@@ -94,7 +95,7 @@ class Serial{
             this.port = undefined;
 
             this.connected = false;
-            this.onDisconnect();
+            if(fireCallback) this.onDisconnect();
 
             console.log("Serial disconnected!");
         }
@@ -156,7 +157,7 @@ class Serial{
 
     async connect(baudRate=2000000, bufferSize=2048){
         // If auto connect fails, continue to manual selection
-        if(await this.attemptAutoConnect() == false){
+        if(!this.manuallyConnecting && await this.attemptAutoConnect() == false){
             this.manuallyConnecting = true;
             try{
                 console.log("Waiting on device selection...");
@@ -165,6 +166,7 @@ class Serial{
             }catch(error){
                 // User did not select anything and closed browser dialog
                 console.log("No device selected for connection...");
+                this.onConnectionCanceled();
             }
             this.manuallyConnecting = false;
         }

@@ -8,7 +8,8 @@ const TV_SIZES = {
 const TV_TYPES = {
     NONE: "NONE",
     TINYTV_2: "TV2",
-    TINYTV_MINI: "TVMINI"
+    TINYTV_MINI: "TVMINI",
+    TINYTV_DIY: "TVDIY"
 };
 
 const TV_JPEG_QUALITIES = {
