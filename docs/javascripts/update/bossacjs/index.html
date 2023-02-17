@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BossacJS</title>
+        
+    </head>
+
+    <body style="background-color: gray;">
+        <button id="f0">flappy</button>
+        <button id="f1">test</button>
+
+        <script type="module">
+            import { Serial } from "./serial.js";
+
+            async function upload(firmwareName){
+                // chrome://device-log/?refresh=1
+                const decoder = new TextDecoder();
+
+                let serial = new Serial([{usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]);
+                let collectedData = "";
+                serial.onData = (data) => {
+                    collectedData += decoder.decode(data);
+                    console.log(decoder.decode(data));
+                }
+
+                let checkCollectedDataFor = async (text) => {
+                    return new Promise((resolve, reject) => {
+                        let check = () => {
+                            setTimeout(() => {
+                                if(collectedData.indexOf(text) == -1){
+                                    check();
+                                    console.warn("looking for " + text);
+                                }else{
+                                    collectedData = "";
+                                    resolve(true);
+                                }
+                            }, 10);
+                        }
+                        check();
+                    });
+                }
+
+                let wait = async (ms) => {
+                    return new Promise((resolve, reject) => {
+                        let count = 0;
+                        let wait1ms = () => {
+                            setTimeout(() => {
+                                if(count < ms){
+                                    count++;
+                                    wait1ms();
+                                }else{
+                                    resolve();
+                                }
+                            }, 1);
+                        }
+                        wait1ms();
+                    });
+                }
+
+                const programFlashStart = 0x2000;
+                const uploadPacketSize = 4096;
+                const sramBufferAddress = 0x20005000;   // Taken from Arduino IDE output with verbose option enabled
+                
+
+                const binData = new Uint8Array(await (await fetch(firmwareName)).arrayBuffer());
+                const packetCount = Math.ceil(binData.byteLength/uploadPacketSize);
+
+                serial.onConnect = async () => {
+                    console.warn("...");
+
+                    // Erase flash after bootloader
+                    await serial.write("X" + programFlashStart.toString(16) + "#", true);
+                    await wait(1);
+                    await checkCollectedDataFor("X\n\r");
+
+                    for(let ipx=0; ipx<packetCount; ipx++){
+                        let packet = binData.slice((ipx*uploadPacketSize), (ipx*uploadPacketSize)+uploadPacketSize)
+
+                        // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L511
+                        const cmd0 = "S" + sramBufferAddress.toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";
+                        console.log(cmd0);
+                        await serial.write(cmd0, true);
+                        await wait(1);
+
+                        // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L528
+                        await serial.write(packet, false);
+                        await wait(1);
+
+                        // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L619
+                        const cmd1 = "Y" + sramBufferAddress.toString(16) + ",0#";
+                        console.log(cmd1);
+                        await serial.write(cmd1, true);
+                        await wait(1);
+                        await checkCollectedDataFor("Y\n\r");
+
+                        // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L629
+                        const cmd2 = "Y" + (programFlashStart + (ipx*uploadPacketSize)).toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";
+                        console.log(cmd2);
+                        await serial.write(cmd2, true);
+                        await wait(1);
+                        await checkCollectedDataFor("Y\n\r");
+                        await wait(1);
+
+                        console.log("");
+                    }
+
+                    // CPU reset https://github.com/shumatech/BOSSA/blob/3532de82efd28fadbabc2b258d84dddf14298107/src/Device.cpp#L652
+                    await serial.write("WE000ED0C,05FA0004#", true);
+                }
+
+                await serial.connect();
+            }
+
+
+            document.getElementById("f0").onclick = async (event) => {
+                upload("f0.bin");
+            }
+
+            document.getElementById("f1").onclick = async (event) => {
+                upload("f1.bin");
+            }
+        </script>
+    </body>
+</html>

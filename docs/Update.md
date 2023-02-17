@@ -8,7 +8,7 @@ hide:
 
 <style>
   /* Remove page title */
-  h1{
+  h1 {
     visibility: hidden;
     position: absolute;
   }
@@ -16,14 +16,14 @@ hide:
 
 
   /* Convenience class for centering elements */
-  .flex-center{
+  .flex-center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  .invisible{
+  .invisible {
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -31,7 +31,7 @@ hide:
 
 
   /* Override/add to allow centering in page */
-  .md-main{
+  .md-main {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,13 +39,13 @@ hide:
   }
 
   /* Override and remove margin to allow complete control over centering elements, grow to max height */
-  .md-main__inner{
+  .md-main__inner {
     margin-top: 0px;
     flex-grow: 1;
     width: 100%;
   }
 
-  .md-content__inner{
+  .md-content__inner {
     margin-top: 0px;
     flex-grow: 1;
     display: flex;
@@ -61,10 +61,16 @@ hide:
     margin: 0;
   }
 
+  .md-typeset h3 {
+    margin: 0px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+  }
+
 
   /* Copy of home.html to get buttons to match buttons */
   .tx-hero {
-    margin: 32px 2.8rem;
+    margin: 8px 0px;
     color: var(--md-primary-bg-color);
   }
 
@@ -88,19 +94,46 @@ hide:
     border-color: var(--md-accent-fg-color); /*border color on hover*/
   }
 
-  .tx-hero .md-button:disabled{
+  .tx-hero .md-button:disabled {
     cursor: not-allowed;
     filter: brightness(50%);
   }
 
-  .choose{
+  .choose {
     width: 100%;
     display: flex;
     justify-content: space-around;
     max-width: 61rem;
     margin-right: auto;
     margin-left: auto;
+    margin-top: 32px;
     padding: 0 .2rem;
+  }
+
+  .progress-bar-parent {
+    display: flex;
+    height: 25px;
+    width: 50%;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    outline: 1px solid green;
+  }
+
+  .progress-bar {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(0, 170, 0);
+    border-radius: 8px;
+  }
+
+  .progress-bar-text {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 
   .item {
@@ -121,10 +154,19 @@ hide:
 
 <!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/streaming/stream.js -->
 <body>
-  <section id="streamScreen0" class="tx-container flex-center" style="width:100%; height:100%">
+  <section id="updateSection" class="tx-container flex-center" style="width:100%; height:100%">
     <h2>TV Updating</h2>
     
     <p id="description" style="display:flex; text-align: center;">Update software on TinyTV 2, Mini, or DIY Kit</p>
+
+    <div id="progressBar" class="progress-bar-parent invisible">
+      <div id="progressBarBar" class="progress-bar">
+      </div>
+      <div id="progressBarText" class="progress-bar-text">
+        50%
+      </div>
+    </div>
+
     <p id="browserSupportError" style="color:red" class="invisible">Browser not supported: please use a Chromium based browser like Google Chrome, Microsoft Edge, Opera, Brave, etc.</p>
 
 
@@ -170,28 +212,37 @@ hide:
       </div>
     </div>
 
-
-
-    <div class="tx-hero" style="display:flex; flex-direction:row; justify-content:center; align-items:center">
-      <button id="connectButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
-        class="md-button md-button--primary">
-        Connect TV
-      </button>
-      <button id="manualUpdateButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
-        class="md-button md-button--primary invisible" style="margin-left:8px">
-        Manual Update
-      </button>
-      <button id="step1NextButton" title="go to step 2" alt="Button that goes to the next step"
-        class="md-button md-button--primary invisible" style="margin-left:8px">
-        Next
-      </button>
-      <button id="step2NextButton" title="go to step 3" alt="Button that goes to the next step"
-        class="md-button md-button--primary invisible" style="margin-left:8px">
-        Next
-      </button>
-    </div>
-
     <h3 id="infoOutput" class="invisible">Detecting TV...</h3>
+
+    <div id="buttonContainer" class="tx-hero" style="display:flex; flex-direction:column; justify-content:center; align-items:center">
+      <div>
+        <button id="connectButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
+          class="md-button md-button--primary">
+          Connect TV
+        </button>
+        <button id="manualUpdateButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
+          class="md-button md-button--primary invisible" style="margin-left:8px">
+          Manual Update
+        </button>
+      </div>
+
+      <div style="display:flex; flex-flow:column">
+        <div>
+          <button id="backButton" title="go to the previous step" alt="Button that goes back a step"
+            class="md-button md-button--primary invisible" style="margin-left:8px">
+            Back
+          </button>
+          <button id="nextButton" title="go to the next step" alt="Button that goes to the next step"
+            class="md-button md-button--primary invisible" style="margin-left:8px">
+            Next
+          </button>
+        </div>
+        <div style="display:flex; justify-content:center; align-items:center; margin-top:16px; text-decoration: underline;">
+          <a id="cancelManualUpdate" class="invisible" style="cursor:pointer">Cancel</a>
+        </div>
+      </div>
+
+    </div>
   </section>
 
 
