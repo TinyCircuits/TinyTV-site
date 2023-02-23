@@ -2,28 +2,40 @@ class BasicPicoboot{
     constructor(){
         this.device = undefined;
 
+        this.connected = false;
+
         // Callbacks for external implementation
+        this.onUpdateStart = () => {};
         this.onUpdateProgress = (percentage) => {};
         this.onUpdateComplete = () => {};
+        this.onConnectionCanceled = () => {};
     }
 
 
     async connect(){
-        // Do web side of getting the device
-        this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
-        await this.device.open();
+        try{
+            // Do web side of getting the device
+            this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
+            this.connected = true;
 
-        if(this.device.configuration === null){
-            device.setConfiguration(1);
+            await this.device.open();
+
+            if(this.device.configuration === null){
+                device.setConfiguration(1);
+            }
+
+            await this.device.claimInterface(1);
+
+            // Get USB exclusive control according to the datasheet PICOBOOT interface commands
+            await this.#exclusive();
+
+            // Wireshark does this after every erase and write but it seems to work by just doing it once
+            await this.#exitxip();
+        }catch(error){
+            // User did not select anything and closed browser dialog
+            console.log("No USB device selected for connection or couldn't open port...", error);
+            this.onConnectionCanceled();
         }
-
-        await this.device.claimInterface(1);
-
-        // Get USB exclusive control according to the datasheet PICOBOOT interface commands
-        await this.#exclusive();
-
-        // Wireshark does this after every erase and write but it seems to work by just doing it once
-        await this.#exitxip();
     }
 
 
@@ -33,6 +45,10 @@ class BasicPicoboot{
 
 
     async update(firmwarePath){
+        if(!this.connected){
+            return;
+        }
+
         const flashSectorSize = 4096;
 
         const uf2Data = await (await fetch(firmwarePath)).arrayBuffer();
@@ -41,6 +57,8 @@ class BasicPicoboot{
         const uf2BlockPayloadSize = 256;
         let uf2Payload = new Uint8Array(flashSectorSize);
         const uf2FlashStartAddress = new DataView(uf2Data.slice(0, uf2BlockSize)).getUint32(12, true);
+
+        this.onUpdateStart();
 
         for(let ibx=0, ipx=0, flashAddressOffset=0; ibx<uf2BlockCount; ibx++, ipx++){
             const uf2Offset = ibx*uf2BlockSize;
@@ -70,6 +88,10 @@ class BasicPicoboot{
 
 
     async #exclusive(){
+        if(!this.connected){
+            return;
+        }
+
         return new Promise(async (resolve, reject) => {
             let packet = new ArrayBuffer(32);
             let dataView = new DataView(packet);
@@ -97,6 +119,10 @@ class BasicPicoboot{
 
 
     async #reboot(){
+        if(!this.connected){
+            return;
+        }
+
         return new Promise(async (resolve, reject) => {
             let packet = new ArrayBuffer(32);
             let dataView = new DataView(packet);
@@ -118,6 +144,7 @@ class BasicPicoboot{
                 console.error("Could not reboot...");
                 reject();
             }else{
+                this.connected = false;
                 console.log("Wrote reboot!");
                 resolve();
             }
@@ -126,6 +153,10 @@ class BasicPicoboot{
 
 
     async #exitxip(){
+        if(!this.connected){
+            return;
+        }
+
         return new Promise(async (resolve, reject) => {
             let packet = new ArrayBuffer(32);
             let dataView = new DataView(packet);
@@ -151,6 +182,10 @@ class BasicPicoboot{
 
 
     async #flasherase(address, size){
+        if(!this.connected){
+            return;
+        }
+
         return new Promise(async (resolve, reject) => {
             let packet = new ArrayBuffer(32);
             let dataView = new DataView(packet);
@@ -179,6 +214,10 @@ class BasicPicoboot{
 
 
     async #flashwrite(address, size, payload){
+        if(!this.connected){
+            return;
+        }
+
         return new Promise(async (resolve, reject) => {
             let packet = new ArrayBuffer(32);
             let dataView = new DataView(packet);

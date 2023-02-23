@@ -44,37 +44,37 @@
                                              |                           |             |                   XX |                   |                         |                          |
                                              |                           v             |         +         |  |                   v                         v                          v
                                              |                                         |         |         |  |
-                                             |               Did it respond within 5s? |  +------+------+  |  |
+                                             |               Did it respond within 5s? |  +------+------+  |  |                  TV2                      TVMini                     TVDiy
                                              |                                         |  |             |  |  |
-                                             |                           +             |  v             v  |  |
-                                             |                           |             |                   |  |
-                                             |               +-----------+-----------+ |Manual         Try +  |
+                                             |                           +             |  v             v  |  |                   +                         +                          +
+                                             |                           |             |                   |  |                   |                         |                          |
+                                             |               +-----------+-----------+ |Manual         Try +  |                   v                         v                          v
                                              |               |                       | |Update         Again  |
-                                             |               v                       v |                      |
-                                             |                                         |  +                   |
+                                             |               v                       v |                      |          Step 1: turn all the       Step 1: turn all the      Step 1: flip the power
+                                             |                                         |  +                   |          way off                    way off                   button off
                                              |              YES                     NO |  +-------------------+
-                                             |                                         |                      |
-                                             |               +                       + +---------+            |
-                                             |               |                       |           |            |
+                                             |                                         |                      |                   +                          +                         +
+                                             |               +                       + +---------+            |                   |                          |                         |
+                                             |               |                       |           |            |                   v                          v                         v
                                              |               v                       v           |            |
-                                             |                                                   |            |
+                                             |                                                   |            |            Step 2: plug in            Step 2: plug in           Step 2: plug in
                                              |        Is the firmware         Ask if they want   |            |
-                                             |        older than what's       to try again or    |            |
-                                             |        available?              manually update    |            |
-                                             |                                                   |            |
+                                             |        older than what's       to try again or    |            |                   +                          +                         +
+                                             |        available?              manually update    |            |                   |                          |                         |
+                                             |                                                   |            |                   v                          v                         v
                                              |               +                       +           |            |
-                                             |               |                       |           |            |
-                                             |   +-----------+-----------+    +------+------+    |            |
+                                             |               |                       |           |            |            Step 3: put into           Step 3: put into         Step 3: put into
+                                             |   +-----------+-----------+    +------+------+    |            |            BOOTSEL mode               BOOTSEL mode             BOOTSEL mode
                                              |   |                       |    |             |    |            |
-                                             |   v                       v    v             v    |            |
-                                             |                                                   |            |
-                                             |  YES                     NO  Manual         Try   |            |
+                                             |   v                       v    v             v    |            |                   +                          +                         +
+                                             |                                                   |            |                   |                          |                         |
+                                             |  YES                     NO  Manual         Try   |            |                   v                          v                         v
                                              |                              Update         Again +            |
-                                             |   +                       +                                    |
-                                             |   |                       |    +                               |
-                                             |   |                       v    +-------------------------------+
-                                             |   |                                                            |
-                                             |   |                Let the user know and                       |
+                                             |   +                       +                                    |            Step 4: press              Step 4: press             Step 4: press
+                                             |   |                       |    +                               |            connect and                connect and               connect and
+                                             |   |                       v    +-------------------------------+            select RP2 Boot            select RP2 Boot           select RP2 Boot
+                                             |   |                                                            |            device to start            device to start           device to start
+                                             |   |                Let the user know and                       |            update                     update                    update
                                              |   |                ask if they'd still                         |
                                              |   |                like to update                              |
                                              |   |                                                            |

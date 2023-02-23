@@ -78,7 +78,7 @@
                     await checkCollectedDataFor("X\n\r");
 
                     for(let ipx=0; ipx<packetCount; ipx++){
-                        let packet = binData.slice((ipx*uploadPacketSize), (ipx*uploadPacketSize)+uploadPacketSize)
+                        let packet = binData.slice((ipx*uploadPacketSize), (ipx*uploadPacketSize)+uploadPacketSize);
 
                         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L511
                         const cmd0 = "S" + sramBufferAddress.toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";

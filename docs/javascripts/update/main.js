@@ -1,14 +1,10 @@
 import { Serial } from "../serial.js";
-import { TV_TYPES } from "/javascripts/streaming/jpegstreamerCommon.js";
+import { TV_TYPES } from "/javascripts/common.js";
 import { BasicPicoboot } from "./basicpicoboot.js";
+import { BasicBossac } from "./basicbossac.js";
 
 
-
-
-
-
-
-// Only perform the streaming logic if actually on the streaming page that has all the elements
+// Only perform the update page logic if actually on the update page
 if(window.location.pathname.indexOf("Update") != -1){
     let show = (element, showChildren=true) => {
         if(typeof(element) == "string") element = document.getElementById(element);
@@ -66,7 +62,7 @@ if(window.location.pathname.indexOf("Update") != -1){
     }
 
 
-    // When insertUrlParameter(), removeUrlParameter(), or page back button are pressed, re-render the page
+    // When setScreen(), removeUrlParameter(), or page back button are pressed, re-render the page
     window.onpopstate = () => {
         refresh();
     }
@@ -79,8 +75,16 @@ if(window.location.pathname.indexOf("Update") != -1){
             searchParams.set(key, value);
             let newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + searchParams.toString();
             window.history.pushState({path: newurl}, '', newurl);
-            refresh();
         }
+    }
+
+    let setType = (type) => {
+        insertUrlParameter("type", type);
+    }
+
+    let setScreen = (screen) => {
+        insertUrlParameter("screen", screen);
+        refresh();
     }
     
     // Remove the specific key
@@ -108,9 +112,9 @@ if(window.location.pathname.indexOf("Update") != -1){
 
     let serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}], false);
     let detectedTVType = TV_TYPES.NONE;
+    let detectedFirmwareVer = undefined;
 
-
-
+    
     // Makes all elements invisible and then shows element for screen in query string (called by insertUrlParameter)
     let refresh = () => {
         const screen = getUrlParameter("screen");
@@ -119,91 +123,211 @@ if(window.location.pathname.indexOf("Update") != -1){
         hideAll();
 
         if(screen == undefined){
+            // If serial connected, disconnect it on this page
+            if(serial.connected){
+                serial.disconnect();
+            }
+
+            // Reset these when back on this screen
+            detectedTVType = TV_TYPES.NONE;
+            detectedFirmwareVer = undefined;
+
             setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
 
-            setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit");
+            setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit\n\nClick the button below then select\neither \"TinyUSB Serial\" or \"TinyScreen+\"\nClick \"Connect\" in the dropdown to finish.");
             setInnerText("connectButton", "Connect TV");
             show("description");
             show("connectButton");
 
-            // If serial connected, disconnect it on this page
-            if(serial.connected){
-                serial.disconnect();
+
+            let failedToConnectOrDetect = (str) => {
+                detectedTVType = TV_TYPES.NONE
+                serial.disconnect(false);
+        
+                setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
+                setInnerText("description", str);
+                setInnerText("connectButton", "Try Again");
+        
+                hide("infoOutput");
+                show("description");
+                show("manualUpdateButton");
+            }
+        
+            serial.onConnectionCanceled = () => {
+                failedToConnectOrDetect("Connection canceled. Would you like to try again or try manually updating?");
+            }
+            serial.onDisconnect = () => {
+                setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
+                setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit");
+                setInnerText("connectButton", "Connect TV");
+        
+                hide("infoOutput");
+                show("description");
+        
+                detectedTVType = TV_TYPES.NONE;
+            }
+            serial.onConnect = () => {
+                setClickCallback("connectButton", serial.disconnect.bind(serial));
+                setInnerText("connectButton", "Disconnect");
+        
+                setInnerText("infoOutput", "Detecting TV..");
+                show("infoOutput");
+        
+                const decoder = new TextDecoder();
+                let received = "";
+        
+                serial.onData = (data) => {
+                    if(detectedTVType == TV_TYPES.NONE || detectedFirmwareVer == undefined){
+                        received += decoder.decode(data);
+        
+                        // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
+                        if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_2;
+                            received = received.replace(TV_TYPES.TINYTV_2, ""); // Trim this away
+                            requestFirmwareVersion();
+                        }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_MINI;
+                            received = received.replace(TV_TYPES.TINYTV_MINI, "");  // Trim this away
+                            requestFirmwareVersion();
+                        }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_DIY;
+                            received = received.replace(TV_TYPES.TINYTV_DIY, "");  // Trim this away
+                            requestFirmwareVersion();
+                        }else if(received.indexOf("]") != -1){
+                            let versionStr = received.slice(received.indexOf("[")+1, received.indexOf("]"));
+                            received = received.replace("[" + detectedFirmwareVer + "]", "");  // Trim this away
+        
+                            versionStr = versionStr.split("."); // Split into separate components
+        
+                            detectedFirmwareVer = {
+                                "MAJOR": parseInt(versionStr[0]),
+                                "MINOR": parseInt(versionStr[1]),
+                                "PATCH": parseInt(versionStr[2])
+                            }
+        
+                            onTVTypeAndVersionDetected();
+                        }
+                    }
+                }
+        
+                let typeRequestCount = 0; 
+                let requestTVType = () => {
+                    if(detectedTVType == TV_TYPES.NONE && serial.connected){
+                        setTimeout(() => {
+                            serial.write("TYPE", true);
+        
+                            typeRequestCount++;
+        
+                            // 2.5 seconds
+                            if(typeRequestCount >= 10){
+                                failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
+                            }else{
+                                requestTVType();
+                            }
+                        }, 250);
+                    }
+                }
+                requestTVType();
+        
+                let firmwareVersionCount = 0; 
+                let requestFirmwareVersion = () => {
+                    if(detectedFirmwareVer == undefined && serial.connected){
+                        setTimeout(() => {
+                            serial.write("VER", true);
+        
+                            firmwareVersionCount++;
+        
+                            // 2.5 seconds
+                            if(firmwareVersionCount >= 10){
+                                failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
+                            }else{
+                                requestFirmwareVersion();
+                            }
+                        }, 250);
+                    }
+                }
             }
         }else if(screen == "manual_update"){
             setInnerText("infoOutput", "Manually choose your TV");
             show("manualChoice");
             show("infoOutput");
-            show("cancelManualUpdate");
+            show("cancelUpdate");
 
             setClickCallback("choseMini", () => {
-                insertUrlParameter("screen", "tvmini_step_1");
+                setScreen("tvmini_step_1");
             });
             setClickCallback("chose2", () => {
-                insertUrlParameter("screen", "tv2_step_1");
+                setScreen("tv2_step_1");
             });
             setClickCallback("choseDIY", () => {
-                insertUrlParameter("screen", "tvdiy_step_1");
+                setScreen("tvdiy_step_1");
             });
-            setClickCallback("cancelManualUpdate", () => {
+            setClickCallback("cancelUpdate", () => {
                 removeUrlParameter("screen");
+                removeUrlParameter("type");
             });
         }else if(screen == "tvmini_step_1"){
 
         }else if(screen == "tv2_step_1"){
             setInnerText("description", "Step 1: Turn the TV off by holding the power button for 5 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
+            setInnerText("nextButton", "Next");
             show("description");
             show("backButton");
             show("nextButton");
             show("tv2Step1VideoContainer");
             play("tv2Step1Video");
-            show("cancelManualUpdate");
+            show("cancelUpdate");
 
             setClickCallback("nextButton", () => {
-                insertUrlParameter("screen", "tv2_step_2");
+                setScreen("tv2_step_2");
             });
             setClickCallback("backButton", () => {
-                insertUrlParameter("screen", "manual_update");
+                setScreen("manual_update");
             });
-            setClickCallback("cancelManualUpdate", () => {
+            setClickCallback("cancelUpdate", () => {
                 removeUrlParameter("screen");
+                removeUrlParameter("type");
             });
         }else if(screen == "tv2_step_2"){
             setInnerText("description", "Step 2: Plug the TV into a computer using a USB-C cord");
+            setInnerText("nextButton", "Next");
             show("description");
             show("backButton");
             show("nextButton");
             show("tv2Step2VideoContainer");
             play("tv2Step2Video");
-            show("cancelManualUpdate");
+            show("cancelUpdate");
 
             setClickCallback("nextButton", () => {
-                insertUrlParameter("screen", "tv2_step_3");
+                setScreen("tv2_step_3");
             });
             setClickCallback("backButton", () => {
-                insertUrlParameter("screen", "tv2_step_1");
+                setScreen("tv2_step_1");
             });
-            setClickCallback("cancelManualUpdate", () => {
+            setClickCallback("cancelUpdate", () => {
                 removeUrlParameter("screen");
+                removeUrlParameter("type");
             });
         }else if(screen == "tv2_step_3"){
             setInnerText("description", "Step 3: Turn the TV on in update mode by pressing and holding\nthe reset button with a pen and clicking the power button once");
+            setInnerText("nextButton", "Next");
             show("description");
             show("backButton");
             show("nextButton");
             show("tv2Step3VideoContainer");
             play("tv2Step3Video");
-            show("cancelManualUpdate");
+            show("cancelUpdate");
 
             setClickCallback("nextButton", () => {
-                insertUrlParameter("screen", "update");
                 insertUrlParameter("type", "tv2");
+                setScreen("update");
             });
             setClickCallback("backButton", () => {
-                insertUrlParameter("screen", "tv2_step_2");
+                setScreen("tv2_step_2");
             });
-            setClickCallback("cancelManualUpdate", () => {
+            setClickCallback("cancelUpdate", () => {
                 removeUrlParameter("screen");
+                removeUrlParameter("type");
             });
         }else if(screen == "tvdiy_step_1"){
             
@@ -212,14 +336,24 @@ if(window.location.pathname.indexOf("Update") != -1){
 
             if(tvtype == "tv2" || tvtype == "tvmini"){
                 setInnerText("connectButton", "Connect");
-                setInnerText("description", "The TV should now be in update mode and ready to connect to!\nSelect the 'RP2 Boot' device");
-                show("description")
+                setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select the 'RP2 Boot' device");
+                show("description");
                 show("connectButton");
-                show("cancelManualUpdate");
+                show("cancelUpdate");
 
                 setClickCallback("connectButton", async () => {
                     const picoboot = new BasicPicoboot();
         
+                    picoboot.onConnectionCanceled = () => {
+                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contact us, or cancel?");
+                        setInnerText("connectButton", "Try again");
+                        show("contactusButton");
+                    }
+
+                    picoboot.onUpdateStart = () => {
+                        setInnerText("description", "Updating...");
+                    }
+
                     picoboot.onUpdateProgress = (percentage) => {
                         show("progressBar");
                         document.getElementById("progressBarBar").style.width = percentage + "%";
@@ -229,18 +363,100 @@ if(window.location.pathname.indexOf("Update") != -1){
                     picoboot.onUpdateComplete = () => {
                         removeUrlParameter("screen");
                         removeUrlParameter("type");
+                        setScreen("update_complete");
                     }
 
                     await picoboot.connect();
-                    await picoboot.update("/firmware/2-green.uf2");
+                    if(tvtype == "tv2"){
+                        await picoboot.update("/firmware/2-green.uf2");
+                    }else{
+                        await picoboot.update("/firmware/m-green.uf2");
+                    }
                 });
             }else{
+                setInnerText("connectButton", "Connect");
+                setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select 'USB Serial Device'");
+                show("description");
+                show("connectButton");
+                show("cancelUpdate");
 
+                setClickCallback("connectButton", async () => {
+                    const bossac = new BasicBossac(serial);
+        
+                    bossac.onConnectionCanceled = () => {
+                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contact us, or cancel?");
+                        setInnerText("connectButton", "Try again");
+                        show("contactusButton");
+                    }
+
+                    bossac.onUpdateStart = () => {
+                        setInnerText("description", "Updating...");
+                    }
+
+                    bossac.onUpdateProgress = (percentage) => {
+                        show("progressBar");
+                        document.getElementById("progressBarBar").style.width = percentage + "%";
+                        document.getElementById("progressBarText").innerText = percentage + "%";
+                    }
+
+                    bossac.onUpdateComplete = () => {
+                        removeUrlParameter("screen");
+                        removeUrlParameter("type");
+                        setScreen("update_complete");
+                    }
+
+                    await bossac.connectUpdate("/firmware/d-0.bin").catch((errorMsg) => {
+                        setInnerText("description", "Update failed. Make sure the TinyTV DIY Kit is still plugged in. Try turning it off and on.\nWould you like to try again, contact us, or cancel?");
+                        setInnerText("connectButton", "Try again");
+                        show("contactusButton");
+                        return;
+                    });
+                });
             }
 
-            
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+        }else if(screen == "update_not_needed"){
+            setInnerText("description", "Your TV is up to date. Would you still like to update?");
+            setInnerText("nextButton", "Update");
+            show("description");
+            show("cancelUpdate");
+            show("nextButton");
 
-            setClickCallback("cancelManualUpdate", () => {
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+            setClickCallback("nextButton", async () => {
+                serial.autoReset(() => {
+                    setScreen("update");
+                });
+            });
+        }else if(screen == "update_needed"){
+            setInnerText("description", "Your TV is out of date! Would you like to update?");
+            setInnerText("nextButton", "Yes");
+            show("description");
+            show("cancelUpdate");
+            show("nextButton");
+
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+            setClickCallback("nextButton", async () => {
+                serial.autoReset(() => {
+                    setScreen("update");
+                });
+            });
+        }else if(screen == "update_complete"){
+            setInnerText("description", "Update complete!");
+            setInnerText("nextButton", "Done");
+            show("description");
+            show("nextButton");
+
+            setClickCallback("nextButton", async () => {
                 removeUrlParameter("screen");
             });
         }
@@ -252,90 +468,98 @@ if(window.location.pathname.indexOf("Update") != -1){
 
     // If user picks manual update, change query string and render that page
     setClickCallback("manualUpdateButton", () => {
-        insertUrlParameter("screen", "manual_update");
+        setScreen("manual_update");
     })
 
 
-    let onTVTypeDetected = () => {
+    let onTVTypeAndVersionDetected = async () => {
+        // Disconnect now since the next connect should be automatic and at 1200 baud to reset it
+        serial.onDisconnect = () => {};
+        await serial.disconnect();
+
+        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV2RI54ZRXLYSIMEXGKY7XSEBA", {cache: 'no-store', pragma: 'no-cache'});
+        
+        if(!response.ok){
+            setInnerText("description", "Error fetching online versions, please contact us or try manually updating");
+            show("contactusButton");
+            show("manualUpdateButton");
+            hide("infoOutput");
+            hide("connectButton");
+            return;
+        }
+        let text = await response.text();
+        text = text.split("\r\n");                     // Split into lines (assumes Windows line-endings)
+
+        let latestOnlineRequiredVersions = {
+            "TINYTV_2_VERSION_REQUIRED_MAJOR": 0,
+            "TINYTV_2_VERSION_REQUIRED_MINOR": 0,
+            "TINYTV_2_VERSION_REQUIRED_PATCH": 0,
+
+            "TINYTV_MINI_VERSION_REQUIRED_MAJOR": 0,
+            "TINYTV_MINI_VERSION_REQUIRED_MINOR": 0,
+            "TINYTV_MINI_VERSION_REQUIRED_PATCH": 0,
+
+            "TINYTV_DIY_VERSION_REQUIRED_MAJOR": 0,
+            "TINYTV_DIY_VERSION_REQUIRED_MINOR": 0,
+            "TINYTV_DIY_VERSION_REQUIRED_PATCH": 0,
+        }
+
+        for(let ilx=0; ilx<text.length; ilx++){
+            let line = text[ilx];
+            if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_MAJOR") != -1){
+                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_MINOR ") != -1){
+                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_PATCH ") != -1){
+                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_MAJOR") != -1){
+                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_MINOR") != -1){
+                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_PATCH") != -1){
+                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_MAJOR") != -1){
+                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_MINOR") != -1){
+                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_PATCH") != -1){
+                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
+            }
+        }
+
         if(detectedTVType == TV_TYPES.TINYTV_2){
-            console.error("TINY TV 2");
+            insertUrlParameter("type", "tv2");
+            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MAJOR"] ||
+               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MINOR"] ||
+               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_PATCH"]){
+                // Need to update
+                setScreen("update_needed");
+            }else{
+                // Don't need to update but still can if they'd like to
+                setScreen("update_not_needed");
+            }
         }else if(detectedTVType == TV_TYPES.TINYTV_MINI){
-            console.error("TINY TV MINI");
+            insertUrlParameter("type", "tvmini");
+            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MAJOR"] ||
+               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MINOR"] ||
+               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_PATCH"]){
+                // Need to update
+                setScreen("update_needed");
+            }else{
+                // Don't need to update but still can if they'd like to
+                setScreen("update_not_needed");
+            }
         }else if(detectedTVType == TV_TYPES.TINYTV_DIY){
-            console.error("TINY TV DIY");
-        }
-        insertUrlParameter("screen", "update");
-    }
-
-    let failedToConnectOrDetect = (str) => {
-        detectedTVType = TV_TYPES.NONE
-        serial.disconnect(false);
-
-        setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
-        setInnerText("description", str);
-        setInnerText("connectButton", "Try Again");
-
-        hide("infoOutput");
-        show("description");
-        show("manualUpdateButton");
-    }
-
-
-    serial.onConnect = () => {
-        setClickCallback("connectButton", serial.disconnect.bind(serial));
-        setInnerText("connectButton", "Disconnect");
-
-        setInnerText("infoOutput", "Detecting TV..");
-        show("infoOutput");
-
-        const decoder = new TextDecoder();
-        let received = "";
-
-        serial.onData = (data) => {
-            if(detectedTVType == TV_TYPES.NONE){
-                received += decoder.decode(data);
-
-                // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
-                if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
-                    detectedTVType = TV_TYPES.TINYTV_2;
-                    onTVTypeDetected();
-                }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
-                    detectedTVType = TV_TYPES.TINYTV_MINI;
-                    onTVTypeDetected();
-                }
+            insertUrlParameter("type", "tvdiy");
+            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MAJOR"] ||
+               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MINOR"] ||
+               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_PATCH"]){
+                // Need to update
+                setScreen("update_needed");
+            }else{
+                // Don't need to update but still can if they'd like to
+                setScreen("update_not_needed");
             }
         }
-
-        let attempts = 0; 
-        let requestTVType = () => {
-            if(detectedTVType == TV_TYPES.NONE && serial.connected){
-                setTimeout(() => {
-                    serial.write("TYPE", true);
-
-                    attempts++;
-
-                    // 5 seconds
-                    if(attempts >= 20){
-                        failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
-                    }else{
-                        requestTVType();
-                    }
-                }, 250);
-            }
-        }
-        requestTVType();
-    }
-    serial.onConnectionCanceled = () => {
-        failedToConnectOrDetect("Connection canceled. Would you like to try again or try manually updating?");
-    }
-    serial.onDisconnect = () => {
-        setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
-        setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit");
-        setInnerText("connectButton", "Connect TV");
-
-        hide("infoOutput");
-        show("description");
-
-        detectedTVType = TV_TYPES.NONE;
     }
 }

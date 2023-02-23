@@ -1,5 +1,6 @@
 import { Serial } from "../serial.js";
-import { TV_SIZES, TV_TYPES, TV_JPEG_QUALITIES, TV_FIT_TYPES } from "./jpegstreamerCommon.js";
+import { TV_TYPES } from "../common.js";
+import { TV_SIZES, TV_JPEG_QUALITIES, TV_FIT_TYPES } from "./jpegstreamerCommon.js";
 
 self.detectedTVType = TV_TYPES.NONE;
 self.currentJPEGQuality = 0;

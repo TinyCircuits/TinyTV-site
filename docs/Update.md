@@ -220,6 +220,10 @@ hide:
           class="md-button md-button--primary">
           Connect TV
         </button>
+        <button id="contactusButton" title="go to TinyCircuits contact us form" alt="Button that goes to contact us form"
+          class="md-button md-button--primary invisible" style="margin-left:8px" onclick="window.open('https://tinycircuits.com/pages/contact-us','_blank')">
+          Contact us
+        </button>
         <button id="manualUpdateButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
           class="md-button md-button--primary invisible" style="margin-left:8px">
           Manual Update
@@ -238,7 +242,7 @@ hide:
           </button>
         </div>
         <div style="display:flex; justify-content:center; align-items:center; margin-top:16px; text-decoration: underline;">
-          <a id="cancelManualUpdate" class="invisible" style="cursor:pointer">Cancel</a>
+          <a id="cancelUpdate" class="invisible" style="cursor:pointer">Cancel</a>
         </div>
       </div>
 
