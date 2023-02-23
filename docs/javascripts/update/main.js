@@ -270,7 +270,66 @@ if(window.location.pathname.indexOf("Update") != -1){
                 removeUrlParameter("type");
             });
         }else if(screen == "tvmini_step_1"){
+            setInnerText("description", "Step 1: Turn the TV off by holding the middle power button for 5 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvminiStep1VideoContainer");
+            play("tvminiStep1Video");
+            show("cancelUpdate");
 
+            setClickCallback("nextButton", () => {
+                setScreen("tvmini_step_2");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("manual_update");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+        }else if(screen == "tvmini_step_2"){
+            setInnerText("description", "Step 2: Plug the TV into a computer using a USB-C cord");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvminiStep2VideoContainer");
+            play("tvminiStep2Video");
+            show("cancelUpdate");
+
+            setClickCallback("nextButton", () => {
+                setScreen("tvmini_step_3");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("tvmini_step_1");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+        }else if(screen == "tvmini_step_3"){
+            setInnerText("description", "Step 3: Turn the TV on in update mode by pressing and holding the\nright-most button and clicking the middle power button once");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvminiStep3VideoContainer");
+            play("tvminiStep3Video");
+            show("cancelUpdate");
+
+            setClickCallback("nextButton", () => {
+                insertUrlParameter("type", "tvmini");
+                setScreen("update");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("tvmini_step_2");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
         }else if(screen == "tv2_step_1"){
             setInnerText("description", "Step 1: Turn the TV off by holding the power button for 5 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
             setInnerText("nextButton", "Next");
@@ -333,7 +392,66 @@ if(window.location.pathname.indexOf("Update") != -1){
                 removeUrlParameter("type");
             });
         }else if(screen == "tvdiy_step_1"){
-            
+            setInnerText("description", "Step 1: Turn the TV off by sliding the power switch down");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvdiyStep1VideoContainer");
+            play("tvdiyStep1Video");
+            show("cancelUpdate");
+
+            setClickCallback("nextButton", () => {
+                setScreen("tvdiy_step_2");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("manual_update");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+        }else if(screen == "tvdiy_step_2"){
+            setInnerText("description", "Step 2: Plug the TV into a computer using a Micro-USB cord");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvdiyStep2VideoContainer");
+            play("tvdiyStep2Video");
+            show("cancelUpdate");
+
+            setClickCallback("nextButton", () => {
+                setScreen("tvdiy_step_3");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("tvdiy_step_1");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
+        }else if(screen == "tvdiy_step_3"){
+            setInnerText("description", "Step 3: Turn the TV on in update mode by pressing and holding\nthe top-left button and sliding the power button up");
+            setInnerText("nextButton", "Next");
+            show("description");
+            show("backButton");
+            show("nextButton");
+            show("tvdiyStep3VideoContainer");
+            play("tvdiyStep3Video");
+            show("cancelUpdate");
+
+            setClickCallback("nextButton", () => {
+                insertUrlParameter("type", "tvdiy");
+                setScreen("update");
+            });
+            setClickCallback("backButton", () => {
+                setScreen("tvdiy_step_2");
+            });
+            setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("screen");
+                removeUrlParameter("type");
+            });
         }else if(screen == "update"){
             const tvtype = getUrlParameter("type");
 
