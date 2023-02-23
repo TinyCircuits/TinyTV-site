@@ -134,10 +134,11 @@ if(window.location.pathname.indexOf("Update") != -1){
 
             setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
 
-            setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit\n\nClick the button below then select\neither \"TinyUSB Serial\" or \"TinyScreen+\"\nClick \"Connect\" in the dropdown to finish.");
+            setInnerText("description", "Update software on TinyTV 2, Mini, or DIY Kit");
             setInnerText("connectButton", "Connect TV");
             show("description");
             show("connectButton");
+            show("mainScreenBulletList");
 
 
             let failedToConnectOrDetect = (str) => {
@@ -148,6 +149,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 setInnerText("description", str);
                 setInnerText("connectButton", "Try Again");
         
+                hide("mainScreenBulletList");
                 hide("infoOutput");
                 show("description");
                 show("manualUpdateButton");
@@ -172,6 +174,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         
                 setInnerText("infoOutput", "Detecting TV..");
                 show("infoOutput");
+                hide("mainScreenBulletList");
         
                 const decoder = new TextDecoder();
                 let received = "";
@@ -477,7 +480,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         serial.onDisconnect = () => {};
         await serial.disconnect();
 
-        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV2RI54ZRXLYSIMEXGKY7XSEBA", {cache: 'no-store', pragma: 'no-cache'});
+        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV2SAKIDG4TA4UQRA36Y7XSXCA", {cache: 'no-store', pragma: 'no-cache'});
         
         if(!response.ok){
             setInnerText("description", "Error fetching online versions, please contact us or try manually updating");

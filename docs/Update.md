@@ -158,6 +158,13 @@ hide:
     <h2>TV Updating</h2>
     
     <p id="description" style="display:flex; text-align: center;">Update software on TinyTV 2, Mini, or DIY Kit</p>
+    <div id="mainScreenBulletList">
+      <ul style="list-style-type:decimal">
+        <li>Click the button below to bring up the connection dialog</li>
+        <li>Select "TinyUSB Serial" or "TinyScreen+"</li>
+        <li>Click the "Connect" button the in dialog to start the update process</li>
+      </ul>
+    </div>
 
     <div id="progressBar" class="progress-bar-parent invisible">
       <div id="progressBarBar" class="progress-bar">
