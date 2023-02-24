@@ -108,6 +108,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         disable("connectButton");
         show("browserSupportError");
         hide("description");
+        hide("mainScreenBulletList");
     }
 
     let serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}], false);
