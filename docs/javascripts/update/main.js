@@ -466,6 +466,18 @@ if(window.location.pathname.indexOf("Update") != -1){
                 setClickCallback("connectButton", async () => {
                     const picoboot = new BasicPicoboot();
         
+                    picoboot.onError = () => {
+                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
+                        setInnerText("connectButton", "Restart");
+                        hide("progressBar");
+                        show("contactusButton");
+
+                        setClickCallback("connectButton", () => {
+                            removeUrlParameter("type");
+                            setScreen("manual_update");
+                        });
+                    }
+
                     picoboot.onConnectionCanceled = () => {
                         setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contact us, or cancel?");
                         setInnerText("connectButton", "Try again");
@@ -528,10 +540,15 @@ if(window.location.pathname.indexOf("Update") != -1){
                     }
 
                     await bossac.connectUpdate("/firmware/TinyTV-DIY-firmware.bin").catch((errorMsg) => {
-                        setInnerText("description", "Update failed. Make sure the TinyTV DIY Kit is still plugged in. Try turning it off and on.\nWould you like to try again, contact us, or cancel?");
-                        setInnerText("connectButton", "Try again");
+                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
+                        setInnerText("connectButton", "Restart");
+                        hide("progressBar");
                         show("contactusButton");
-                        return;
+
+                        setClickCallback("connectButton", () => {
+                            removeUrlParameter("type");
+                            setScreen("manual_update");
+                        });
                     });
                 });
             }
@@ -599,7 +616,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         serial.onDisconnect = () => {};
         await serial.disconnect();
 
-        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV3ZVM3S3YFQSOCVSAEY7ZB4YA", {cache: 'no-store', pragma: 'no-cache'});
+        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV3TCXFNGTL55DVZUZSY7ZFPAA", {cache: 'no-store', pragma: 'no-cache'});
         
         if(!response.ok){
             setInnerText("description", "Error fetching online versions, please contact us or try manually updating");

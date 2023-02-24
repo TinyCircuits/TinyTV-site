@@ -23,7 +23,7 @@ class BasicBossac{
         let timeoutTryCount = 0;
         return new Promise((resolve, reject) => {
             let check = () => {
-                if(timeoutTryCount < 300){
+                if(timeoutTryCount < 200){
                     setTimeout(() => {
                         if(this.collectedData.indexOf(text) == -1){
                             check();
@@ -66,8 +66,7 @@ class BasicBossac{
 
             this.serial.onConnectionCanceled = this.onConnectionCanceled.bind(this);
             this.serial.onDisconnect = () => {
-                this.connected = false;
-                this.onConnectionCanceled();
+                // Don't want this to do what it was doing before
             }
             this.serial.onConnect = () => {
                 this.connected = true;

@@ -9,6 +9,7 @@ class BasicPicoboot{
         this.onUpdateProgress = (percentage) => {};
         this.onUpdateComplete = () => {};
         this.onConnectionCanceled = () => {};
+        this.onError = () => {};
     }
 
 
@@ -199,17 +200,22 @@ class BasicPicoboot{
             dataView.setUint32(0x10 , address, true);     // Address
             dataView.setUint32(0x14 , size, true);        // Size
 
-            await this.device.transferOut(3, new Uint8Array(packet));
+            try{
+                await this.device.transferOut(3, new Uint8Array(packet));
+                let data = await this.device.transferIn(4, 64);
 
-            let data = await this.device.transferIn(4, 64);
-            if(data.status != "ok"){
-                console.error("Could not erase flash...");
-                reject();
-            }else{
-                console.log("Erased", size, "bytes at", address,);
-                resolve();
+                if(data.status != "ok"){
+                    console.error("Could not erase flash...");
+                    reject();
+                }else{
+                    console.log("Erased", size, "bytes at", address,);
+                    resolve();
+                }
+            }catch(error){
+                console.warn("Error, maybe disconnected?");
+                this.onError();
             }
-        })
+        });
     }
 
 
@@ -231,18 +237,24 @@ class BasicPicoboot{
             dataView.setUint32(0x10, address, true);      // Address
             dataView.setUint32(0x14, size, true);         // Size
 
-            await this.device.transferOut(3, new Uint8Array(packet));
-            await this.device.transferOut(3, new Uint8Array(payload));
+            try{
+                await this.device.transferOut(3, new Uint8Array(packet));
+                await this.device.transferOut(3, new Uint8Array(payload));
 
-            let data = await this.device.transferIn(4, 64);
-            if(data.status != "ok"){
-                console.error("Could not write to flash...");
-                reject();
-            }else{
-                console.log("Wrote", size, "bytes to flash starting at", address);
-                resolve();
+                let data = await this.device.transferIn(4, 64);
+
+                if(data.status != "ok"){
+                    console.error("Could not write to flash...");
+                    reject();
+                }else{
+                    console.log("Wrote", size, "bytes to flash starting at", address);
+                    resolve();
+                }
+            }catch(error){
+                console.warn("Error, maybe disconnected?");
+                this.onError();
             }
-        })
+        });
     }
 }
 
