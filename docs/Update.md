@@ -178,57 +178,57 @@ hide:
 
 
     <div id="tv2Step1VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tv2Step1Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tv2Step1Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tv2_manual_step1.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tv2Step2VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tv2Step2Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tv2Step2Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tv2_manual_step2.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tv2Step3VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tv2Step3Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tv2Step3Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tv2_manual_step3.webm" type="video/webm">
       </video>
     </div>
 
 
     <div id="tvminiStep1VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvminiStep1Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvminiStep1Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvmini_manual_step1.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tvminiStep2VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvminiStep2Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvminiStep2Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvmini_manual_step2.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tvminiStep3VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvminiStep3Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvminiStep3Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvmini_manual_step3.webm" type="video/webm">
       </video>
     </div>
 
 
     <div id="tvdiyStep1VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvdiyStep1Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvdiyStep1Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvdiy_manual_step1.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tvdiyStep2VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvdiyStep2Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvdiyStep2Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvdiy_manual_step2.webm" type="video/webm">
       </video>
     </div>
 
     <div id="tvdiyStep3VideoContainer" style="height:60%; aspect-ratio:1/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
-      <video id="tvdiyStep3Video" width="1000" height="1000" style="object-fit:contain; height:480px; width:480px;" loop muted>
+      <video id="tvdiyStep3Video" width="1000" height="1000" style="object-fit:contain; height:100%; width:100%;" loop muted>
         <source src="/videos/tvdiy_manual_step3.webm" type="video/webm">
       </video>
     </div>
