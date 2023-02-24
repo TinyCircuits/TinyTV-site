@@ -32,6 +32,7 @@ if(streamScreen0 &&
         streamConnectButton.disabled = true;
         browserSupportError.classList.remove("invisible");
         description.classList.add("invisible");
+        audioSupportMessage.classList.add("invisible");
     }
 
     streamConnectButton.onclick = () => {jpegStreamer.connectSerial()};
