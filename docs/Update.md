@@ -286,7 +286,7 @@ hide:
             Next
           </button>
         </div>
-        <div style="display:flex; justify-content:center; align-items:center; margin-top:16px; text-decoration: underline;">
+        <div style="display:flex; justify-content:center; align-items:center; margin-top:16px; text-decoration:underline; text-decoration-color:var(--md-typeset-a-color)">
           <a id="cancelUpdate" class="invisible" style="cursor:pointer">Cancel</a>
         </div>
       </div>
