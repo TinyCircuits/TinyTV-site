@@ -479,7 +479,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                     }
 
                     picoboot.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contact us, or cancel?");
+                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
                         setInnerText("connectButton", "Try again");
                         show("contactusButton");
                     }
@@ -518,7 +518,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                     const bossac = new BasicBossac(serial);
         
                     bossac.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contact us, or cancel?");
+                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
                         setInnerText("connectButton", "Try again");
                         show("contactusButton");
                     }
@@ -640,7 +640,7 @@ if(window.location.pathname.indexOf("Update") != -1){
 
             "TINYTV_DIY_VERSION_REQUIRED_MAJOR": 0,
             "TINYTV_DIY_VERSION_REQUIRED_MINOR": 0,
-            "TINYTV_DIY_VERSION_REQUIRED_PATCH": 0,
+            "TINYTV_DIY_VERSION_REQUIRED_PATCH": 0
         }
 
         for(let ilx=0; ilx<text.length; ilx++){

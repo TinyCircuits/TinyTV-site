@@ -14,7 +14,6 @@ hide:
   }
 
 
-
   /* Convenience class for centering elements */
   .flex-center {
     display: flex;
@@ -87,11 +86,24 @@ hide:
     border-radius: 8px;
   }
 
-  .tx-hero .md-button:focus,
-  .tx-hero .md-button:hover:enabled {
-    background-color: var(--md-accent-fg-color); /* BG color on hover */
-    color: var(--md-default-bg-color); /*Text color on hover*/
-    border-color: var(--md-accent-fg-color); /*border color on hover*/
+  /* Make buttons return to original color when not hovering after click */
+  .tx-hero .md-button:hover:focus {
+    background-color: var(--md-accent-fg-color);
+    color: var(--md-default-bg-color);
+    border-color: var(--md-accent-fg-color);
+  }
+  .tx-hero .md-button:hover {
+    color: var(--md-default-bg-color);
+  }
+  .tx-hero .md-button:active {
+    background-color: var(--md-accent-fg-color);
+    color: var(--md-default-bg-color);
+    border-color: var(--md-accent-fg-color);
+  }
+  .tx-hero .md-button:focus {
+    background-color: var(--md-typeset-a-color);
+    color: var(--md-default-bg-color);
+    border-color: var(--md-typeset-a-color);
   }
 
   .tx-hero .md-button:disabled {
