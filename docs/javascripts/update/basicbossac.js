@@ -141,7 +141,7 @@ class BasicBossac{
         try{
         this.collectedData = "";
 
-        const binData = new Uint8Array(await (await fetch(firmwarePath)).arrayBuffer());
+        const binData = new Uint8Array(await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer());
         const packetCount = Math.ceil(binData.byteLength/this.uploadPacketSize); // Round up since .slice() will figure out the end
 
         this.onUpdateStart();

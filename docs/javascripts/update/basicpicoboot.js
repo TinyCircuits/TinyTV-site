@@ -58,7 +58,7 @@ class BasicPicoboot{
 
         const flashSectorSize = 4096;
 
-        const uf2Data = await (await fetch(firmwarePath)).arrayBuffer();
+        const uf2Data = await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer();
         const uf2BlockSize = 512;
         const uf2BlockCount = uf2Data.byteLength/uf2BlockSize;
         const uf2BlockPayloadSize = 256;
