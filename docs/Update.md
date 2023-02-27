@@ -148,7 +148,11 @@ hide:
     text-align: center;
   }
 
-  .item {
+  .item-parent {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     box-sizing: border-box;
@@ -158,9 +162,9 @@ hide:
     min-width: 0;
   }
 
-  .item:hover {
-    background-color: #526cfe47;
-    border-radius: 8px;
+  .item-child{
+    user-select: none;
+    cursor: pointer;
   }
 </style>
 
@@ -246,26 +250,29 @@ hide:
     </div>
 
 
-    <div id="manualChoice" class="choose invisible">
-      <div class="item">
-        <a id="choseMini">
-          <center><h2>TinyTV Mini</h2></center>
-          <center><img src="/images/tinytvmini.svg" alt="TinyTV Mini" style="height:100px; object-fit:scale-down;" class="filter-svg"/></center>
-        </a>
-      </div>
-    
-      <div class="item">
-        <a id="chose2">
-          <center><h2>TinyTV 2 </h2></center>
-          <center><img src="/images/tinytv2.svg" alt="TinyTV 2" style="height:200px; object-fit:scale-down;" class="filter-svg"/></center>
-        </a>
-      </div>
+    <div id="manualChoice" class="invisible" style="width:100%; display:flex; flex-flow:column; align-items:center; justify-content:center;">
+      <h3 id="infoOutput" class="invisible" style="margin-bottom:0px; margin-top:20px;">Detecting TV...</h3>
+      <div class="choose">
+        <div class="item-parent">
+          <a id="choseMini" class="item-child">
+            <center><h2>TinyTV Mini</h2></center>
+            <center><img src="/images/tinytvmini.svg" alt="TinyTV Mini" style="height:100px; object-fit:scale-down;" class="filter-svg"/></center>
+          </a>
+        </div>
+      
+        <div class="item-parent">
+          <a id="chose2" class="item-child">
+            <center><h2>TinyTV 2 </h2></center>
+            <center><img src="/images/tinytv2.svg" alt="TinyTV 2" style="height:200px; object-fit:scale-down;" class="filter-svg"/></center>
+          </a>
+        </div>
 
-      <div class="item">
-        <a id="choseDIY">
-          <center><h2>TinyTV DIY Kit </h2></center>
-          <center><img src="/images/tinytvdiy.svg" alt="TinyTV DIY Kit" style="height:180px; object-fit:scale-down;" class="filter-svg" /></center>
-        </a>
+        <div class="item-parent">
+          <a id="choseDIY" class="item-child">
+            <center><h2>TinyTV DIY Kit </h2></center>
+            <center><img src="/images/tinytvdiy.svg" alt="TinyTV DIY Kit" style="height:180px; object-fit:scale-down;" class="filter-svg" /></center>
+          </a>
+        </div>
       </div>
     </div>
 
