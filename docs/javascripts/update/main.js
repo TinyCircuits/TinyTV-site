@@ -112,6 +112,8 @@ if(window.location.pathname.indexOf("Update") != -1){
     }
 
     let serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}], false);
+    const picoboot = new BasicPicoboot();
+    const bossac = new BasicBossac(serial);
     let detectedTVType = TV_TYPES.NONE;
     let detectedFirmwareVer = undefined;
 
@@ -125,9 +127,16 @@ if(window.location.pathname.indexOf("Update") != -1){
 
         if(screen == undefined){
             // If serial connected, disconnect it on this page
+            if(bossac.connected){
+                bossac.disconnect();
+            }
             if(serial.connected){
                 serial.disconnect();
             }
+            if(picoboot.connected){
+                picoboot.disconnect();
+            }
+            
 
             // Reset these when back on this screen
             detectedTVType = TV_TYPES.NONE;
@@ -157,7 +166,7 @@ if(window.location.pathname.indexOf("Update") != -1){
             }
         
             serial.onConnectionCanceled = () => {
-                failedToConnectOrDetect("Connection canceled. Would you like to try again or try manually updating?");
+                failedToConnectOrDetect("Connection canceled or something is using it.\nWould you like to try again or try manually updating?");
             }
             serial.onDisconnect = () => {
                 setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
@@ -464,8 +473,6 @@ if(window.location.pathname.indexOf("Update") != -1){
                 show("cancelUpdate");
 
                 setClickCallback("connectButton", async () => {
-                    const picoboot = new BasicPicoboot();
-        
                     picoboot.onError = () => {
                         setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
                         setInnerText("connectButton", "Restart");
@@ -479,13 +486,23 @@ if(window.location.pathname.indexOf("Update") != -1){
                     }
 
                     picoboot.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
+                        setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
                         setInnerText("connectButton", "Try again");
                         show("contactusButton");
                     }
 
                     picoboot.onUpdateStart = () => {
                         setInnerText("description", "Updating...");
+                        setInnerText("connectButton", "Disconnect");
+                        hide("contactusButton");
+                        setClickCallback("connectButton", () => {
+                            picoboot.disconnect();
+                        });
+                        setClickCallback("cancelUpdate", () => {
+                            picoboot.disconnect();
+                            removeUrlParameter("screen");
+                            removeUrlParameter("type");
+                        });
                     }
 
                     picoboot.onUpdateProgress = (percentage) => {
@@ -515,16 +532,36 @@ if(window.location.pathname.indexOf("Update") != -1){
                 show("cancelUpdate");
 
                 setClickCallback("connectButton", async () => {
-                    const bossac = new BasicBossac(serial);
-        
+                    bossac.onError = () => {
+                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
+                        setInnerText("connectButton", "Restart");
+                        hide("progressBar");
+                        show("contactusButton");
+
+                        setClickCallback("connectButton", () => {
+                            removeUrlParameter("type");
+                            setScreen("manual_update");
+                        });
+                    }
+
                     bossac.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
+                        setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
                         setInnerText("connectButton", "Try again");
                         show("contactusButton");
                     }
 
                     bossac.onUpdateStart = () => {
                         setInnerText("description", "Updating...");
+                        setInnerText("connectButton", "Disconnect");
+                        hide("contactusButton");
+                        setClickCallback("connectButton", () => {
+                            bossac.disconnect();
+                        });
+                        setClickCallback("cancelUpdate", () => {
+                            bossac.disconnect();
+                            removeUrlParameter("screen");
+                            removeUrlParameter("type");
+                        });
                     }
 
                     bossac.onUpdateProgress = (percentage) => {

@@ -145,6 +145,7 @@ class Serial{
             }else{
                 console.error(error);
             }
+            this.onConnectionCanceled();
         }
     }
 

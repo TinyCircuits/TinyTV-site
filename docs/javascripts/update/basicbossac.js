@@ -3,6 +3,7 @@ class BasicBossac{
         this.serial = serial;
 
         this.connected = false;
+        this.wasDisconnectCalled = false;
         this.collectedData = "";
 
         this.programFlashStart = 0x2000;
@@ -16,8 +17,16 @@ class BasicBossac{
         this.onUpdateProgress = (percentage) => {};
         this.onUpdateComplete = () => {};
         this.onConnectionCanceled = () => {};
+        this.onError = () => {};
     }
 
+    disconnect(){
+        if(this.connected){
+            this.connected = false;
+            this.wasDisconnectCalled = true;
+            this.serial.disconnect();
+        }
+    }
 
     async checkCollectedDataFor(text){
         let timeoutTryCount = 0;
@@ -34,7 +43,7 @@ class BasicBossac{
                         }
                     }, 10);
                 }else{
-                    reject();
+                    if(!this.wasDisconnectCalled) reject();
                 }
             }
             check();
@@ -66,21 +75,19 @@ class BasicBossac{
 
             this.serial.onConnectionCanceled = this.onConnectionCanceled.bind(this);
             this.serial.onDisconnect = () => {
-                // Don't want this to do what it was doing before
+                this.connected = false;
+                this.onError();
             }
             this.serial.onConnect = () => {
                 this.connected = true;
+                this.wasDisconnectCalled = false;
     
                 this.serial.onData = (data) => {
                     this.collectedData += this.decoder.decode(data);
                     console.log(decoder.decode(data));
                 }
     
-                this.update(firmwarepath).catch((errorMsg) => {
-                    console.error("Update failed... " + errorMsg);
-                    this.serial.disconnect();
-                    reject(errorMsg);
-                });
+                this.update(firmwarepath);
             }
     
             this.serial.connect(115200, 128);
@@ -96,9 +103,7 @@ class BasicBossac{
         // Erase flash after bootloader
         await this.serial.write("X" + this.programFlashStart.toString(16) + "#", true);
         await this.wait(1);
-        await this.checkCollectedDataFor("X\n\r").catch(() => {
-            throw new Error("Erase timed out");
-        });
+        await this.checkCollectedDataFor("X\n\r");
     }
 
 
@@ -122,21 +127,18 @@ class BasicBossac{
         const cmd1 = "Y" + this.sramBufferAddress.toString(16) + ",0#";
         await this.serial.write(cmd1, true);
         await this.wait(1);
-        await this.checkCollectedDataFor("Y\n\r").catch(() => {
-            throw new Error("Upload timed out");
-        });
+        await this.checkCollectedDataFor("Y\n\r");
 
         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L629
         const cmd2 = "Y" + (this.programFlashStart + (ipx*this.uploadPacketSize)).toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";
         await this.serial.write(cmd2, true);
         await this.wait(1);
-        await this.checkCollectedDataFor("Y\n\r").catch(() => {
-            throw new Error("Upload timed out");
-        });
+        await this.checkCollectedDataFor("Y\n\r");
     }
 
 
     async update(firmwarePath){
+        try{
         this.collectedData = "";
 
         const binData = new Uint8Array(await (await fetch(firmwarePath)).arrayBuffer());
@@ -149,16 +151,21 @@ class BasicBossac{
         })
 
         for(let ipx=0; ipx<packetCount; ipx++){
-            let packet = binData.slice((ipx*this.uploadPacketSize), (ipx*this.uploadPacketSize)+this.uploadPacketSize);
-            await this.#write(packet, ipx).catch((errorMsg) => {
-                throw errorMsg;
-            })
+            if(this.connected){
+                let packet = binData.slice((ipx*this.uploadPacketSize), (ipx*this.uploadPacketSize)+this.uploadPacketSize);
+                await this.#write(packet, ipx);
 
-            this.onUpdateProgress(((ipx/packetCount)*100).toFixed(0));
+                this.onUpdateProgress(((ipx/packetCount)*100).toFixed(0));
+            }else{
+                return;
+            }
         }
 
         await this.#reboot();
         this.onUpdateComplete();
+        }catch(error){
+            this.onError();
+        }
     }
 }
 
