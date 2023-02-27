@@ -164,7 +164,7 @@ hide:
   }
 </style>
 
-<!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/streaming/stream.js -->
+<!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/update/main.js -->
 <body>
   <section id="updateSection" class="tx-container flex-center" style="width:100%; height:100%">
     <h2>TV Updating</h2>
