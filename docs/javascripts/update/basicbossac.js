@@ -139,30 +139,30 @@ class BasicBossac{
 
     async update(firmwarePath){
         try{
-        this.collectedData = "";
+            this.collectedData = "";
 
-        const binData = new Uint8Array(await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer());
-        const packetCount = Math.ceil(binData.byteLength/this.uploadPacketSize); // Round up since .slice() will figure out the end
+            const binData = new Uint8Array(await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer());
+            const packetCount = Math.ceil(binData.byteLength/this.uploadPacketSize); // Round up since .slice() will figure out the end
 
-        this.onUpdateStart();
+            this.onUpdateStart();
 
-        await this.#erase().catch((errorMsg) => {
-            throw errorMsg;
-        })
+            await this.#erase().catch((errorMsg) => {
+                throw errorMsg;
+            })
 
-        for(let ipx=0; ipx<packetCount; ipx++){
-            if(this.connected){
-                let packet = binData.slice((ipx*this.uploadPacketSize), (ipx*this.uploadPacketSize)+this.uploadPacketSize);
-                await this.#write(packet, ipx);
+            for(let ipx=0; ipx<packetCount; ipx++){
+                if(this.connected){
+                    let packet = binData.slice((ipx*this.uploadPacketSize), (ipx*this.uploadPacketSize)+this.uploadPacketSize);
+                    await this.#write(packet, ipx);
 
-                this.onUpdateProgress(((ipx/packetCount)*100).toFixed(0));
-            }else{
-                return;
+                    this.onUpdateProgress(((ipx/packetCount)*100).toFixed(0));
+                }else{
+                    return;
+                }
             }
-        }
 
-        await this.#reboot();
-        this.onUpdateComplete();
+            await this.#reboot();
+            this.onUpdateComplete();
         }catch(error){
             this.onError();
         }

@@ -627,7 +627,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 });
             });
         }else if(screen == "update_complete"){
-            setInnerText("description", "Update complete!");
+            setInnerText("description", "Update complete!\nThe TV should reboot.");
             setInnerText("nextButton", "Done");
             show("description");
             show("nextButton");
