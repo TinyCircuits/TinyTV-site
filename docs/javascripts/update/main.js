@@ -1,67 +1,11 @@
 import { Serial } from "../serial.js";
-import { TV_TYPES } from "/javascripts/common.js";
+import { TV_TYPES, show, hide, disable, play, setClickCallback, setInnerText, hideAll } from "/javascripts/common.js";
 import { BasicPicoboot } from "./basicpicoboot.js";
 import { BasicBossac } from "./basicbossac.js";
 
 
 // Only perform the update page logic if actually on the update page
 if(window.location.pathname.indexOf("Update") != -1){
-    let show = (element, showChildren=true) => {
-        if(typeof(element) == "string") element = document.getElementById(element);
-
-        element.classList.remove("invisible");
-
-        // Don't want to show children, infinite loop otherwise
-        if(element.parentElement) show(element.parentElement, false);
-
-        if(showChildren){
-            for(let icx=0; icx<element.children.length; icx++){
-                show(element.children[icx]);
-            }
-        }
-    }
-    
-    let hide = (element) => {
-        if(typeof(element) == "string") element = document.getElementById(element);
-
-        element.classList.add("invisible");
-
-        for(let icx=0; icx<element.children.length; icx++){
-            hide(element.children[icx]);
-        }
-    }
-    
-    let disable = (elementID) => {
-        document.getElementById(elementID).disabled = true;
-    }
-
-    let play = (elementID) => {
-        document.getElementById(elementID).currentTime = 0;
-        document.getElementById(elementID).play();
-    }
-
-    let pause = (elementID) => {
-        document.getElementById(elementID).pause();
-    }
-    
-    let setClickCallback = (elementID, callback) => {
-        document.getElementById(elementID).onclick = callback;
-    }
-    
-    let setInnerText = (elementID, text) => {
-        document.getElementById(elementID).innerText = text;
-    }
-    
-    let hideAll = () => {
-        let sectionChildren = document.getElementById("updateSection").children;
-    
-        // Start at index 1 to skip description header
-        for(let icx=1; icx<sectionChildren.length; icx++){
-            hide(sectionChildren[icx]);
-        }
-    }
-
-
     // When setScreen(), removeUrlParameter(), or page back button are pressed, re-render the page
     window.onpopstate = () => {
         refresh();

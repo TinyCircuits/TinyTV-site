@@ -16,18 +16,7 @@ let inputCover = document.getElementById("inputCover");
 let inputFill = document.getElementById("inputFill");
 
 // Only perform the streaming logic if actually on the streaming page that has all the elements
-if(streamScreen0 &&
-   streamConnectButton &&
-   browserSupportError &&
-   description &&
-   outputPreview &&
-   outputCanvas &&
-   infoOutput &&
-   cropContainer &&
-   inputContain &&
-   inputCover &&
-   inputFill &&
-   audioSupportMessage){
+if(window.location.pathname.indexOf("Streaming") != -1){
     if (!("serial" in navigator)){
         streamConnectButton.disabled = true;
         browserSupportError.classList.remove("invisible");

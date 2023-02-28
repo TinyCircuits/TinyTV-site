@@ -280,7 +280,7 @@ hide:
 
     <div id="buttonContainer" class="tx-hero" style="display:flex; flex-direction:column; justify-content:center; align-items:center">
       <div>
-        <button id="connectButton" title="update connect button" alt="Button automatically connects TV or brings up dialog to manually connect it"
+        <button id="connectButton" title="update connect button" alt="Button brings up dialog to manually connect TV"
           class="md-button md-button--primary">
           Connect TV
         </button>
