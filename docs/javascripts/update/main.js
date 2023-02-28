@@ -114,6 +114,7 @@ if(window.location.pathname.indexOf("Update") != -1){
     let serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}], false);
     const picoboot = new BasicPicoboot();
     const bossac = new BasicBossac(serial);
+    const decoder = new TextDecoder();
     let detectedTVType = TV_TYPES.NONE;
     let detectedFirmwareVer = undefined;
 
@@ -186,7 +187,6 @@ if(window.location.pathname.indexOf("Update") != -1){
                 show("infoOutput");
                 hide("mainScreenBulletList");
         
-                const decoder = new TextDecoder();
                 let received = "";
         
                 serial.onData = (data) => {
