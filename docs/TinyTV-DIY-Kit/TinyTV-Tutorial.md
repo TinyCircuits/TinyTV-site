@@ -1,24 +1,7 @@
-<link rel="stylesheet" media="screen" href="/assets/fonts/d-din/d-din.css" type="text/css"/>
-<link rel="stylesheet" href="/assets/fonts/Oswald/Oswald.css">
-
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-dark.css" title="dark">
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-light.css" title="light">
-
-<link rel="stylesheet" href="/stylesheets/TinyStyle.css" type="text/css">
-
-<div class="docName">
-  <h1> TinyTV Customization Tutorial Page </h1>
+# TinyTV Customization Tutorial Page
   
-  <div class="theme-switch-wrapper">
-    <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round"></div>
-    </label>
-  </div>
+<center><img src="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/images/TinyTV-Custom-01.jpg" /></center>
 
-  <center><img src="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/images/TinyTV-Custom-01.jpg" /></center>
-
-</div>
 
 This page includes some details on how the TinyTV settings menu works, and some details about how you can paint your TinyTV and personalize it!
 
@@ -70,36 +53,3 @@ To change the button definitions, you just need to scroll to the button option y
 Check out the <a href="https://tinycircuits.com/blogs/news/customizing-your-diy-tinytv-kit" target="_blank" alt="TinyTV Painting tutorial">**TV Kit Customization Blog**</a> on our main site.
 
 <center><img src="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/images/TinyTV-Custom-03.jpg" /></center>
-
----
-
-## Questions?
-
-Our F.A.Q. is located on the <a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_blank" alt="TinyTV Prouduct page">**TinyTV product page**</a>.
-
-
-
-- - -
-
-<center>
-## Contact Us
-</center>
-
-If you have any questions or feedback, feel free to email us or make a post on our <a href="http://forum.tinycircuits.com/index.php" target="_blank" alt="TinyCircuits Forum">**forum**</a>.  Show us what you make by tagging @TinyCircuits on Instagram, Twitter, or Facebook so we can feature it.
-
-<div class="social">
-  <ul>
-    <li><a href="mailto:info@tinycircuits.com" target="_blank" alt="info@TinyCircuits.com" alt="e-mail info@TinyCircuits.com"><i class="em"></i></a></li>
-    <li><a href="https://www.instagram.com/tinycircuits/" target="_blank" alt="Instagram" alt="TinyCircuits Instagram"><i class="ig"></i></a></li>
-    <li><a href="https://twitter.com/tinycircuits" target="_blank" alt="Twitter" alt="TinyCircuits Twitter"><i class="tw"></i></a></li>
-    <li><a href="https://www.facebook.com/TinyCircuits/" target="_blank" alt="Facebook" alt="TinyCircuits Facebook"><i class="fb"></i></a></li>
-    <li><a href="https://www.youtube.com/user/tinycircuits" target="_blank" alt="YouTube" alt="TinyCircuits YouTube"><i class="yt"></i></a></li>
-    <li><a href="https://www.hackster.io/kburns/" target="_blank" alt="Hackster" alt="TinyCircuits Hackster"><i class="hs"></i></a></li>
-  </ul>  
-</div>
-
-<center><p>Thanks for making with us!</p></center>
-
-<!-- link the javascript! -->
-<script src="/assets/highlight/highlight.pack.js"></script>
-<script src="/js/TinyScript.js"></script>

@@ -1,25 +1,6 @@
-<link rel="stylesheet" media="screen" href="/assets/fonts/d-din/d-din.css" type="text/css"/>
-<link rel="stylesheet" href="/assets/fonts/Oswald/Oswald.css">
-
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-dark.css" title="dark">
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-light.css" title="light">
-
-<link rel="stylesheet" href="/stylesheets/TinyStyle.css" type="text/css">
-
-<div class="docName">
-  <h1>TinyTV & Tiny Video Player Frequently Asked Questions</h1>
+# TinyTV & Tiny Video Player Frequently Asked Questions
   
-  <div class="theme-switch-wrapper">
-    <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round"></div>
-    </label>
-  </div>
-
-  <center><img width="50%" height="50%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Kits/Tiny-Video-Player-Kit/images/TinyVideoPlayer-Product-Photo-01.1.png" /></center>
-
-</div>
-
+<center><img width="50%" height="50%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Kits/Tiny-Video-Player-Kit/images/TinyVideoPlayer-Product-Photo-01.1.png" /></center>
 
 **If one of the below options doesn't answer your question(s), you can post on the <a href="http://forum.tinycircuits.com/index.php?board=10.0" target="_blank" alt="TinyTV Tinycircuits forum">TinyTV section of our forum</a>, or get in touch with <a href="https://tinycircuits.com/pages/contact-us" target="_blank" alt="Send a message to tinycircuits support on this page">customer support</a>.**
 

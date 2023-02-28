@@ -1,26 +1,9 @@
-<link rel="stylesheet" media="screen" href="/assets/fonts/d-din/d-din.css" type="text/css"/>
-<link rel="stylesheet" href="/assets/fonts/Oswald/Oswald.css">
 
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-dark.css" title="dark">
-<link rel="stylesheet" href="/assets/highlight/styles/atom-one-light.css" title="light">
+# TSVConverter: What is it and how do I use it?
 
-<link rel="stylesheet" href="/stylesheets/TinyStyle.css" type="text/css">
+<center><img width="50%" height="50%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TSVConverter-Tutorial/images/TSVConverter-Tutorial-Image-01.jpg" /></center>
 
-<div class="docName">
-  <h1> TSVConverter: What is it and how do I use it? </h1>
-  
-  <div class="theme-switch-wrapper">
-    <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round"></div>
-    </label>
-  </div>
-
-  <center><img width="50%" height="50%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TSVConverter-Tutorial/images/TSVConverter-Tutorial-Image-01.jpg" /></center>
-
-</div>
-
-.TSV (TinyScreen Video) is a file format used to play video on our TinyScreen products, including the TinyTV DIY Kit, our TinyScreen+, the Tiny Arcade, and POcket Arcade. This page will cover how to use the Windows and MacOS program to convert any common video format to a .TSV file. It will also demonstrate how to play .TSV files on your TinyScreen+ with the <a href="https://tinycircuits.com/collections/memory/products/microsd-tinyshield" target="_blank" alt="micro SD TinyShield Product Page">**Micro SD TinyShield**</a>.
+.TSV (TinyScreen Video) is a file format used to play video on our TinyScreen products, including the TinyTV DIY Kit, our TinyScreen+, the Tiny Arcade, and Pocket Arcade. This page will cover how to use the Windows and MacOS program to convert any common video format to a .TSV file. It will also demonstrate how to play .TSV files on your TinyScreen+ with the <a href="https://tinycircuits.com/collections/memory/products/microsd-tinyshield" target="_blank" alt="micro SD TinyShield Product Page">**Micro SD TinyShield**</a>.
 
 _For more information on how to load .TSV files to your Tiny Arcade, please refer to the <a href="https://tinycircuits.com/blogs/learn/how-to-load-tinyarcade-games-onto-an-sd-card" target="_blank" alt="How to Load TinyArcade Games & Videos onto an SD Card Tutorial">**How to Load Tiny Arcade Games & Videos onto an SD Card**</a> tutorial._
 
@@ -115,27 +98,3 @@ Once you have added the file(s) you wish to play on your SD Card, all you need t
 
 The TinyTV Kit and Tiny Video Player kit come pre-loaded with software, but if you have the necessary boards, or you are interested in learning more about the software behind these kits, check out the <a href="https://learn.tinycircuits.com/Kits/Tiny-Video-Program/" target="_blank" alt="wiki learn tutorial page to learn how to use the arduino IDE to upload the tinytv program">**TinyTV & Tiny Video Player Programming tutorial**</a>.
 
----
-
-<center>
-## Contact Us
-</center>
-
-If you have any issues converting your video, or you think you found a bug in our program, feel free to email us at <a href="mailto:info@tinycircuits.com" target="_blank">**info@tinycircuits.com**</a> or make a post on the <a href="http://forum.tinycircuits.com/index.php?board=2.0" target="_blank" alt="Forum page">**forum**</a>.
-
-<div class="social">
-  <ul>
-    <li><a href="mailto:info@tinycircuits.com" target="_blank" alt="info@TinyCircuits.com" alt="e-mail info@TinyCircuits.com"><i class="em"></i></a></li>
-    <li><a href="https://www.instagram.com/tinycircuits/" target="_blank" alt="Instagram" alt="TinyCircuits Instagram"><i class="ig"></i></a></li>
-    <li><a href="https://twitter.com/tinycircuits" target="_blank" alt="Twitter" alt="TinyCircuits Twitter"><i class="tw"></i></a></li>
-    <li><a href="https://www.facebook.com/TinyCircuits/" target="_blank" alt="Facebook" alt="TinyCircuits Facebook"><i class="fb"></i></a></li>
-    <li><a href="https://www.youtube.com/user/tinycircuits" target="_blank" alt="YouTube" alt="TinyCircuits YouTube"><i class="yt"></i></a></li>
-    <li><a href="https://www.hackster.io/kburns/" target="_blank" alt="Hackster" alt="TinyCircuits Hackster"><i class="hs"></i></a></li>
-  </ul>  
-</div>
-
-<center><p>Thanks for making with us!</p></center>
-
-<!-- link the javascript! -->
-<script src="/assets/highlight/highlight.pack.js"></script>
-<script src="/js/TinyScript.js"></script>

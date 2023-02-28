@@ -49,7 +49,12 @@ The MAME-TV project still lives on through Yashusi's friend Guru Hoshi in Japan,
 
 Launched in late 2019, the <a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_blank" alt="TinyTV DIY Kit product page">**TinyTV DIY Kit**</a> allowed people to create their own TinyTV, load their own videos, and paint the TV to look however they wanted. Built upon the TinyCircuits TinyDuino family, this kit has been extremely popular and well-received. 
 
-While the kit aspect of this is fun for a lot of people, we did hear from others who would prefer it already assembled, and easier to load their own videos on. So we began working on the next generation TinyTV platform including the TinyTV 2 and TinyTV Mini.
+While the kit aspect of this is fun for a lot of people, we did hear from others who would prefer it already assembled, and easier to load their own videos on. So we began working on the next generation TinyTV platform including the TinyTV 2 and TinyTV Mini. Check out this video displaying the differences in the TinyTV screens using prototype versions of the TinyTV 2 and TinyTV Mini:
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1S8InR9V6xU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></center>
+
+Check out this comparison chart for a more in-depth look at the differences in tech specs:
 
 <center>
 <img src="../images/tinytv-comparison-chart.jpg" alt="Comparison of TinyCircuits TinyTVs including TinyTV DIY Kit, TinyTV 2, and TinyTV Mini" />
