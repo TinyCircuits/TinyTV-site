@@ -3,7 +3,7 @@ class BasicPicoboot{
         this.device = undefined;
 
         this.connected = false;
-        this.wasDisconnectCalled = false;
+        this.showErrorMsg = false;
 
         // Callbacks for external implementation
         this.onUpdateStart = () => {};
@@ -16,7 +16,7 @@ class BasicPicoboot{
 
     async connect(){
         try{
-            this.wasDisconnectCalled = false;
+            this.showErrorMsg = false;
 
             // Do web side of getting the device
             this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
@@ -43,9 +43,9 @@ class BasicPicoboot{
     }
 
 
-    disconnect(){
+    disconnect(showErrorMSG=true){
         if(this.connected){
-            this.wasDisconnectCalled = true;
+            this.showErrorMsg = showErrorMSG;
             this.device.close();
         }
     }
@@ -219,7 +219,7 @@ class BasicPicoboot{
                 }
             }catch(error){
                 console.warn("Error, maybe disconnected?");
-                if(!this.wasDisconnectCalled) this.onError();
+                if(!this.showErrorMsg) this.onError();
             }
         });
     }
@@ -258,7 +258,7 @@ class BasicPicoboot{
                 }
             }catch(error){
                 console.warn("Error, maybe disconnected?");
-                if(!this.wasDisconnectCalled) this.onError();
+                if(!this.showErrorMsg) this.onError();
             }
         });
     }

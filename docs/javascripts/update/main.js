@@ -464,135 +464,75 @@ if(window.location.pathname.indexOf("Update") != -1){
             });
         }else if(screen == "update"){
             const tvtype = getUrlParameter("type");
+            let programmer = undefined;
 
             if(tvtype == "tv2" || tvtype == "tvmini"){
-                setInnerText("connectButton", "Connect");
+                programmer = picoboot;
                 setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select the 'RP2 Boot' device");
-                show("description");
-                show("connectButton");
-                show("cancelUpdate");
-
-                setClickCallback("connectButton", async () => {
-                    picoboot.onError = () => {
-                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
-                        setInnerText("connectButton", "Restart");
-                        hide("progressBar");
-                        show("contactusButton");
-
-                        setClickCallback("connectButton", () => {
-                            removeUrlParameter("type");
-                            setScreen("manual_update");
-                        });
-                    }
-
-                    picoboot.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
-                        setInnerText("connectButton", "Try again");
-                        show("contactusButton");
-                    }
-
-                    picoboot.onUpdateStart = () => {
-                        setInnerText("description", "Updating...");
-                        setInnerText("connectButton", "Disconnect");
-                        hide("contactusButton");
-                        setClickCallback("connectButton", () => {
-                            picoboot.disconnect();
-                        });
-                        setClickCallback("cancelUpdate", () => {
-                            picoboot.disconnect();
-                            removeUrlParameter("screen");
-                            removeUrlParameter("type");
-                        });
-                    }
-
-                    picoboot.onUpdateProgress = (percentage) => {
-                        show("progressBar");
-                        document.getElementById("progressBarBar").style.width = percentage + "%";
-                        document.getElementById("progressBarText").innerText = percentage + "%";
-                    }
-
-                    picoboot.onUpdateComplete = () => {
-                        removeUrlParameter("screen");
-                        removeUrlParameter("type");
-                        setScreen("update_complete");
-                    }
-
-                    await picoboot.connect();
-                    if(tvtype == "tv2"){
-                        await picoboot.update("/firmware/TinyTV-2-firmware.uf2");
-                    }else{
-                        await picoboot.update("/firmware/TinyTV-Mini-firmware.uf2");
-                    }
-                });
             }else{
-                setInnerText("connectButton", "Connect");
+                programmer = bossac;
                 setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select 'USB Serial Device'");
-                show("description");
-                show("connectButton");
-                show("cancelUpdate");
-
-                setClickCallback("connectButton", async () => {
-                    bossac.onError = () => {
-                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
-                        setInnerText("connectButton", "Restart");
-                        hide("progressBar");
-                        show("contactusButton");
-
-                        setClickCallback("connectButton", () => {
-                            removeUrlParameter("type");
-                            setScreen("manual_update");
-                        });
-                    }
-
-                    bossac.onConnectionCanceled = () => {
-                        setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
-                        setInnerText("connectButton", "Try again");
-                        show("contactusButton");
-                    }
-
-                    bossac.onUpdateStart = () => {
-                        setInnerText("description", "Updating...");
-                        setInnerText("connectButton", "Disconnect");
-                        hide("contactusButton");
-                        setClickCallback("connectButton", () => {
-                            bossac.disconnect();
-                        });
-                        setClickCallback("cancelUpdate", () => {
-                            bossac.disconnect();
-                            removeUrlParameter("screen");
-                            removeUrlParameter("type");
-                        });
-                    }
-
-                    bossac.onUpdateProgress = (percentage) => {
-                        show("progressBar");
-                        document.getElementById("progressBarBar").style.width = percentage + "%";
-                        document.getElementById("progressBarText").innerText = percentage + "%";
-                    }
-
-                    bossac.onUpdateComplete = () => {
-                        removeUrlParameter("screen");
-                        removeUrlParameter("type");
-                        setScreen("update_complete");
-                    }
-
-                    await bossac.connectUpdate("/firmware/TinyTV-DIY-firmware.bin").catch((errorMsg) => {
-                        setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the manual update process, contact us, or cancel?");
-                        setInnerText("connectButton", "Restart");
-                        hide("progressBar");
-                        show("contactusButton");
-
-                        setClickCallback("connectButton", () => {
-                            removeUrlParameter("type");
-                            setScreen("manual_update");
-                        });
-                    });
-                });
             }
 
-            setClickCallback("cancelUpdate", () => {
-                removeUrlParameter("screen");
-                removeUrlParameter("type");
+            setInnerText("connectButton", "Connect");
+            show("description");
+            show("connectButton");
+            show("cancelUpdate");
+
+            setClickCallback("connectButton", async () => {
+                programmer.onError = () => {
+                    setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the update process, contact us, or cancel?");
+                    setInnerText("connectButton", "Restart");
+                    hide("progressBar");
+                    show("contactusButton");
+
+                    setClickCallback("connectButton", () => {
+                        removeUrlParameter("type");
+                        removeUrlParameter("screen");
+                    });
+                }
+
+                programmer.onConnectionCanceled = () => {
+                    setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
+                    setInnerText("connectButton", "Try again");
+                    show("contactusButton");
+                }
+
+                programmer.onUpdateStart = () => {
+                    setInnerText("description", "Updating...");
+                    setInnerText("connectButton", "Disconnect");
+                    hide("contactusButton");
+                    setClickCallback("connectButton", () => {
+                        picoboot.disconnect(true);
+                    });
+                    setClickCallback("cancelUpdate", () => {
+                        picoboot.disconnect(false);
+                        removeUrlParameter("screen");
+                        removeUrlParameter("type");
+                    });
+                }
+
+                programmer.onUpdateProgress = (percentage) => {
+                    show("progressBar");
+                    document.getElementById("progressBarBar").style.width = percentage + "%";
+                    document.getElementById("progressBarText").innerText = percentage + "%";
+                }
+
+                programmer.onUpdateComplete = () => {
+                    removeUrlParameter("screen");
+                    removeUrlParameter("type");
+                    setScreen("update_complete");
+                }
+
+                if(tvtype == "tv2"){
+                    await programmer.connect();
+                    await programmer.update("/firmware/TinyTV-2-firmware.uf2");
+                }else if(tvtype == "mini"){
+                    await programmer.connect();
+                    await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");
+                }else if(tvtype == "tvdiy"){
+                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware.bin");
+                }
             });
         }else if(screen == "update_not_needed"){
             setInnerText("description", "Your TV is up to date. Would you still like to update?");
