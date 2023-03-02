@@ -71,11 +71,11 @@ Load up to 5 hours of your own videos, movies, and TV shows easily using our <a 
 
 The <a href="https://tinycircuits.com/collections/components/products/tiny-remote" target="_blank" alt="Tiny Remote Product Page">**Tiny Remote**</a>  will work best when directed toward the top of the TinyTV where the receiver is, and will work about 12-18in. away from the unit - making it perfect for a desk accessory!
 
-To customize your viewing experience, you can use the <a height="50%" width="50%" href="../TinyTV-Tutorial/" target="_blank" alt="Change Settings and IR remote values tutorial">**Settings Menu Tutorial**</a> to turn off the TinyTV program for the Tiny Video Player program. Additionally you can toggle Auto Play, and Looping settings to customize your palm-sized video display.
+To customize your viewing experience, you can use the <a height="50%" width="50%" href="../TinyTV-Tutorial/"  alt="Change Settings and IR remote values tutorial">**Settings Menu Tutorial**</a> to turn off the TinyTV program for the Tiny Video Player program. Additionally you can toggle Auto Play, and Looping settings to customize your palm-sized video display.
 
 ---
 
 ## Questions?
 
-Our F.A.Q. is located on the <a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_blank" alt="TinyTV Product page">**TinyTV product page**</a>.
+Check our <a href="../TinyTV-FAQ/"  alt="TinyTV FAQ page">**TinyTV DIY Kit specific F.A.Q.**</a>.
 

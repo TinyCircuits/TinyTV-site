@@ -16,7 +16,7 @@
 ### Different Power Source
 **How can I wire a different power source to continuously power the TinyTV?**
 
-* There are a few different options to answer this question depending on the constraints of you or your project's needs - <a href="http://forum.tinycircuits.com/index.php?topic=2383.msg5221#msg5221" target="_blank" alt="forum post that discusses some options for different power sources for the TinyTV">**read through all the options in this forum post**</a>. Additionally, if you plan on permanently installing the TV in a diorama, miniature or otherwise, it may help to change the settings of the TV beforehand to autoplay and loop videos loaded on the SD Card when powered, check out the <a href="https://learn.tinycircuits.com/Kits/TinyTV-Tutorial/" target="_blank" alt="TinyTV settings menu tutorial">**Settings Menu**</a> tutorial to learn more. 
+* There are a few different options to answer this question depending on the constraints of you or your project's needs - <a href="http://forum.tinycircuits.com/index.php?topic=2383.msg5221#msg5221" target="_blank" alt="forum post that discusses some options for different power sources for the TinyTV">**read through all the options in this forum post**</a>. Additionally, if you plan on permanently installing the TV in a diorama, miniature or otherwise, it may help to change the settings of the TV beforehand to auto-play and loop videos loaded on the SD Card when powered, check out the <a href="../TinyTV-Tutorial/" alt="TinyTV settings menu tutorial">**Settings Menu**</a> tutorial to learn more. 
 
 ---
 
@@ -57,7 +57,7 @@
 ### Autoplay & Loop Videos
 **Is there a way to "loop" or "auto-play" the videos when the TV is turned on? Can I change the remote codes to use a different remote?**
 
-* Yes! These features are easily edited by using the <a href="https://learn.tinycircuits.com/Kits/TinyTV-Tutorial/" target="_blank" alt="TinyTV settings menu tutorial">**Settings Menu**</a>.
+* Yes! These features are easily edited by using the <a href="../TinyTV-Tutorial/" alt="TinyTV settings menu tutorial">**Settings Menu**</a>.
 
 ---
 ### Painting Tips
@@ -83,7 +83,7 @@
 The remote will work around 12-16 inches away from the TV - this can change depending on the thickness of the TV enclosure and the amount of paint layered on the TV.
 
 * Make sure the battery is fully seated in the battery holder. You can check that the remote is working by pressing one of the six white buttons while looking at the bottom of the remote. A red LED on the bottom of the board will flicker when a button is pressed.
-You can test that the IR Receiver inside the TV is working by using any other IR Remote with the IR settings menu on the TinyTV (to get to the settings menu, turn the TV off with the power switch and while holding the top right TV button, turn the TV back on). <a href="https://learn.tinycircuits.com/Kits/TinyTV-Tutorial/" target="_blank" alt="TinyTV settings menu tutorial">**Check out the full settings tutorial for more information.**</a>
+You can test that the IR Receiver inside the TV is working by using any other IR Remote with the IR settings menu on the TinyTV (to get to the settings menu, turn the TV off with the power switch and while holding the top right TV button, turn the TV back on). <a href="../TinyTV-Tutorial/" alt="TinyTV settings menu tutorial">**Check out the full settings tutorial for more information.**</a>
 
 ---
 ### TV Buttons
@@ -97,7 +97,7 @@ You can test that the IR Receiver inside the TV is working by using any other IR
 
 * You should be able to get around 2-5x the sound by pressing and installing the speaker more firmly. To do this, take off the white sticker and adhere the speaker firmly against a flat surface (like on the inside of the TV's back panel). It may help to have the TinyTV on with a video playing and testing the audio while pressing on the speaker.
 
-* The volume on the TV is limited by the volume of the video that is converted using the <a href="https://learn.tinycircuits.com/Kits/TSV-Converter-Tutorial/" target="_blank" alt="TinyScreen Video Converter Tutorial">**TSV Converter**</a> . Make sure that you are converting videos with louder volume, or consider editing the volume on a video with a utility like Photoshop.
+* The volume on the TV is limited by the volume of the video that is converted using the <a href="../TSV-Converter-Tutorial/"  alt="TinyScreen Video Converter Tutorial">**TSV Converter**</a> . Make sure that you are converting videos with louder volume, or consider editing the volume on a video with a utility like Photoshop or Affinity.
 
 ---
 ### Videos Not Playing
@@ -118,26 +118,3 @@ You can test that the IR Receiver inside the TV is working by using any other IR
 
 * There could be invisible files that your computer put on your SD Card! MacOS is most known for loading invisible files into any folder or location on your computer to organize files and upkeep some different OS functions. <a href="http://forum.tinycircuits.com/index.php?topic=2337.msg5024#msg5024" target="_blank" alt="forum post that discusses glitching videos produced by invisible files on MacOS">**Read more about this issue and how to fix it from this forum post**</a>.
 
----
-<center>
-## Contact Us
-</center>
-
-If you have any questions or feedback, feel free to email us or make a post on our <a href="http://forum.tinycircuits.com/index.php" target="_blank" alt="TinyCircuits Forum">**forum**</a>.  Show us what you make by tagging @TinyCircuits on Instagram, Twitter, or Facebook so we can feature it.
-
-<div class="social">
-  <ul>
-    <li><a href="mailto:info@tinycircuits.com" target="_blank" alt="info@TinyCircuits.com" alt="e-mail info@TinyCircuits.com"><i class="em"></i></a></li>
-    <li><a href="https://www.instagram.com/tinycircuits/" target="_blank" alt="Instagram" alt="TinyCircuits Instagram"><i class="ig"></i></a></li>
-    <li><a href="https://twitter.com/tinycircuits" target="_blank" alt="Twitter" alt="TinyCircuits Twitter"><i class="tw"></i></a></li>
-    <li><a href="https://www.facebook.com/TinyCircuits/" target="_blank" alt="Facebook" alt="TinyCircuits Facebook"><i class="fb"></i></a></li>
-    <li><a href="https://www.youtube.com/user/tinycircuits" target="_blank" alt="YouTube" alt="TinyCircuits YouTube"><i class="yt"></i></a></li>
-    <li><a href="https://www.hackster.io/kburns/" target="_blank" alt="Hackster" alt="TinyCircuits Hackster"><i class="hs"></i></a></li>
-  </ul>  
-</div>
-
-<center><p>Thanks for making with us!</p></center>
-
-<!-- link the javascript! -->
-<script src="/assets/highlight/highlight.pack.js"></script>
-<script src="/js/TinyScript.js"></script>

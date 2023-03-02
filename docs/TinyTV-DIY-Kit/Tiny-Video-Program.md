@@ -32,7 +32,7 @@ TinyTV and Tiny Video Player kits are shipped with the TinyTV and Video Player c
 ### Software: 
 
 * <a href="https://www.arduino.cc/en/Main/Software" target="_blank" alt="Arduino IDE Download Page">**Arduino IDE**</a>  - used to program the processor on the TinyScreen+
-* <a href="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/examples/TinyTV.zip" target="_blank" alt="Program that can function as a Tiny Video Player or TinyTV">**Arduino Program zip file Tiny Video Player / TinyTV**</a> - this will need uploaded using the Arduino IDE. This program can display both the Tiny Video Player, or the TinyTV program by toggling options on the <a href="../TinyTV-Tutorial/" target="_blank" alt="TinyScreen+ Setup Tutorial learn wiki page">**Settings Menu**</a>. The default setting is for the TinyTV.
+* <a href="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/examples/TinyTV.zip" target="_blank" alt="Program that can function as a Tiny Video Player or TinyTV">**Arduino Program zip file Tiny Video Player / TinyTV**</a> - this will need uploaded using the Arduino IDE. This program can display both the Tiny Video Player, or the TinyTV program by toggling options on the <a href="../TinyTV-Tutorial/" alt="TinyScreen+ Setup Tutorial learn wiki page">**Settings Menu**</a>. The default setting is for the TinyTV.
   * *Note: make sure that when you download this zipped folder that you keep the file structure as it is when downloaded. You will need to open all of the program files in the Arduino IDE to be able to upload the program successfully.*
 
 - - -
@@ -70,7 +70,7 @@ After the program is uploaded, the TinyTV will begin playing the first video lis
 
 <center><img height="50%" width="50%" src="https://github.com/TinyCircuits/TinyCircuits-TinyTV-ASK4002/raw/master/images/TinyTV-Buttons.jpg" alt="TinyTV Button functions" /></center>
 
-To customize your viewing experience, you can use the <a height="50%" width="50%" href="https://learn.tinycircuits.com/Kits/TinyTV-Tutorial/" target="_blank" alt="https://learn.tinycircuits.com/Kits/TinyTV-Tutorial/">**Settings Menu Tutorial**</a> to turn off the TinyTV program for the Tiny Video Player program. Additionally you can toggle Auto Play, and Looping settings to customize your palm-sized video display.
+To customize your viewing experience, you can use the <a height="50%" width="50%" href="../TinyTV-Tutorial/" alt="Settings for TinyTV DIY Kit tutorial">**Settings Menu Tutorial**</a> to turn off the TinyTV program for the Tiny Video Player program. Additionally you can toggle Auto Play, and Looping settings to customize your palm-sized video display.
 
 The Tiny Video Player program will display a side-scrolling menu of all the files on the SD Card that have the .tsv extension in order. The Tiny Video Player program has the following functionality programmed for the TinyScreen+ buttons: 
 
