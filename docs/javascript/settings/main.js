@@ -1,5 +1,5 @@
 import { Serial } from "../serial.js";
-import { show, hide, disable, setClickCallback, setInnerText } from "/javascripts/common.js";
+import { show, hide, disable, setClickCallback, setInnerText } from "../common.js";
 
 
 // Only perform the update page logic if actually on the settings page
@@ -77,7 +77,6 @@ if(window.location.pathname.indexOf("Settings") != -1){
     // Update the volume percent label on input change, and send cmd to update it
     document.getElementById("volume").oninput = (event) => {
         document.getElementById("volumeLabel").innerText = event.target.value + "%";
-
         set("volume", event.target.value);
     }
 

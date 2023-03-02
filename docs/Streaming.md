@@ -127,5 +127,5 @@ hide:
   </section>
 
 
-  <script type="module" src="/javascripts/streaming/main.js"></script>
+  <script type="module" src="../javascript/streaming/main.js"></script>
 </body>

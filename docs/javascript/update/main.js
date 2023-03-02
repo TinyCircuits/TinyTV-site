@@ -1,5 +1,5 @@
 import { Serial } from "../serial.js";
-import { TV_TYPES, show, hide, disable, play, setClickCallback, setInnerText, hideAll } from "/javascripts/common.js";
+import { TV_TYPES, show, hide, disable, play, setClickCallback, setInnerText, hideAll } from "../common.js";
 import { BasicPicoboot } from "./basicpicoboot.js";
 import { BasicBossac } from "./basicbossac.js";
 
