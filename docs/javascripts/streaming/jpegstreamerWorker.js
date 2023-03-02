@@ -1,5 +1,6 @@
 import { Serial } from "../serial.js";
-import { TV_SIZES, TV_TYPES, TV_JPEG_QUALITIES, TV_FIT_TYPES } from "./jpegstreamerCommon.js";
+import { TV_TYPES } from "../common.js";
+import { TV_SIZES, TV_JPEG_QUALITIES, TV_FIT_TYPES } from "./jpegstreamerCommon.js";
 
 self.detectedTVType = TV_TYPES.NONE;
 self.currentJPEGQuality = 0;
@@ -146,6 +147,7 @@ self.onmessage = async (message) => {
         const blob = await self.offscreenCanvas.convertToBlob({type: "image/jpeg", quality: self.currentJPEGQuality});
         
         if(self.serial.connected){
+
             // Write the AVI chunk header bytes and the 4 bytes for the frame length
             await self.serial.write(new Uint8Array([0x30, 0x30, 0x64, 0x63,  blob.size & 0x000000ff,
                                                                             (blob.size & 0x0000ff00) >> 8,

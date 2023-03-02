@@ -5,12 +5,6 @@ const TV_SIZES = {
     TINYTV_MINI_H: 64
 }
 
-const TV_TYPES = {
-    NONE: "NONE",
-    TINYTV_2: "TV2",
-    TINYTV_MINI: "TVMINI"
-};
-
 const TV_JPEG_QUALITIES = {
     TINYTV_2: 0.8,
     TINYTV_MINI: 0.92
@@ -22,4 +16,4 @@ const TV_FIT_TYPES = {
     FILL: "FILL"
 }
 
-export { TV_SIZES, TV_TYPES, TV_JPEG_QUALITIES, TV_FIT_TYPES };
+export { TV_SIZES, TV_JPEG_QUALITIES, TV_FIT_TYPES };

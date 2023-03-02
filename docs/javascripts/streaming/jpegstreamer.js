@@ -1,4 +1,4 @@
-import { TV_SIZES, TV_TYPES, TV_JPEG_QUALITIES, TV_FIT_TYPES } from "./jpegstreamerCommon.js";
+import { TV_TYPES } from "../common.js";
 
 class JPEGStreamer{
     constructor(outputCanvas){

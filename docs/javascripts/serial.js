@@ -28,6 +28,7 @@ class Serial{
         this.onConnect = () => {};
         this.onDisconnect = () => {};
         this.onData = (data) => {};
+        this.onConnectionCanceled = () => {};
     }
 
 
@@ -38,6 +39,21 @@ class Serial{
 
     disableAutoConnect(){
         this.allowAutoConnect = false;
+    }
+
+
+    // Sets baud to 1200 and disconnects to boot Arduino boards into bootloader mode
+    async autoReset(callback = () => {}){
+        this.onConnect = () => {
+            this.onDisconnect = () => {
+                callback();
+            }
+            this.disconnect();
+        }
+
+        this.enableAutoConnect();
+        await this.connect(1200);
+        this.disableAutoConnect();
     }
 
 
@@ -83,7 +99,7 @@ class Serial{
     }
 
 
-    async disconnect(){
+    async disconnect(fireCallback=true){
         if(this.connected){
             this.reader.releaseLock();
             this.writer.releaseLock();
@@ -94,7 +110,7 @@ class Serial{
             this.port = undefined;
 
             this.connected = false;
-            this.onDisconnect();
+            if(fireCallback) this.onDisconnect();
 
             console.log("Serial disconnected!");
         }
@@ -129,11 +145,12 @@ class Serial{
             }else{
                 console.error(error);
             }
+            this.onConnectionCanceled();
         }
     }
 
 
-    async attemptAutoConnect(){
+    async attemptAutoConnect(baudRate=2000000, bufferSize=2048){
         if(this.allowAutoConnect && this.manuallyConnecting == false){
             console.log("Attempting auto connect...");
             // Get ports this page knows about
@@ -144,7 +161,7 @@ class Serial{
                 for(let pairidx=0; pairidx<this.vendorProductIDs.length; pairidx++){
                     let portInfo = ports[portidx].getInfo();
                     if(portInfo.usbVendorId == this.vendorProductIDs[pairidx].usbVendorId && portInfo.usbProductId == this.vendorProductIDs[pairidx].usbProductId){
-                        await this.#connect(ports[portidx]);
+                        await this.#connect(ports[portidx], baudRate, bufferSize);
                         return true;
                     }
                 }
@@ -156,7 +173,7 @@ class Serial{
 
     async connect(baudRate=2000000, bufferSize=2048){
         // If auto connect fails, continue to manual selection
-        if(await this.attemptAutoConnect() == false){
+        if(!this.manuallyConnecting && await this.attemptAutoConnect(baudRate, bufferSize) == false){
             this.manuallyConnecting = true;
             try{
                 console.log("Waiting on device selection...");
@@ -165,6 +182,7 @@ class Serial{
             }catch(error){
                 // User did not select anything and closed browser dialog
                 console.log("No device selected for connection...");
+                this.onConnectionCanceled();
             }
             this.manuallyConnecting = false;
         }
