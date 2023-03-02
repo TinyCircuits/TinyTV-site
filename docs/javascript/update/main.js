@@ -1,5 +1,5 @@
 import { Serial } from "../serial.js";
-import { TV_TYPES, show, hide, disable, play, setClickCallback, setInnerText, hideAll } from "/javascripts/common.js";
+import { TV_TYPES, show, hide, disable, play, setClickCallback, setInnerText, hideAll } from "../common.js";
 import { BasicPicoboot } from "./basicpicoboot.js";
 import { BasicBossac } from "./basicbossac.js";
 
@@ -470,12 +470,12 @@ if(window.location.pathname.indexOf("Update") != -1){
 
                 if(tvtype == "tv2"){
                     await programmer.connect();
-                    await programmer.update("/firmware/TinyTV-2-firmware.uf2");
+                    await programmer.update("firmware/TinyTV-2-firmware.uf2");
                 }else if(tvtype == "mini"){
                     await programmer.connect();
-                    await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");
+                    await programmer.update("firmware/TinyTV-Mini-firmware.uf2");
                 }else if(tvtype == "tvdiy"){
-                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware.bin");
+                    await programmer.connectUpdate("firmware/TinyTV-DIY-firmware.bin");
                 }
             });
         }else if(screen == "update_not_needed"){

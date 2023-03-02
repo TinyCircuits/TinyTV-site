@@ -226,5 +226,5 @@ hide:
   </section>
 
 
-  <script type="module" src="/javascripts/settings/main.js"></script>
+  <script type="module" src="../javascript/settings/main.js"></script>
 </body>
