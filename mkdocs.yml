@@ -4,7 +4,14 @@ nav:
   - Home: index.md
   - TinyTV Mini: Mini-Get-Started.md
   - TinyTV 2: TV2-Get-Started.md
-  - TinyTV DIY Kit: TinyTV-DIY-Kit.md
+  - TinyTV DIY Kit: 
+      - Get Started: TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
+      - TinyTV Assembly: TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
+      - Tiny Video Player Assembly: TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
+      - TinyTV & Tiny Video Player Programming: TinyTV-DIY-Kit/Tiny-Video-Program.md
+      - Settings/Customization: TinyTV-DIY-Kit/TinyTV-Tutorial.md
+      - TinyTV DIY Kit TSV Converter: TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
+      - TinyTV FAQ: TinyTV-DIY-Kit/TinyTV-FAQ.md
   - Converter App: TinyTV-Converter-App.md
   - Streaming: Streaming.md
   - Update: Update.md
