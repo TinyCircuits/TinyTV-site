@@ -23,7 +23,7 @@ class JPEGStreamer{
         this.streamTransformer = undefined;
         
         // Web worker
-        this.convertWorker = new Worker("javascript/streaming/jpegstreamerWorker.js", {
+        this.convertWorker = new Worker("/javascript/streaming/jpegstreamerWorker.js", {
             type: 'module'
         });
         this.convertWorker.onmessage = async (message) => {
