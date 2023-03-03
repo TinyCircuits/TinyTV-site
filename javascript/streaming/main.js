@@ -1,5 +1,5 @@
-import { JPEGStreamer } from "/javascripts/streaming/jpegstreamer.js";
-import { TV_FIT_TYPES } from "/javascripts/streaming/jpegstreamerCommon.js";
+import { JPEGStreamer } from "../streaming/jpegstreamer.js";
+import { TV_FIT_TYPES } from "../streaming/jpegstreamerCommon.js";
 
 let streamScreen0 = document.getElementById("streamScreen0");
 let streamConnectButton = document.getElementById("streamConnectButton");
