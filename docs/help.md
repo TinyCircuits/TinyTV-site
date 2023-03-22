@@ -47,4 +47,4 @@ The SD Card in the hardware is not detectable - this error occurs when no SD Car
 </center>
 
 
-A few things can trigger a storage malfunction error. This error occurs when the SD Card is detected, but the filesystem is damaged or unrecognizable. This can also happen if your file names include unexpected, or special, characters - if you see this error, try changing the names of your files on the SD Card 
+A few things can trigger a storage malfunction error. This error occurs when the SD Card is detected, but the filesystem is damaged or unrecognizable. This can also happen if your file names include unexpected, or special, characters - if you see this error, try changing the names of your files on the SD Card.
