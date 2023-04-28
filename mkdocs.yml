@@ -46,6 +46,7 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top # 'Back to top' button when scrolling up a page
+    - content.tabs.link
   name: material
   custom_dir: docs/overrides/
 
@@ -114,6 +115,9 @@ extra:
 
 # This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
   markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji

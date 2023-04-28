@@ -3,11 +3,11 @@
 
 <center><img width="50%" height="50%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TSVConverter-Tutorial/images/TSVConverter-Tutorial-Image-01.jpg" /></center>
 
-.TSV (TinyScreen Video) is a file format used to play video on our TinyScreen products, including the TinyTV DIY Kit, our TinyScreen+, the Tiny Arcade, and Pocket Arcade. This page will cover how to use the Windows and MacOS program to convert any common video format to a .TSV file. It will also demonstrate how to play .TSV files on your TinyScreen+ with the <a href="https://tinycircuits.com/collections/memory/products/microsd-tinyshield" target="_blank" alt="micro SD TinyShield Product Page">**Micro SD TinyShield**</a>.
+.TSV (TinyScreen Video) is a file format used to play video on our TinyScreen products, including the TinyTV DIY Kit, our TinyScreen+, the Tiny Arcade, and Pocket Arcade. This page will cover how to use the Windows and MacOS program to convert a video file to a .TSV file. It will also demonstrate how to play .TSV files on your TinyScreen+ with the <a href="https://tinycircuits.com/collections/memory/products/microsd-tinyshield" target="_blank" alt="micro SD TinyShield Product Page">**Micro SD TinyShield**</a>.
 
 _For more information on how to load .TSV files to your Tiny Arcade, please refer to the <a href="https://learn.tinycircuits.com/Help/Load-Games-and-Video-to-SD-Tutorial/" target="_blank" alt="How to Load TinyArcade Games & Videos onto an SD Card Tutorial">**How to Load Tiny Arcade Games & Videos onto an SD Card**</a> tutorial._
 
-<center><a href="../../TinyTV-Converter-App/" alt="TinyTV Converter app tutorial and download page">_If you have a Kickstarter/Indiegogo TinyTV 2 or TinyTV Mini, please navigate to the  tutorial and download page for the TinyTV converter application that will be compatible with the new hardware._</a></center>
+<center><a href="../../TinyTV-Converter-App/" alt="TinyTV Converter app tutorial and download page">_Note: If you have a TinyTV 2 or TinyTV Mini, please navigate to the tutorial and download page for the TinyTV Converter Application that is compatible with the hardware._</a> Additionally, if you have difficulties downloading or using the TSV Converter with the TinyTV DIY Kit, please update the TinyTV DIY Kit code with the <a href="../../Update/" alt="">**Update Tool**</a> to be compatible with the <a href="../../TinyTV-Converter-App/" alt="TinyTV Converter app tutorial and download page">**newest app version**</a>.</center> 
 
 ---
 

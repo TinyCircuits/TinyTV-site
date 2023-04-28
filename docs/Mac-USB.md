@@ -1,0 +1,1 @@
+https://support.apple.com/lt-lt/guide/mac-help/mchlf779ae93/mac
