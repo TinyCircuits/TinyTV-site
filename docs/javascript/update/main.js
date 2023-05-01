@@ -470,12 +470,12 @@ if(window.location.pathname.indexOf("Update") != -1){
 
                 if(tvtype == "tv2"){
                     await programmer.connect();
-                    await programmer.update("/TinyTV-site/firmware/TinyTV-2-firmware.uf2");
+                    await programmer.update("/firmware/TinyTV-2-firmware.uf2");
                 }else if(tvtype == "mini"){
                     await programmer.connect();
-                    await programmer.update("/TinyTV-site/firmware/TinyTV-Mini-firmware.uf2");
+                    await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");
                 }else if(tvtype == "tvdiy"){
-                    await programmer.connectUpdate("/TinyTV-site/firmware/TinyTV-DIY-firmware.bin");
+                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware.bin");
                 }
             });
         }else if(screen == "update_not_needed"){
