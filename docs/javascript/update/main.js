@@ -424,8 +424,8 @@ if(window.location.pathname.indexOf("Update") != -1){
             show("cancelUpdate");
 
             setClickCallback("connectButton", async () => {
-                programmer.onError = () => {
-                    setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the update process, contact us, or cancel?");
+                programmer.onError = (message="") => {
+                    setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the update process, contact us, or cancel?\n" + message);
                     setInnerText("connectButton", "Restart");
                     hide("progressBar");
                     show("contactusButton");

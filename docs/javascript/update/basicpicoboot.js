@@ -58,7 +58,12 @@ class BasicPicoboot{
 
         const flashSectorSize = 4096;
 
-        const uf2Data = await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer();
+        const response = await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'});
+        if(response.ok == false){
+            this.onError("404: firmware file not found " + firmwarePath);
+            return;
+        }
+        const uf2Data = await (response).arrayBuffer();
         const uf2BlockSize = 512;
         const uf2BlockCount = uf2Data.byteLength/uf2BlockSize;
         const uf2BlockPayloadSize = 256;

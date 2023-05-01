@@ -141,7 +141,12 @@ class BasicBossac{
         try{
             this.collectedData = "";
 
-            const binData = new Uint8Array(await (await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'})).arrayBuffer());
+            const response = await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'});
+            if(response.ok == false){
+                this.onError("404: firmware file not found " + firmwarePath);
+                return;
+            }
+            const binData = new Uint8Array(await (response).arrayBuffer());
             const packetCount = Math.ceil(binData.byteLength/this.uploadPacketSize); // Round up since .slice() will figure out the end
 
             this.onUpdateStart();
