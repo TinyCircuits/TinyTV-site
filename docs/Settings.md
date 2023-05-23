@@ -129,8 +129,8 @@ hide:
             Volume:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: start; align-items: center;">
-            <input id="volume" type="range" min="1" max="100" value="0" style="width:60%">
-            <label id="volumeLabel">0%</label>
+            <input id="volume" type="range" min="0" max="8" value="0" style="width:60%">
+            <label id="volumeLabel">0</label>
           </div>
         </div>
       </div>
@@ -138,15 +138,47 @@ hide:
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
           <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
-            Playback Mode:
+            Loop Video:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
-            Loop
-            <input type="radio" id="playbackModeLoop" name="playbackMode" style="width:17px; height:17px">
+            Off
+            <input type="radio" id="loopVideoOff" name="loopVideo" style="width:17px; height:17px">
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
-            Auto
-            <input type="radio" id="playbackModeAuto" name="playbackMode" style="width:17px; height:17px">
+            On
+            <input type="radio" id="loopVideoOn" name="loopVideo" style="width:17px; height:17px">
+          </div>
+        </div>
+      </div>
+
+      <div style="width:100%; flex:1; display:flex; flex-flow:row;">
+        <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+            Live Video:
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+            Off
+            <input type="radio" id="liveVideoOff" name="liveVideo" style="width:17px; height:17px">
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+            On
+            <input type="radio" id="liveVideoOn" name="liveVideo" style="width:17px; height:17px">
+          </div>
+        </div>
+      </div>
+
+      <div style="width:100%; flex:1; display:flex; flex-flow:row;">
+        <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+            Alphabetize Playback Order:
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+            Off
+            <input type="radio" id="alphabetizePlaybackOrderOff" name="playbackOrder" style="width:17px; height:17px">
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+            On
+            <input type="radio" id="alphabetizePlaybackOrderOn" name="playbackOrder" style="width:17px; height:17px">
           </div>
         </div>
       </div>
@@ -170,22 +202,6 @@ hide:
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
           <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
-            Show Timestamp:
-          </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
-            Off
-            <input type="radio" id="showTimestampOff" name="timestamp" style="width:17px; height:17px">
-          </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
-            On
-            <input type="radio" id="showTimestampOn" name="timestamp" style="width:17px; height:17px">
-          </div>
-        </div>
-      </div>
-
-      <div style="width:100%; flex:1; display:flex; flex-flow:row;">
-        <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Show Channel Number:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -202,15 +218,15 @@ hide:
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
           <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
-            Alphabetize Playback Order:
+            Show Volume:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
             Off
-            <input type="radio" id="alphabetizePlaybackOrderOff" name="playbackOrder" style="width:17px; height:17px">
+            <input type="radio" id="showVolumeOff" name="showVolume" style="width:17px; height:17px">
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
             On
-            <input type="radio" id="alphabetizePlaybackOrderOn" name="playbackOrder" style="width:17px; height:17px">
+            <input type="radio" id="showVolumeOn" name="showVolume" style="width:17px; height:17px">
           </div>
         </div>
       </div>

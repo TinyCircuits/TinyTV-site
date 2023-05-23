@@ -89,13 +89,12 @@ self.serial = new Serial([{usbVendorId:11914, usbProductId:10}]);
 self.serial.onConnect = () => {
     self.postMessage({messageType: "connected", messageData: []});
 
-    const decoder = new TextDecoder();
-    let received = "";
-
-    self.serial.onData = (data) => {
+    let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
+    console.log("SENT: " + sendStr);
+    self.serial.write(sendStr, true);
+    
+    self.serial.waitFor('{', '}').then((received) => {
         if(self.detectedTVType == TV_TYPES.NONE){
-            received += decoder.decode(data);
-
             // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
             if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
                 self.detectedTVType = TV_TYPES.TINYTV_2;
@@ -109,19 +108,11 @@ self.serial.onConnect = () => {
                 self.offscreenCanvas.height = TV_SIZES.TINYTV_MINI_H;
                 self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_MINI;
                 self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_MINI]});
+            }else{
+                console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
             }
         }
-    }
-
-    let requestTVType = () => {
-        if(self.detectedTVType == TV_TYPES.NONE && self.serial.connected){
-            setTimeout(() => {
-                self.serial.write("TYPE", true);
-                requestTVType();
-            }, 250);
-        }
-    }
-    requestTVType();
+    });
 }
 self.serial.onDisconnect = () => {
     self.detectedTVType = TV_TYPES.NONE;
@@ -148,11 +139,9 @@ self.onmessage = async (message) => {
         
         if(self.serial.connected){
 
-            // Write the AVI chunk header bytes and the 4 bytes for the frame length
-            await self.serial.write(new Uint8Array([0x30, 0x30, 0x64, 0x63,  blob.size & 0x000000ff,
-                                                                            (blob.size & 0x0000ff00) >> 8,
-                                                                            (blob.size & 0x00ff0000) >> 16,
-                                                                            (blob.size & 0xff000000) >> 24]), false);
+            let sendStr = "{\"FRAME\":" + blob.size + "}";
+            console.log("SENT: " + sendStr);
+            self.serial.write(sendStr, true);
             
             // Write the actual jpeg frame
             await self.serial.write(new Uint8Array(await blob.arrayBuffer()), false);

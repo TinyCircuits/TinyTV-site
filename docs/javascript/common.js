@@ -1,8 +1,9 @@
+// These are the strings that TVs can reply back with when asked for their type
 const TV_TYPES = {
     NONE: "NONE",
-    TINYTV_2: "TV2",
-    TINYTV_MINI: "TVMINI",
-    TINYTV_DIY: "TVDIY"
+    TINYTV_2: "TinyTV2",
+    TINYTV_MINI: "TinyTVMini",
+    TINYTV_DIY: "TinyTVDiy"
 };
 
 let show = (element, showChildren=true) => {

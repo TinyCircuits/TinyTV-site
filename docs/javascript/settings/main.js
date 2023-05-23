@@ -15,51 +15,84 @@ if(window.location.pathname.indexOf("Settings") != -1){
     const decoder = new TextDecoder();
     let received = "";
 
-    let set = async (cmd, value) => {
-        await serial.write(JSON.stringify({CMD: cmd, CMD_TYPE: "set", VALUE: value}), true);
+    let set = async (value) => {
+        let sendStr = "{\"SET\":\"" + value + "\"}" ;
+        console.log("SENT: " + sendStr);
+        await serial.write(sendStr, true);
     }
 
-    let get = async (cmd) => {
+    let get = async (value) => {
         received = "";
-        await serial.write(JSON.stringify({CMD: cmd, CMD_TYPE: "get",}), true);
 
-        // Cleared received, wait for valid json response to parse or timeout
-        let tries = 0;
-        let parse = () => {
-            return new Promise((resolve, reject) => {
-                let tryParse = () => {
-                    setTimeout(() => {
-                        try{
-                            let result = JSON.parse(received);
-                            resolve(result);
-                        }catch(error){
-                            // Parse likely did not work
-                        }
+        let sendStr = "{\"GET\":\"" + value + "\"}";
+        console.log("SENT: " + sendStr);
+        await serial.write(sendStr, true);
 
-                        tries++;
-                        if(tries >= 200){
-                            throw "Timed out waiting for json response... This is what was received: " + received;
-                        }
-                        tryParse();
-                    }, 10);
-                }
-                tryParse();
-            })
+        try{
+            return await serial.waitFor("{", "}");
+        }catch{
+            // Did not find response string in time
         }
-        return await parse();
     }
 
     serial.onConnectionCanceled = () => {
         setInnerText("description", "Connection canceled. Would you like to try again?");
         setInnerText("connectButton", "Try again");
     }
-    serial.onConnect = () => {
+    serial.onConnect = async () => {
         show("settings");
         setInnerText("connectButton", "Disconnect");
 
         setClickCallback("connectButton", serial.disconnect.bind(serial));
 
-        get("volume");
+        // Get volume setting
+        let received = await get("volume");
+        console.warn(received);
+        let volume = parseInt(JSON.parse(received)["volume"]);
+        document.getElementById("volumeLabel").innerText = volume;
+        document.getElementById("volume").value = volume;
+
+        // Get loop playback mode setting
+        received = await get("loopVideo");
+        console.warn(received);
+        let loopVideo = JSON.parse(received)["loopVideo"];
+        document.getElementById("loopVideoOn").checked = loopVideo;
+        document.getElementById("loopVideoOff").checked = !loopVideo;
+
+        // Get live playback mode setting
+        received = await get("liveVideo");
+        console.warn(received);
+        let liveVideo = JSON.parse(received)["liveVideo"];
+        document.getElementById("liveVideoOn").checked = liveVideo;
+        document.getElementById("liveVideoOff").checked = !liveVideo;
+
+        // Get alphabetize playlist setting
+        received = await get("alphabetize");
+        console.warn(received);
+        let alphabetize = JSON.parse(received)["alphabetize"];
+        document.getElementById("alphabetizePlaybackOrderOn").checked = alphabetize;
+        document.getElementById("alphabetizePlaybackOrderOff").checked = !alphabetize;
+
+        // Get static effect setting
+        received = await get("static");
+        console.warn(received);
+        let staticEffect = JSON.parse(received)["static"];
+        document.getElementById("staticEffectOn").checked = staticEffect;
+        document.getElementById("staticEffectOff").checked = !staticEffect;
+
+        // Get show channel number setting
+        received = await get("showChannel");
+        console.warn(received);
+        let showChannel = JSON.parse(received)["showChannel"];
+        document.getElementById("showChannelNumberOn").checked = showChannel;
+        document.getElementById("showChannelNumberOff").checked = !showChannel;
+
+        // Get show volume setting
+        received = await get("showVolume");
+        console.warn(received);
+        let showVolume = JSON.parse(received)["showVolume"];
+        document.getElementById("showVolumeOn").checked = showVolume;
+        document.getElementById("showVolumeOff").checked = !showVolume;
     }
     serial.onDisconnect = () => {
         hide("settings");
@@ -76,42 +109,49 @@ if(window.location.pathname.indexOf("Settings") != -1){
 
     // Update the volume percent label on input change, and send cmd to update it
     document.getElementById("volume").oninput = (event) => {
-        document.getElementById("volumeLabel").innerText = event.target.value + "%";
-        set("volume", event.target.value);
+        document.getElementById("volumeLabel").innerText = event.target.value;
+        set("volume=" + event.target.value);
     }
 
-    document.getElementById("playbackModeLoop").oninput = (event) => {
-        set("playback_mode", "loop");
+    document.getElementById("loopVideoOff").oninput = (event) => {
+        set("loopVideo=false");
     }
-    document.getElementById("playbackModeAuto").oninput = (event) => {
-        set("playback_mode", "auto");
+    document.getElementById("loopVideoOn").oninput = (event) => {
+        set("loopVideo=true");
+    }
+
+    document.getElementById("liveVideoOff").oninput = (event) => {
+        set("liveVideo=false");
+    }
+    document.getElementById("liveVideoOn").oninput = (event) => {
+        set("liveVideo=true");
     }
 
     document.getElementById("staticEffectOff").oninput = (event) => {
-        set("static", "off");
+        set("static=false");
     }
     document.getElementById("staticEffectOn").oninput = (event) => {
-        set("static", "on");
+        set("static=true");
     }
 
-    document.getElementById("showTimestampOff").oninput = (event) => {
-        set("timestamp", "off");
+    document.getElementById("showVolumeOff").oninput = (event) => {
+        set("showVolume=false");
     }
-    document.getElementById("showTimestampOn").oninput = (event) => {
-        set("timestamp", "on");
+    document.getElementById("showVolumeOn").oninput = (event) => {
+        set("showVolume=true");
     }
 
     document.getElementById("showChannelNumberOff").oninput = (event) => {
-        set("channel_number", "off");
+        set("showChannel=false");
     }
     document.getElementById("showChannelNumberOn").oninput = (event) => {
-        set("channel_number", "on");
+        set("showChannel=true");
     }
 
     document.getElementById("alphabetizePlaybackOrderOff").oninput = (event) => {
-        set("alphabetize_playback_order", "off");
+        set("alphabetize=false");
     }
     document.getElementById("alphabetizePlaybackOrderOn").oninput = (event) => {
-        set("alphabetize_playback_order", "on");
+        set("alphabetize=true");
     }
 }

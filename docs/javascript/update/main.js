@@ -123,7 +123,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         
                 detectedTVType = TV_TYPES.NONE;
             }
-            serial.onConnect = () => {
+            serial.onConnect = async () => {
                 setClickCallback("connectButton", serial.disconnect.bind(serial));
                 setInnerText("connectButton", "Disconnect");
         
@@ -131,78 +131,46 @@ if(window.location.pathname.indexOf("Update") != -1){
                 show("infoOutput");
                 hide("mainScreenBulletList");
         
-                let received = "";
-        
-                serial.onData = (data) => {
-                    if(detectedTVType == TV_TYPES.NONE || detectedFirmwareVer == undefined){
-                        received += decoder.decode(data);
-        
-                        // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
-                        if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
-                            detectedTVType = TV_TYPES.TINYTV_2;
-                            received = received.replace(TV_TYPES.TINYTV_2, ""); // Trim this away
-                            requestFirmwareVersion();
-                        }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
-                            detectedTVType = TV_TYPES.TINYTV_MINI;
-                            received = received.replace(TV_TYPES.TINYTV_MINI, "");  // Trim this away
-                            requestFirmwareVersion();
-                        }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
-                            detectedTVType = TV_TYPES.TINYTV_DIY;
-                            received = received.replace(TV_TYPES.TINYTV_DIY, "");  // Trim this away
-                            requestFirmwareVersion();
-                        }else if(received.indexOf("]") != -1){
-                            let versionStr = received.slice(received.indexOf("[")+1, received.indexOf("]"));
-                            received = received.replace("[" + detectedFirmwareVer + "]", "");  // Trim this away
-        
-                            versionStr = versionStr.split("."); // Split into separate components
-        
-                            detectedFirmwareVer = {
-                                "MAJOR": parseInt(versionStr[0]),
-                                "MINOR": parseInt(versionStr[1]),
-                                "PATCH": parseInt(versionStr[2])
-                            }
-        
-                            onTVTypeAndVersionDetected();
-                        }
+                let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
+                console.log("SENT: " + sendStr);
+                serial.write(sendStr, true);
+                let received = await serial.waitFor('{', '}');
+                console.warn(received);
+                
+                if(detectedTVType == TV_TYPES.NONE || detectedFirmwareVer == undefined){
+                    // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
+                    if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
+                        detectedTVType = TV_TYPES.TINYTV_2;
+                        received = received.replace(TV_TYPES.TINYTV_2, "");     // Trim this away
+                    }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
+                        detectedTVType = TV_TYPES.TINYTV_MINI;
+                        received = received.replace(TV_TYPES.TINYTV_MINI, "");  // Trim this away
+                    }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
+                        detectedTVType = TV_TYPES.TINYTV_DIY;
+                        received = received.replace(TV_TYPES.TINYTV_DIY, "");  // Trim this away
+                    }else{
+                        console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
+                        failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
                     }
                 }
-        
-                let typeRequestCount = 0; 
-                let requestTVType = () => {
-                    if(detectedTVType == TV_TYPES.NONE && serial.connected){
-                        setTimeout(() => {
-                            serial.write("TYPE", true);
-        
-                            typeRequestCount++;
-        
-                            // 2.5 seconds
-                            if(typeRequestCount >= 10){
-                                failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
-                            }else{
-                                requestTVType();
-                            }
-                        }, 250);
-                    }
+
+
+                sendStr = "{\"GET\":\"" + "fwVersion" + "\"}";
+                console.log("SENT: " + sendStr);
+                await serial.write(sendStr, true);
+                received = await serial.waitFor('{', '}');
+                console.warn(received);
+                
+                let versionStr = JSON.parse(received)["fwVersion"];
+                versionStr = versionStr.split("."); // Split into separate components
+
+                detectedFirmwareVer = {
+                    "MAJOR": parseInt(versionStr[0]),
+                    "MINOR": parseInt(versionStr[1]),
+                    "PATCH": parseInt(versionStr[2])
                 }
-                requestTVType();
-        
-                let firmwareVersionCount = 0; 
-                let requestFirmwareVersion = () => {
-                    if(detectedFirmwareVer == undefined && serial.connected){
-                        setTimeout(() => {
-                            serial.write("VER", true);
-        
-                            firmwareVersionCount++;
-        
-                            // 2.5 seconds
-                            if(firmwareVersionCount >= 10){
-                                failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
-                            }else{
-                                requestFirmwareVersion();
-                            }
-                        }, 250);
-                    }
-                }
+
+                onTVTypeAndVersionDetected();
             }
         }else if(screen == "manual_update"){
             setInnerText("infoOutput", "Manually choose your TV");

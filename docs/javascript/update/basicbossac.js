@@ -117,22 +117,22 @@ class BasicBossac{
         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L511
         const cmd0 = "S" + this.sramBufferAddress.toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";
         await this.serial.write(cmd0, true);
-        await this.wait(1);
+        await this.wait(5);
 
         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L528
         await this.serial.write(packet, false);
-        await this.wait(1);
+        await this.wait(5);
 
         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L619
         const cmd1 = "Y" + this.sramBufferAddress.toString(16) + ",0#";
         await this.serial.write(cmd1, true);
-        await this.wait(1);
+        await this.wait(5);
         await this.checkCollectedDataFor("Y\n\r");
 
         // https://github.com/shumatech/BOSSA/blob/master/src/Samba.cpp#L629
         const cmd2 = "Y" + (this.programFlashStart + (ipx*this.uploadPacketSize)).toString(16) + "," + packet.byteLength.toString(16).padStart(4, '0') + "#";
         await this.serial.write(cmd2, true);
-        await this.wait(1);
+        await this.wait(5);
         await this.checkCollectedDataFor("Y\n\r");
     }
 
@@ -169,7 +169,7 @@ class BasicBossac{
             await this.#reboot();
             this.onUpdateComplete();
         }catch(error){
-            this.onError();
+            this.onError(error);
         }
     }
 }

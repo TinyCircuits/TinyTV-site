@@ -17,12 +17,19 @@ class Serial{
         });
 
         // Encode to bytes when writing
-        this.encoder = new TextEncoder(); 
+        this.encoder = new TextEncoder();
+        this.decoder = new TextDecoder();
 
         this.manuallyConnecting = false;
         this.connected = false;
 
         this.allowAutoConnect = allowAutoConnect;
+
+        // String buffer used for waiting for specific string
+        this.waiting = false;
+        this.startWaitForStr = "";
+        this.endWaitForStr = "";
+        this.received = "";
 
         // Functions called internally but defined externally
         this.onConnect = () => {};
@@ -89,6 +96,13 @@ class Serial{
 
                     // If data defined, stream it to onData
                     if(value){
+                        console.log(this.decoder.decode(value))
+                        // If we're waiting on a specific string, add this chunk
+                        // to all teh received so it can be searched through
+                        if(this.waiting){
+                            this.received += this.decoder.decode(value);
+                            this.#checkWaitFor();
+                        }
                         this.onData(value);
                     }
                 }
@@ -96,6 +110,53 @@ class Serial{
                 // Likely unplugged
             }
         }
+    }
+
+
+    #checkWaitFor(){
+        if(this.received.indexOf(this.startWaitForStr) != -1 && this.received.indexOf(this.endWaitForStr) != -1){
+            // Found all the strings, stop waiting
+            this.waiting = false;
+        }
+    }
+
+
+    // Async function that returns with substring (included what was waited for)
+    // or rejects if times out since string may have never been found
+    async waitFor(startWaitForStr, endWaitForStr){
+        this.waiting = true;
+        this.startWaitForStr = startWaitForStr;
+        this.endWaitForStr = endWaitForStr;
+        this.received = "";
+
+        let startTimeMS = performance.now();
+
+        // Wait for this.waiting to go false due to #checkWaitFor() being called when data is received
+        return new Promise((resolve, reject) => {
+            let check = () => {
+                if(this.waiting){
+                    // Still waiting, check timeout and reject if went over else try checking flag again in a little
+                    if(performance.now() - startTimeMS < 5000){
+                        // Call self after certain amount of time
+                        setTimeout(() => {
+                            check();
+                        }, 100);
+                    }else{
+                        console.error("Timed out waiting for serial strings '" + startWaitForStr + "' and '" + endWaitForStr + "', here's what was received: ", this.received);
+                        reject(undefined);
+                    }
+                }else{
+                    // Not waiting anymore, must have found the start and end strings
+                    // Find them again and extract then return the substring
+                    let startIndex = this.received.indexOf(this.startWaitForStr);
+                    let endIndex = this.received.indexOf(this.endWaitForStr);
+
+                    // Return the string
+                    resolve(this.received.slice(startIndex, endIndex+1));
+                }
+            }
+            check();
+        })
     }
 
 
