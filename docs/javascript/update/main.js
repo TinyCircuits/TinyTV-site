@@ -134,24 +134,30 @@ if(window.location.pathname.indexOf("Update") != -1){
                 let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
                 console.log("SENT: " + sendStr);
                 serial.write(sendStr, true);
-                let received = await serial.waitFor('{', '}');
-                console.warn(received);
-                
-                if(detectedTVType == TV_TYPES.NONE || detectedFirmwareVer == undefined){
-                    // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
-                    if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
-                        detectedTVType = TV_TYPES.TINYTV_2;
-                        received = received.replace(TV_TYPES.TINYTV_2, "");     // Trim this away
-                    }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
-                        detectedTVType = TV_TYPES.TINYTV_MINI;
-                        received = received.replace(TV_TYPES.TINYTV_MINI, "");  // Trim this away
-                    }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
-                        detectedTVType = TV_TYPES.TINYTV_DIY;
-                        received = received.replace(TV_TYPES.TINYTV_DIY, "");  // Trim this away
-                    }else{
-                        console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
-                        failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
+                try{
+                    let received = await serial.waitFor('{', '}');
+                    console.warn(received);
+
+                    if(detectedTVType == TV_TYPES.NONE || detectedFirmwareVer == undefined){
+                        // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
+                        if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_2;
+                            received = received.replace(TV_TYPES.TINYTV_2, "");     // Trim this away
+                        }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_MINI;
+                            received = received.replace(TV_TYPES.TINYTV_MINI, "");  // Trim this away
+                        }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
+                            detectedTVType = TV_TYPES.TINYTV_DIY;
+                            received = received.replace(TV_TYPES.TINYTV_DIY, "");  // Trim this away
+                        }else{
+                            console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
+                            failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
+                            return;
+                        }
                     }
+                }catch(error){
+                    failedToConnectOrDetect("Detection failed. Would you like to try again or try manually updating?");
+                    return;
                 }
 
 
@@ -192,7 +198,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 removeUrlParameter("type");
             });
         }else if(screen == "tvmini_step_1"){
-            setInnerText("description", "Step 1: Turn the TV off by holding the middle power button for 5 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
+            setInnerText("description", "Step 1: Turn the TV off by holding the middle power button for 10 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
             setInnerText("nextButton", "Next");
             show("description");
             show("backButton");
@@ -253,7 +259,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 removeUrlParameter("type");
             });
         }else if(screen == "tv2_step_1"){
-            setInnerText("description", "Step 1: Turn the TV off by holding the power button for 5 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
+            setInnerText("description", "Step 1: Turn the TV off by holding the power button for 10 seconds. The screen will remain off\n(it does not matter if the TV is already on or off)");
             setInnerText("nextButton", "Next");
             show("description");
             show("backButton");
@@ -438,7 +444,7 @@ if(window.location.pathname.indexOf("Update") != -1){
 
                 if(tvtype == "tv2"){
                     await programmer.connect();
-                    await programmer.update("/firmware/TinyTV-2-firmware.uf2");
+                    await programmer.update("/firmware/TinyTV-2-firmware-1.1.0.uf2");
                 }else if(tvtype == "mini"){
                     await programmer.connect();
                     await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");

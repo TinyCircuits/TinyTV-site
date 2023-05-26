@@ -38,6 +38,8 @@ class JPEGStreamer{
                     this.#onTVDetect("TinyTV 2");
                 }else if(message.data.messageData == TV_TYPES.TINYTV_MINI){
                     this.#onTVDetect("TinyTV Mini");
+                }else if(message.data.messageData == TV_TYPES.TINYTV_DIY){
+                    this.#onTVDetect("TinyTV Diy");
                 }
             }
         };
@@ -51,6 +53,12 @@ class JPEGStreamer{
         this.onSerialDisconnect = () => {};
         this.onTVDetected = (tvString) => {};
         this.onStreamReady = () => {};
+
+        // When a frame hasn't been sent from the stream
+        // in a while, need to resend to keep TV in live mode
+        this.keepAliveTimeAtLastFrameMS = 0;
+        this.keepAliveLastFrame = undefined;
+        this.keepAlive();
     }
 
 
@@ -65,8 +73,36 @@ class JPEGStreamer{
     }
 
 
+    // If a frame hasn't been sent in a while, resend the last one to keep the TV
+    // in live mode. Needs to be sent from here so that scaled correctly in worker
+    keepAlive(){
+        setTimeout(() => {
+            if(performance.now() - this.keepAliveTimeAtLastFrameMS >= 250 && this.keepAliveLastFrame != undefined){
+                try{
+                    // Clone the keep alive frame since it will be closed after the worker uses it
+                    let tempFrameClone = this.keepAliveLastFrame.clone();
+                    this.convertWorker.postMessage({messageType: "frame", frame: this.keepAliveLastFrame}, [this.keepAliveLastFrame]);
+                    this.keepAliveTimeAtLastFrameMS = performance.now();
+
+                    // Reassign for use next time (or gets closed if the stream picks back up)
+                    this.keepAliveLastFrame = tempFrameClone;
+                }catch(error){
+                    // Tried to send from here but was closed by main streamer, whatever
+                    console.error(error);
+                }
+            }
+            this.keepAlive();
+        }, 100);
+    }
+
+
     async #processCapturedFrames(videoFrame, controller){
         if(this.lastFrameSent){
+            // Keep a clone frame just in case so that it can be resent to keep TV in live mode
+            this.keepAliveTimeAtLastFrameMS = performance.now();
+            if(this.keepAliveLastFrame != undefined) this.keepAliveLastFrame.close();
+            this.keepAliveLastFrame = videoFrame.clone();
+
             this.lastFrameSent = false;
             this.convertWorker.postMessage({messageType: "frame", frame: videoFrame}, [videoFrame]);
         }else{
@@ -153,7 +189,7 @@ class JPEGStreamer{
         // No device, make the user pair one for the worker to auto connect to
         if(!portFound){
             try{
-                await navigator.serial.requestPort({filters: [{usbVendorId:11914, usbProductId:10}]});
+                await navigator.serial.requestPort({filters: [{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]});
                 portFound = true;
             }catch(err){
                 portFound = false;

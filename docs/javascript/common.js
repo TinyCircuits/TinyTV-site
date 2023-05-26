@@ -3,7 +3,7 @@ const TV_TYPES = {
     NONE: "NONE",
     TINYTV_2: "TinyTV2",
     TINYTV_MINI: "TinyTVMini",
-    TINYTV_DIY: "TinyTVDiy"
+    TINYTV_DIY: "TinyTVKit"
 };
 
 let show = (element, showChildren=true) => {

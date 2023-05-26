@@ -125,11 +125,11 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row; border-bottom: 1px solid var(--md-default-fg-color)">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="The current volume of the TV" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Volume:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: start; align-items: center;">
-            <input id="volume" type="range" min="0" max="8" value="0" style="width:60%">
+            <input id="volume" type="range" min="0" max="6" value="0" style="width:60%">
             <label id="volumeLabel">0</label>
           </div>
         </div>
@@ -137,7 +137,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Make the videos loop over and over without switching to the next automatically" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Loop Video:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -153,7 +153,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Make all videos play in the background. When off, videos pause until switched back to" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Live Video:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -169,7 +169,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle ordering the video playlist by name (or number)" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Alphabetize Playback Order:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -185,7 +185,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle static effects that occur when the channel changes or the TV turns on" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Static Effect:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -201,7 +201,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle the channel number that's shown when the channel is changed" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Show Channel Number:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
@@ -217,7 +217,7 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle showing the volume slider that appears when the volume is changed" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
             Show Volume:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">

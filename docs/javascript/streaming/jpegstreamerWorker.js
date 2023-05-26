@@ -75,6 +75,14 @@ self.setScreenFit = (fitType, videoW, videoH) => {
         }else if(fitType == TV_FIT_TYPES.FILL){
             self.fitFill(TV_SIZES.TINYTV_MINI_W, TV_SIZES.TINYTV_MINI_H);
         }
+    }else if(self.detectedTVType == TV_TYPES.TINYTV_DIY){
+        if(fitType == undefined || fitType == TV_FIT_TYPES.CONTAIN){
+            self.fitContain(TV_SIZES.TINYTV_DIY_W, TV_SIZES.TINYTV_DIY_H, videoW, videoH);
+        }else if(fitType == TV_FIT_TYPES.COVER){
+            self.fitCover(TV_SIZES.TINYTV_DIY_W, TV_SIZES.TINYTV_DIY_H, videoW, videoH);
+        }else if(fitType == TV_FIT_TYPES.FILL){
+            self.fitFill(TV_SIZES.TINYTV_DIY_W, TV_SIZES.TINYTV_DIY_H);
+        }
     }
 }
 
@@ -85,40 +93,68 @@ self.offscreenCanvasCtx = self.offscreenCanvas.getContext("2d");
 self.offscreenOutputCanvas = undefined;
 self.offscreenOutputCanvasCtx = undefined;
 
-self.serial = new Serial([{usbVendorId:11914, usbProductId:10}]);
+self.serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]);
 self.serial.onConnect = () => {
     self.postMessage({messageType: "connected", messageData: []});
 
-    let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
-    console.log("SENT: " + sendStr);
-    self.serial.write(sendStr, true);
-    
-    self.serial.waitFor('{', '}').then((received) => {
-        if(self.detectedTVType == TV_TYPES.NONE){
-            // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
-            if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
-                self.detectedTVType = TV_TYPES.TINYTV_2;
-                self.offscreenCanvas.width = TV_SIZES.TINYTV_2_W;
-                self.offscreenCanvas.height = TV_SIZES.TINYTV_2_H;
-                self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_2;
-                self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_2]});
-            }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
-                self.detectedTVType = TV_TYPES.TINYTV_MINI;
-                self.offscreenCanvas.width = TV_SIZES.TINYTV_MINI_W;
-                self.offscreenCanvas.height = TV_SIZES.TINYTV_MINI_H;
-                self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_MINI;
-                self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_MINI]});
-            }else{
-                console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
+
+    // Keep requesting TV type until it works
+    let requestTvType = async () => {
+        let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
+        console.log("SENT: " + sendStr);
+        serial.write(sendStr, true);
+        try{
+            let received = await serial.waitFor('{', '}');
+            console.warn(received);
+
+            // Only way this ends is if we get response that does not reject
+            if(self.detectedTVType == TV_TYPES.NONE){
+                // See if it is any of the TVs, pass a human readable string to the on detect function since it will be displayed
+                if(received.indexOf(TV_TYPES.TINYTV_2) != -1){
+                    self.detectedTVType = TV_TYPES.TINYTV_2;
+                    self.offscreenCanvas.width = TV_SIZES.TINYTV_2_W;
+                    self.offscreenCanvas.height = TV_SIZES.TINYTV_2_H;
+                    self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_2;
+                    self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_2]});
+                }else if(received.indexOf(TV_TYPES.TINYTV_MINI) != -1){
+                    self.detectedTVType = TV_TYPES.TINYTV_MINI;
+                    self.offscreenCanvas.width = TV_SIZES.TINYTV_MINI_W;
+                    self.offscreenCanvas.height = TV_SIZES.TINYTV_MINI_H;
+                    self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_MINI;
+                    self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_MINI]});
+                }else if(received.indexOf(TV_TYPES.TINYTV_DIY) != -1){
+                    self.detectedTVType = TV_TYPES.TINYTV_DIY;
+                    self.offscreenCanvas.width = TV_SIZES.TINYTV_DIY_W;
+                    self.offscreenCanvas.height = TV_SIZES.TINYTV_DIY_H;
+                    self.currentJPEGQuality = TV_JPEG_QUALITIES.TINYTV_DIY;
+                    self.postMessage({messageType: "tvtype", messageData: [TV_TYPES.TINYTV_DIY]});
+                }else{
+                    console.error("Found reply string but it does not contain a recognized TV type. Here's the received substring '" + received + "' and here are valid types:", TV_TYPES);
+                }
             }
+        }catch(error){
+            // Every time 'waitFor()' fails, try asking again
+            requestTvType();
         }
-    });
+    }
+    requestTvType();
 }
 self.serial.onDisconnect = () => {
     self.detectedTVType = TV_TYPES.NONE;
     self.postMessage({messageType: "disconnected", messageData: []});
 }
 
+
+self.sendFrame = async (frameBlob) => {
+    if(self.serial.connected){
+        let sendStr = "{\"FRAME\":" + frameBlob.size + "}";
+        console.log("SENT: " + sendStr);
+        await self.serial.write(sendStr, true);
+        
+        // Write the actual jpeg frame
+        await self.serial.write(new Uint8Array(await frameBlob.arrayBuffer()), false);
+    }
+}
 
 
 self.onmessage = async (message) => {
@@ -137,15 +173,8 @@ self.onmessage = async (message) => {
         // Convert to jpeg blob
         const blob = await self.offscreenCanvas.convertToBlob({type: "image/jpeg", quality: self.currentJPEGQuality});
         
-        if(self.serial.connected){
-
-            let sendStr = "{\"FRAME\":" + blob.size + "}";
-            console.log("SENT: " + sendStr);
-            self.serial.write(sendStr, true);
-            
-            // Write the actual jpeg frame
-            await self.serial.write(new Uint8Array(await blob.arrayBuffer()), false);
-        }
+        // Send the frame to the TV
+        await self.sendFrame(blob);
         
         // Convert jpeg to bitmap for preview (want to show the compression in the preview) and display it
         const bitmap = await createImageBitmap(blob, 0, 0, self.offscreenCanvas.width, self.offscreenCanvas.height);

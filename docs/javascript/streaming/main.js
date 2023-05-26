@@ -32,7 +32,7 @@ if(window.location.pathname.indexOf("Streaming") != -1){
         streamConnectButton.onclick = () => {jpegStreamer.disconnectSerial()};
 
 
-        infoOutput.innerText = "Detecting TV...";
+        infoOutput.innerText = "Detecting TV... Press power button to exit USB mode...";
         infoOutput.classList.remove("invisible");
     }
     jpegStreamer.onSerialDisconnect = () => {

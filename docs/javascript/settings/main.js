@@ -29,21 +29,17 @@ if(window.location.pathname.indexOf("Settings") != -1){
         await serial.write(sendStr, true);
 
         try{
-            return await serial.waitFor("{", "}");
+            return await serial.waitFor("{", "}", value);
         }catch{
             // Did not find response string in time
         }
     }
 
-    serial.onConnectionCanceled = () => {
-        setInnerText("description", "Connection canceled. Would you like to try again?");
-        setInnerText("connectButton", "Try again");
-    }
-    serial.onConnect = async () => {
+    let setup = async () => {
+        // Now show settings since we got a response
         show("settings");
-        setInnerText("connectButton", "Disconnect");
 
-        setClickCallback("connectButton", serial.disconnect.bind(serial));
+        setInnerText("description", "Change settings on TinyTV 2, Mini, or DIY Kit");
 
         // Get volume setting
         let received = await get("volume");
@@ -94,9 +90,39 @@ if(window.location.pathname.indexOf("Settings") != -1){
         document.getElementById("showVolumeOn").checked = showVolume;
         document.getElementById("showVolumeOff").checked = !showVolume;
     }
+
+    serial.onConnectionCanceled = () => {
+        setInnerText("description", "Connection canceled. Would you like to try again?");
+        setInnerText("connectButton", "Try again");
+    }
+    serial.onConnect = async () => {
+        setInnerText("connectButton", "Disconnect");
+        setClickCallback("connectButton", serial.disconnect.bind(serial));
+
+        setInnerText("description", "Connected, waiting for TV response...\nPress the power button to get out of USB mode");
+
+        // Keep requesting TV type until it works
+        let requestTvType = async () => {
+            let sendStr = "{\"GET\":\"" + "tvType" + "\"}";
+            console.log("SENT: " + sendStr);
+            serial.write(sendStr, true);
+            try{
+                let received = await serial.waitFor('{', '}');
+                console.warn(received);
+
+                // Only way this ends is if we get response that does not reject
+                setup();
+            }catch(error){
+                // Every time 'waitFor()' fails, try asking again
+                requestTvType();
+            }
+        }
+        requestTvType();
+    }
     serial.onDisconnect = () => {
         hide("settings");
         setInnerText("connectButton", "Connect TV");
+        setInnerText("description", "Change settings on TinyTV 2, Mini, or DIY Kit");
 
         setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
     }

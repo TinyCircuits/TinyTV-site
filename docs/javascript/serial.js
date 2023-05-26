@@ -29,6 +29,7 @@ class Serial{
         this.waiting = false;
         this.startWaitForStr = "";
         this.endWaitForStr = "";
+        this.subStr = undefined;
         this.received = "";
 
         // Functions called internally but defined externally
@@ -114,19 +115,34 @@ class Serial{
 
 
     #checkWaitFor(){
-        if(this.received.indexOf(this.startWaitForStr) != -1 && this.received.indexOf(this.endWaitForStr) != -1){
-            // Found all the strings, stop waiting
-            this.waiting = false;
+        let startIndex = this.received.indexOf(this.startWaitForStr);
+        let endIndex = this.received.indexOf(this.endWaitForStr);
+        if(startIndex != -1 && endIndex != -1){
+
+            // Found the start and end enclosing strings, not see if the sub string is between them if not undefined
+            if(this.subStr != undefined){
+                let subIndex = this.received.indexOf(this.subStr, startIndex);
+
+                // Already know we're ahead of start since we started there, make sure less then end
+                if(subIndex < endIndex){
+                    // Substring within start and end, stop waiting, we found all the strings
+                    this.waiting = false;
+                }
+            }else{
+                // No sub string and we found the start and end, stop waiting
+                this.waiting = false;
+            }
         }
     }
 
 
     // Async function that returns with substring (included what was waited for)
     // or rejects if times out since string may have never been found
-    async waitFor(startWaitForStr, endWaitForStr){
+    async waitFor(startWaitForStr, endWaitForStr, subStr=undefined){
         this.waiting = true;
         this.startWaitForStr = startWaitForStr;
         this.endWaitForStr = endWaitForStr;
+        this.subStr = subStr;
         this.received = "";
 
         let startTimeMS = performance.now();
@@ -136,13 +152,13 @@ class Serial{
             let check = () => {
                 if(this.waiting){
                     // Still waiting, check timeout and reject if went over else try checking flag again in a little
-                    if(performance.now() - startTimeMS < 5000){
+                    if(performance.now() - startTimeMS < 3000){
                         // Call self after certain amount of time
                         setTimeout(() => {
                             check();
                         }, 100);
                     }else{
-                        console.error("Timed out waiting for serial strings '" + startWaitForStr + "' and '" + endWaitForStr + "', here's what was received: ", this.received);
+                        console.error("Timed out waiting for serial strings '" + startWaitForStr + "', " + subStr + ", and '" + endWaitForStr + "', here's what was received: ", this.received);
                         reject(undefined);
                     }
                 }else{
