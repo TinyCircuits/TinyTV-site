@@ -24,37 +24,28 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "Windows"
 
-    - <a href="https://files.tinycircuits.com/TinyTV%20Video%20Converter_0.1.2_x64_en-US.msi" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (64-bit) 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (64-bit) 
 
     Click the above link and wait for the download to complete.
     
-    Once downloaded, left-click the _.exe_ file through the browser download dialog or double left-click the file in File Explorer.
+    Unzip _.exe_ file and double click it to run.
 
     _Note: If your browser asks you if you want to keep the file, select **Yes** or **Keep**. Windows may warn you about running the file, click **Advanced** and **Run Anyway**_
 
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTV%20Video%20Converter_0.1.2_x64.dmg" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (for Intel and Apple Silicon)
+    - <a href="https://files.tinycircuits.com/TinyTVConverter.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (for Intel and Apple Silicon)
 
 
     To download the TinyTV Converter Application, it may help to use Google Chrome. Press the above download link, choose a location for the installer file, and then select 'Keep' from the option arrow found on the chrome download pop-up at the bottom of your browser window:
 
     <center><img width="75%" height="75%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TinyTV-App/Chrome-download-message.jpg" /></center>
-    <center>_Screen capture of the 'Keep' option highlighted_</center>
 
     ---
+    The TinyTV converter app is not currently signed so you will need to right-click the file in Finder and click **Open**, then click **Open** again in the warning dialog.
 
-    **Mac (M1 and M2) Accessory Approval**
-
-    The silicon processors available in MacOS devices starting in November 2020 have an additional USB device security protocol that you must accept when connecting your TinyTV in order to place converted videos into the TinyTV's memory. When plugging in a USB device, you may see this pop-up window:
-
-    <center><img width="40%" height="40%" src="../images/Mac-USB-Accessory.png"/></center>
-    <center>_Screen capture of the 'Open' option highlighted_</center>
-
-
-    Please review <a href="https://support.apple.com/lt-lt/guide/mac-help/mchlf779ae93/mac" target="_blank" alt="">**Mac's publication on allowing accessories to connect to Mac**</a> to learn how to approve USB device accessories.
-
+    <center><img width="75%" height="75%" src="../images/Mac-double-open-menus.jpg" /></center>
 </div>
     
 
@@ -97,10 +88,8 @@ Once you have downloaded the correct application version for your system, you ca
 
 ## Troubleshooting
 
-- **"I'm getting an error on my Mac device about allowing the accessory to connect?"** - Please review the <a href="#installation" alt="">**installation steps**</a> for MacOS to remedy the error.
 - If the TinyTV 2 or TinyTV Mini USB device does not appear on your computer - your USB-C cable may not have the necessary data connections required for transferring data. Try using other USB-C cables.
 - If you cannot see the resulting converted video, refresh your file explorer in the directory you saved the file. _Try pressing the convert button again if the video is not present._
-- Do not use the same title for converted videos repeatedly in the same file location. The file will not be overwritten correctly and only the first video with the title will be saved. Change the title each time you press the convert button to avoid errors or losing video data.
 
 
 
@@ -109,7 +98,8 @@ Once you have downloaded the correct application version for your system, you ca
 
 
 ## TinyTV Converter App version history:
-
+* v1.0.0
+    * Initial release of app written in Python.
 * v0.1.2 
     * Added video file path for debugging. 
     * Signed and notarized MacOS version of application to remove downloading issues.
