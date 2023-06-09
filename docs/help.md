@@ -6,6 +6,11 @@ hide:
 # TinyTV Help & FAQ Page
 
 
+## Charging TinyTV's
+
+You can use a USB power cable to connect your TinyTV to your computer or another power source. A orange charging LED will turn on when your TinyTV is charging. The orange LED will turn off when your TinyTV is fully charged.
+
+
 ## Can I expand the storage?
 
 All TinyTVs come with an 8GB micro SD Card pre-loaded with some demo videos. The micro SD Card is removable only with the TinyTV DIY Kit using tweezers and the cutout slot on the bottom of the TV case. The TinyTV 2 and TinyTV Mini sets have the micro SD Card built in without ready-access - ***While it's theoretically possible to disassemble these models and put in a larger SD Card, we don't recommend or support this since it could damage the electronics without proper caution or equipment.***

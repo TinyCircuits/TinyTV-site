@@ -93,7 +93,7 @@ hide:
   <section id="streamScreen0" class="tx-container flex-center" style="width:100%; height:100%">
     <h2>TV Streaming</h2>
     
-    <p id="description">Stream your computer to TinyTV 2 or Mini!</p>
+    <p id="description">Stream your computer to TinyTV 2, Mini, or DIY Kit!</p>
     <p id="browserSupportError" style="color:red" class="invisible">Browser not supported: please use a Chromium based browser like Google Chrome, Microsoft Edge, Opera, Brave, etc.</p>
     <p id="audioSupportMessage">(Audio currently not supported)</p>
 

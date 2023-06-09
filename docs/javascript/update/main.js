@@ -127,7 +127,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 setClickCallback("connectButton", serial.disconnect.bind(serial));
                 setInnerText("connectButton", "Disconnect");
         
-                setInnerText("infoOutput", "Detecting TV..");
+                setInnerText("infoOutput", "Detecting TV, please press power button to exit USB mode...");
                 show("infoOutput");
                 hide("mainScreenBulletList");
         
@@ -164,7 +164,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                 sendStr = "{\"GET\":\"" + "fwVersion" + "\"}";
                 console.log("SENT: " + sendStr);
                 await serial.write(sendStr, true);
-                received = await serial.waitFor('{', '}');
+                let received = await serial.waitFor('{', '}');
                 console.warn(received);
                 
                 let versionStr = JSON.parse(received)["fwVersion"];
@@ -449,7 +449,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                     await programmer.connect();
                     await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");
                 }else if(tvtype == "tvdiy"){
-                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware.bin");
+                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware-1.1.0.bin");
                 }
             });
         }else if(screen == "update_not_needed"){

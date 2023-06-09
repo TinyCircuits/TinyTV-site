@@ -1,5 +1,16 @@
 site_name: TinyTV®
 
+# This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
 nav:
   - Home: index.md
   - TinyTV Mini: Mini-Get-Started.md
@@ -42,11 +53,11 @@ theme:
     #     icon: material/toggle-switch-off-outline
     #     name: Switch to dark mode
   features:
+    - content.tabs.link
     - header.autohide
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top # 'Back to top' button when scrolling up a page
-    - content.tabs.link
   name: material
   custom_dir: docs/overrides/
 
@@ -112,13 +123,3 @@ extra:
   # - icon: fontawesome/heading       # there's no logo for this that works well, so I'm leaving it off
   #   link: https://www.hackster.io/tinycircuits
   #   name: TinyCircuits on Hackster
-
-# This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
-  markdown_extensions:
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true 
-  - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
