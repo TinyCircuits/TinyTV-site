@@ -25,7 +25,7 @@ class BasicPicoboot{
             await this.device.open();
 
             if(this.device.configuration === null){
-                device.setConfiguration(1);
+                await device.selectConfiguration(1);
             }
 
             await this.device.claimInterface(1);
