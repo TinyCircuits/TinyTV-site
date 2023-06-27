@@ -15,7 +15,14 @@ You can use a USB power cable to connect your TinyTV to your computer or another
 
 All TinyTVs come with an 8GB micro SD Card pre-loaded with some demo videos. The micro SD Card is removable only with the TinyTV DIY Kit using tweezers and the cutout slot on the bottom of the TV case. The TinyTV 2 and TinyTV Mini sets have the micro SD Card built in without ready-access - ***While it's theoretically possible to disassemble these models and put in a larger SD Card, we don't recommend or support this since it could damage the electronics without proper caution or equipment.***
 
+---
 
+## "The remote does not turn the TV on?"
+
+TinyTV 2 and Mini can only be turned on using the remote for up to two minutes after quickly pressing the power button. There are two "off modes" the TVs have, soft off and hard off:
+
+  * **Soft off**: When quickly pressing the power button to turn the TV off it goes into **soft off** mode. The remote can be used for up to two minutes to turn it back on.
+  * **Hard off**: After two minutes in **soft off** mode the TV cannot be turned back on using the remote. This mode conserves the most battery life. Quickly press the power button to turn it back on.
 
 ---
 

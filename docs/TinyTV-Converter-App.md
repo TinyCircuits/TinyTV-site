@@ -24,7 +24,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "Windows"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (64-bit) 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.0, updated 6/27/2023, supports Windows 10 64-bit and newer) 
 
     Click the above link and wait for the download to complete.
     
@@ -35,14 +35,8 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverter.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (for Intel and Apple Silicon)
+    - <a href="https://files.tinycircuits.com/TinyTVConverter.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.1, updated 6/27/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
 
-
-    To download the TinyTV Converter Application, it may help to use Google Chrome. Press the above download link, choose a location for the installer file, and then select 'Keep' from the option arrow found on the chrome download pop-up at the bottom of your browser window:
-
-    <center><img width="75%" height="75%" src="https://github.com/TinyCircuits/Wiki-Tutorials-Supporting-Files/raw/master/Utilities/TinyTV-App/Chrome-download-message.jpg" /></center>
-
-    ---
     The TinyTV converter app is not currently signed so you will need to right-click the file in Finder and click **Open**, then click **Open** again in the warning dialog.
 
     <center><img width="75%" height="75%" src="../images/Mac-double-open-menus.jpg" /></center>
