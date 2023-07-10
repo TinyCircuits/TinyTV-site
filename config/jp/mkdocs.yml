@@ -15,39 +15,23 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
 nav:
-  # - Home: index.md
-  # - TinyTV Mini: Mini-Get-Started.md
-  # - TinyTV 2: TV2-Get-Started.md
-  # - TinyTV DIY Kit: 
-  #     - Get Started: TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
-  #     - TinyTV Assembly: TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
-  #     - Tiny Video Player Assembly: TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
-  #     - TinyTV & Tiny Video Player Programming: TinyTV-DIY-Kit/Tiny-Video-Program.md
-  #     - Settings/Customization: TinyTV-DIY-Kit/TinyTV-Tutorial.md
-  #     - TinyTV DIY Kit TSV Converter: TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
-  #     - TinyTV FAQ: TinyTV-DIY-Kit/TinyTV-FAQ.md
-  # - Converter App: TinyTV-Converter-App.md
-  # - Streaming: Streaming.md
-  # - Update: Update.md
-  # - Settings: Settings.md
-  # - Help & FAQ: help.md
-
-  - Home: jp/index.md
-  - TinyTV Mini: jp/Mini-Get-Started.md
-  - TinyTV 2: jp/TV2-Get-Started.md
+  - Home: index.md
+  - TinyTV Mini: Mini-Get-Started.md
+  - TinyTV 2: TV2-Get-Started.md
   - TinyTV DIY Kit: 
-      - Get Started: jp/TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
-      - TinyTV Assembly: jp/TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
-      - Tiny Video Player Assembly: jp/TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
-      - TinyTV & Tiny Video Player Programming: jp/TinyTV-DIY-Kit/Tiny-Video-Program.md
-      - Settings/Customization: jp/TinyTV-DIY-Kit/TinyTV-Tutorial.md
-      - TinyTV DIY Kit TSV Converter: jp/TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
-      - TinyTV FAQ: jp/TinyTV-DIY-Kit/TinyTV-FAQ.md
-  - Converter App: jp/TinyTV-Converter-App.md
-  - Streaming: jp/Streaming.md
-  - Update: jp/Update.md
-  - Settings: jp/Settings.md
-  - Help & FAQ: jp/help.md
+      - Get Started: TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
+      - TinyTV Assembly: TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
+      - Tiny Video Player Assembly: TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
+      - TinyTV & Tiny Video Player Programming: TinyTV-DIY-Kit/Tiny-Video-Program.md
+      - Settings/Customization: TinyTV-DIY-Kit/TinyTV-Tutorial.md
+      - TinyTV DIY Kit TSV Converter: TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
+      - TinyTV FAQ: TinyTV-DIY-Kit/TinyTV-FAQ.md
+  - Converter App: TinyTV-Converter-App.md
+  - Streaming: Streaming.md
+  - Update: Update.md
+  - Settings: Settings.md
+  - Help & FAQ: help.md
+
 
 theme:
   logo: images/television.png
