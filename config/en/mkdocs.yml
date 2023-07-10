@@ -1,4 +1,7 @@
 site_name: TinyTV®
+docs_dir: '../../docs/en'                           # Where to find the markdown files
+site_dir: '../../site/en'                      # Where to put the HTML files
+
 
 # This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
 markdown_extensions:
@@ -28,8 +31,6 @@ nav:
   - Update: Update.md
   - Settings: Settings.md
   - Help & FAQ: help.md
-  # - About/Contact: About.md
-  # - JSON Testing: Testing.md
 
 theme:
   logo: images/television.png
@@ -59,7 +60,7 @@ theme:
     - navigation.tabs.sticky
     - navigation.top # 'Back to top' button when scrolling up a page
   name: material
-  custom_dir: docs/overrides/
+  custom_dir: ../../docs/en/overrides/
 
 # This sheet just has color changes
 extra_css:

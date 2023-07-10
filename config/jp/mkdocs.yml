@@ -1,0 +1,143 @@
+site_name: TinyTV®
+docs_dir: '../../docs/jp'                           # Where to find the markdown files
+site_dir: '../../site/jp'                      # Where to put the HTML files
+
+
+# This bit is for icons https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/?h=emoji#configuration
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+nav:
+  # - Home: index.md
+  # - TinyTV Mini: Mini-Get-Started.md
+  # - TinyTV 2: TV2-Get-Started.md
+  # - TinyTV DIY Kit: 
+  #     - Get Started: TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
+  #     - TinyTV Assembly: TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
+  #     - Tiny Video Player Assembly: TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
+  #     - TinyTV & Tiny Video Player Programming: TinyTV-DIY-Kit/Tiny-Video-Program.md
+  #     - Settings/Customization: TinyTV-DIY-Kit/TinyTV-Tutorial.md
+  #     - TinyTV DIY Kit TSV Converter: TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
+  #     - TinyTV FAQ: TinyTV-DIY-Kit/TinyTV-FAQ.md
+  # - Converter App: TinyTV-Converter-App.md
+  # - Streaming: Streaming.md
+  # - Update: Update.md
+  # - Settings: Settings.md
+  # - Help & FAQ: help.md
+
+  - Home: jp/index.md
+  - TinyTV Mini: jp/Mini-Get-Started.md
+  - TinyTV 2: jp/TV2-Get-Started.md
+  - TinyTV DIY Kit: 
+      - Get Started: jp/TinyTV-DIY-Kit/TinyTV-DIY-Kit.md
+      - TinyTV Assembly: jp/TinyTV-DIY-Kit/TinyTV-DIY-Kit-Assembly.md
+      - Tiny Video Player Assembly: jp/TinyTV-DIY-Kit/Tiny-Video-Player-Kit_Tutorial.md
+      - TinyTV & Tiny Video Player Programming: jp/TinyTV-DIY-Kit/Tiny-Video-Program.md
+      - Settings/Customization: jp/TinyTV-DIY-Kit/TinyTV-Tutorial.md
+      - TinyTV DIY Kit TSV Converter: jp/TinyTV-DIY-Kit/TSV-Converter-Tutorial.md
+      - TinyTV FAQ: jp/TinyTV-DIY-Kit/TinyTV-FAQ.md
+  - Converter App: jp/TinyTV-Converter-App.md
+  - Streaming: jp/Streaming.md
+  - Update: jp/Update.md
+  - Settings: jp/Settings.md
+  - Help & FAQ: jp/help.md
+
+theme:
+  logo: images/television.png
+  favicon: images/television.png
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    # - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      # primary: 
+      # accent: 
+    #   toggle:
+    #     icon: material/toggle-switch
+    #     name: Switch to light mode
+    # - media: "(prefers-color-scheme: light)"
+    #   scheme: default
+    #   # primary: these values were overwritten in stylesheets/extra.css
+    #   # accent:
+    #   toggle:
+    #     icon: material/toggle-switch-off-outline
+    #     name: Switch to dark mode
+  features:
+    - content.tabs.link
+    - header.autohide
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top # 'Back to top' button when scrolling up a page
+  name: material
+  custom_dir: ../../docs/jp/overrides/
+
+# This sheet just has color changes
+extra_css:
+  - stylesheets/extra.css
+
+copyright: Copyright &copy; 2023 TinyCircuits
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  # - minify:
+  #     minify_html: true
+
+
+# social footer icons and links
+extra:
+  analytics:
+    provider: google # TODO
+    # property: UA-118275183-3 
+    # feedback: # this feature is not available yet
+    #   title: Was this page helpful?
+    #   ratings:
+    #     - icon: material/emoticon-happy-outline
+    #       name: This page was helpful
+    #       data: 1
+    #       note: >-
+    #         Thanks for your feedback!
+    #     - icon: material/emoticon-sad-outline
+    #       name: This page could be improved
+    #       data: 0
+    #       note: >-
+    #         Thanks for your feedback! Help us improve this page by
+    #         using our <a href="https://tinycircuits.com/pages/contact-us" target=_blank>feedback form</a>.
+  homepage: https://tinytv.us # TODO
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/TinyCircuits
+      name: TinyCircuits on GitHub
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/nkwR3WBBXD
+      name: TinyCircuits on Discord
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/TinyCircuits
+      name: TinyCircuits on Twitter
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/tinycircuits/
+      name: TinyCircuits on Instagram
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/TinyCircuits/
+      name: TinyCircuits on Facebook
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCc4SQjmFcgsbvQFuYNgHuVg
+      name: TinyCircuits on YouTube
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/tinycircuits-com/
+      name: TinyCircuits on LinkedIn
+    - icon: fontawesome/brands/tiktok
+      link: https://www.tiktok.com/@tinycircuits
+      name: TinyCircuits on TikTok
+  # - icon: fontawesome/heading       # there's no logo for this that works well, so I'm leaving it off
+  #   link: https://www.hackster.io/tinycircuits
+  #   name: TinyCircuits on Hackster

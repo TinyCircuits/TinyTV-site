@@ -71,3 +71,20 @@ We use GitHub issues to track public bugs. Report a bug by **opening a new issue
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
 
 We *love* thorough bug reports!!
+
+## Translations
+https://github.com/squidfunk/mkdocs-material/discussions/2346
+
+## Deploying the site
+Do to site translations being added way after the beginning of the site creation (when a bunch of links now exist elsewhere), deploying the site is done in an odd way.
+
+1. Run `mkdocs build -f config/en/mkdocs.yml` (builds `/site/en` folder)
+2. Run `mkdocs build -f config/jp/mkdocs.yml` (builds `site/jp` folder)
+  1. The header will have links that go to the English version, those need changed in every jp site page.
+  2. Go to `/config/jp/mkdocs.yml` and in the `nav` section comment out the none prepended with `jp` lines and uncomment the `jp` prepended lines.
+  3. Run `mkdocs build -f config/jp/mkdocs.yml` again which replaces the headers with the `jp` prepended links
+3. Copy the contents of the `/site/en` folder to the root of the server
+4. In the root of the server create a `jp` folder and copy the contents of `/site/jp` to it
+5. Now there should be two copies of the site:
+  1. `https://tinytv.us/` (English version)
+  2. `https://tinytv.us/jp` (Japanese version with header links now changed to switch to other Japanese pages)
