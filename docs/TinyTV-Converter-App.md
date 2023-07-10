@@ -35,7 +35,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverter.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.1, updated 6/27/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
+    - <a href="https://files.tinycircuits.com/TinyTVConverter1.0.1b.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.1, updated 6/27/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
 
     The TinyTV converter app is not currently signed so you will need to right-click the file in Finder and click **Open**, then click **Open** again in the warning dialog.
 
