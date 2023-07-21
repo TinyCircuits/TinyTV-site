@@ -3,30 +3,37 @@ hide:
   - navigation
 ---
 
-# TinyTV Help & FAQ Page
+# TinyTV ヘルプ&FAQ ページ
 
 
-## Charging TinyTV's
+## TinyTVの充電
 
-You can use a USB power cable to connect your TinyTV to your computer or another power source. A orange charging LED will turn on when your TinyTV is charging. The orange LED will turn off when your TinyTV is fully charged.
+USB電源ケーブルを使用してTinyTVをパソコンまたは他の電源に接続できます。TinyTVが充電中は、オレンジ色の充電LEDが点灯します。TinyTVの充電が完了すると、オレンジ色のLEDが消灯します。
 
-
-## Can I expand the storage?
-
-All TinyTVs come with an 8GB micro SD Card pre-loaded with some demo videos. The micro SD Card is removable only with the TinyTV DIY Kit using tweezers and the cutout slot on the bottom of the TV case. The TinyTV 2 and TinyTV Mini sets have the micro SD Card built in without ready-access - ***While it's theoretically possible to disassemble these models and put in a larger SD Card, we don't recommend or support this since it could damage the electronics without proper caution or equipment.***
 
 ---
 
-## "The remote does not turn the TV on?"
 
-TinyTV 2 and Mini can only be turned on using the remote for up to two minutes after quickly pressing the power button. There are two "off modes" the TVs have, soft off and hard off:
+ストレージを拡張することはできますか？
 
-  * **Soft off**: When quickly pressing the power button to turn the TV off it goes into **soft off** mode. The remote can be used for up to two minutes to turn it back on.
-  * **Hard off**: After two minutes in **soft off** mode the TV cannot be turned back on using the remote. This mode conserves the most battery life. Quickly press the power button to turn it back on.
+全てのTinyTVには、デモ動画がプリロードされた8GBのマイクロSDカードが付属しています。マイクロSDカードは、TinyTV DIYキットを使用してのみ取り外すことができます。ピンセットとテレビケースの底部の切り抜きスロットを使用してください。TinyTV 2とTinyTV Miniには、アクセスしやすい内蔵マイクロSDカードはありません。***これらのモデルを分解して大容量のSDカードに入れ替えることは理論的には可能ですが、適切な注意や装備がないと電子部品を破損する可能性があるため、お勧めしませんし、サポートも提供していません。***
+
 
 ---
 
-## "Playback error"
+
+##「リモコンでテレビをオンにできませんか？」
+
+TinyTV 2とMiniは、電源ボタンを素早く押した後、2分以内にリモコンを使用してのみオンにすることができます。テレビには2つの「オフモード」があります。ソフトオフとハードオフです：
+
+*	**ソフトオフ**：電源ボタンを素早く押してテレビをオフにすると、ソフトオフモードになります。リモコンを使って2分以内に再度オンにすることができます。
+*	**ハードオフ**：ソフトオフモードで2分間経過すると、リモコンを使用してテレビをオンにすることはできません。このモードは最もバッテリー寿命を節約します。再びオンにするには、電源ボタンを素早く押してください。
+
+
+---
+
+
+## "プレイバックエラー"
 
 <center>
 <img src="../images/PlaybackErrorSplash_64x64.png" alt="TinyTV Playback error TinyTV Mini" />
@@ -34,11 +41,13 @@ TinyTV 2 and Mini can only be turned on using the remote for up to two minutes a
 <img src="../images/PlaybackErrorSplash_216x135.png" alt="TinyTV Playback error TinyTV 2" />
 </center>
 
-A playback error will occur when a video file cannot be loaded, or if playback cannot continue for the given file. Check your storage on your TinyTV and make sure the videos have been converted with the correct TinyTV Model, and that all the files have been converted using the TinyTV Converter Application. The TinyTV video formats are custom to the hardware, so you will need to use our free converter.
+動画ファイルが読み込みや再生ができない場合は、再生エラーが発生します。TinyTVのストレージを確認し、動画が正しく対応のTinyTVモデルに変換されていること、またすべてのファイルがTinyTV変換アプリケーションを使用して変換されていることを確認してください。TinyTVの動画形式はハードウェア固有のものですので、無料のコンバーターを使用する必要があります。
+
 
 ---
 
-## "No Card" or "Storage card not detected"
+
+## 「カードなし」か「ストレージカードが検出されません」
 
 <center>
 <img src="../images/NoCardSplash_64x64.png" alt="TinyTV No card error TinyTV Mini" />
@@ -46,11 +55,12 @@ A playback error will occur when a video file cannot be loaded, or if playback c
 <img src="../images/NoCardSplash_216x135.png" alt="TinyTV No card error TinyTV 2" />
 </center>
 
-The SD Card in the hardware is not detectable - this error occurs when no SD Card is inserted, or if the SD Card is loose on the contacts. Try re-inserting the SD Card if possible.
+ハードウェア内のSDカードが検出できない - このエラーは、SDカードが挿入されていない場合、またはSDカードが接触不良の場合に発生します。可能であれば、SDカードを再挿入してみてください。
+
 
 ---
 
-## "Storage error" or "A storage malfunction occurred"
+## 「ストレージエラー」か「ストレージ故障が発生」
 
 <center>
 <img src="../images/StorageErrorSplash_64x64.png" alt="TinyTV Storage error TinyTV Mini" />
@@ -59,4 +69,11 @@ The SD Card in the hardware is not detectable - this error occurs when no SD Car
 </center>
 
 
-A few things can trigger a storage malfunction error. This error occurs when the SD Card is detected, but the filesystem is damaged or unrecognizable. This can also happen if your file names include unexpected, or special, characters - if you see this error, try changing the names of your files on the SD Card.
+ストレージの故障エラーは、いくつかの要因で発生する可能性があります。このエラーは、SDカードが検出されるものの、ファイルシステムが破損しているか認識できない場合に発生します。また、ファイル名に予期しない特殊文字が含まれている場合もこのエラーが発生することがあります。このエラーが表示された場合は、SDカード内のファイル名を変更してみてください。
+
+
+---
+
+
+ご注文いただき誠にありがとうございます！新しいTinyTVがあなたをとても幸せにします。
+何かご質問があれば、以下の連絡先までお問い合わせください：

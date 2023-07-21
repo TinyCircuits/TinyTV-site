@@ -13,7 +13,7 @@ Pre-requisites: You will need [Python](https://www.python.org/downloads/) and [p
 Once installed, fork this repository to create your local copy. To run the website locally, navigate a command prompt or terminal to the directory of the project that has the mkdocs.yml file and execute:
 
 ```
-mkdocs serve
+mkdocs serve -f config/en/mkdocs.yml or mkdocs serve -f config/jp/mkdocs.yml
 ```
 
 If everything is correctly installed, your terminal should print a message like:

@@ -9,13 +9,13 @@ hide:
 <img src="../images/banner-tinytv2.jpg" alt="TinyTV banner vector image" />
 </center>
 
-**Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
+**充電** - TinyTVを充電するには、USB-CケーブルをTinyTVの背面に差し込み、もう一方の端をパソコンまたはUSB充電器等に接続してください。
 
-**Turn On / Off** - There is a single button on the top which will turn the TV on or off. You can also us the Tiny Remote to turn the TV on and off.
+**電源オン/オフ** - 上には3つのボタンがあり、中央のボタンはテレビの電源をオン/オフにします。Tinyリモコンを使ってテレビの電源をオン/オフすることもできます。
 
-**Changing Volume** - The left rotary knob will turn up or down the volume. 
+**音量調整** - 左側の回転ノブを回すと、音量を上げたり下げたりすることができます。 
 
-**Changing Channels** - The right rotary knob will cycle between the different videos that are loaded on the TV.
+**チャンネルを変える** - 右側の回転ノブを回すと、テレビに読み込まれた動画を選択できます。
 
 ---
 
@@ -25,21 +25,21 @@ hide:
   }
 </style>
 
-#### Tech Specs
+#### 製品仕様
 
 <center>
 <img src="../images/banner-tech-specs.jpg" alt="TinyTV vector drawing of a TinyTV 2 entering an x-ray machine" />
 </center>
 
-* **Dimensions**: 47.6mm x 36.6mm x 25.9mm (1.9" x 1.4" x 1.0")
-* **Display**: IPS TFT 65K Color, 26mm (1.0"), 216x135 pixels
-* **Battery**: Li-Polymer 3.7V, 150mAh, about 2 hours of video playback 
-* **Storage**: Built in 8GB, about 10 hours of video playback
-* **Audio**: 16x9mm (0.6" x 0.4") front facing speaker
-* **Inputs**: Power Button, 2 rotary knobs for channel and volume control
-* **Remote**: Can be controlled by an Infrared (IR) remote control
-* **Processor**: Raspberry Pi RP2040 Processor
-* **Connectivity**: USB-C for uploading and battery charging
+* **寸法**: 47.6mm x 36.6mm x 25.9mm (1.9インチ x 1.4インチ x 1.0インチ
+* **ディスプレイ**: IPS TFT 65Kカラー、26mm (1.0インチ)、216x135ピクセル
+* **バッテリー**: リチウムポリマー3.7V、150mAh、動画は約2時間再生可能 
+* **ストレージ**: 内蔵8GB、約10時間分の動画
+* **オーディオ**: 16x9mm (0.6インチ x 0.4インチ) フロントスピーカー
+* **ボタン**: 電源ボタン、チャンネルと音量の調整用の回転ノブ2つ
+* **リモコン**: 赤外線（IR）リモコンで操作可能
+* **プロセッサー: Raspberry Pi RP2040プロセッサー
+* **接続**: 読み込み用と充電用のUSB-C ポート
 
 <center>
 <img src="../images/TV-2-features-diagram.jpg" alt="TinyTV 2 photo features front of TV" />
