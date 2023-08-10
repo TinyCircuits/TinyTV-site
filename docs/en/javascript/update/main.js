@@ -483,7 +483,7 @@ if(window.location.pathname.indexOf("Update") != -1){
 
                 if(tvtype == "tv2"){
                     await programmer.connectUpdate(firmwareAndVersionInfo["tinytv2"]["firmware-url"]);
-                }else if(tvtype == "mini"){
+                }else if(tvtype == "tvmini"){
                     await programmer.connectUpdate(firmwareAndVersionInfo["tinytvmini"]["firmware-url"]);
                 }else if(tvtype == "tvdiy"){
                     await programmer.connectUpdate(firmwareAndVersionInfo["tinytvdiy"]["firmware-url"]);
