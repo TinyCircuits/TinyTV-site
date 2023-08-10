@@ -10,18 +10,19 @@ class BasicPicoboot{
         this.onUpdateProgress = (percentage) => {};
         this.onUpdateComplete = () => {};
         this.onConnectionCanceled = () => {};
+        this.onOpenFail = () => {};
         this.onError = () => {};
     }
 
 
-    async connect(){
+    async connectUpdate(firmwareURL){
         try{
             this.showErrorMsg = false;
 
             // Do web side of getting the device
             this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
-            this.connected = true;
 
+            throw("An operation that changes interface state is in progress");
             await this.device.open();
 
             if(this.device.configuration === null){
@@ -29,16 +30,53 @@ class BasicPicoboot{
             }
 
             await this.device.claimInterface(1);
+            this.connected = true;
 
             // Get USB exclusive control according to the datasheet PICOBOOT interface commands
             await this.#exclusive();
 
             // Wireshark does this after every erase and write but it seems to work by just doing it once
             await this.#exitxip();
+
+            await this.update(firmwareURL);
         }catch(error){
-            // User did not select anything and closed browser dialog
-            console.log("No USB device selected for connection or couldn't open port...", error);
-            this.onConnectionCanceled();
+            console.log(error);
+
+            if(error.toString().indexOf("An operation that changes interface state is in progress") != -1){
+                this.onOpenFail();
+
+                // Get the directory
+
+                let dirHandle = undefined;
+                try{
+                    dirHandle = await showDirectoryPicker({id: 0, mode: "readwrite", startIn: "downloads"});
+                }catch(error){
+                    this.onError(error.toString());
+                }
+                
+                if(dirHandle != undefined && dirHandle.name == "\\"){
+                    this.onUpdateStart();
+                    const response = await fetch(firmwareURL, {cache: 'no-store', pragma: 'no-cache'});
+                    if(response.ok == false){
+                        this.onError("404: firmware file not found " + firmwareURL);
+                        return;
+                    }
+                    const uf2Data = await (response).arrayBuffer();
+
+                    const fileHandle = await dirHandle.getFileHandle("firmware.uf2", {create: true});
+                    const writable = await fileHandle.createWritable();
+                    this.onUpdateProgress(35);
+                    await writable.write(uf2Data);
+                    this.onUpdateProgress(75);
+                    await writable.close();
+                    this.onUpdateComplete();
+                }else{
+                    this.onError("It looks like the wrong directory was selected (or none at all)...");
+                }
+            }else{
+                // User did not select anything and closed browser dialog
+                this.onConnectionCanceled();
+            }
         }
     }
 

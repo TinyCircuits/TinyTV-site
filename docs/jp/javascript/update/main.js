@@ -61,6 +61,7 @@ if(window.location.pathname.indexOf("Update") != -1){
     const decoder = new TextDecoder();
     let detectedTVType = TV_TYPES.NONE;
     let detectedFirmwareVer = undefined;
+    let firmwareAndVersionInfo = undefined;
 
     
     // Makes all elements invisible and then shows element for screen in query string (called by insertUrlParameter)
@@ -86,6 +87,7 @@ if(window.location.pathname.indexOf("Update") != -1){
             // Reset these when back on this screen
             detectedTVType = TV_TYPES.NONE;
             detectedFirmwareVer = undefined;
+            firmwareAndVersionInfo = undefined;
 
             setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
 
@@ -416,15 +418,25 @@ if(window.location.pathname.indexOf("Update") != -1){
                     show("contactusButton");
                 }
 
+                programmer.onOpenFail = () => {
+                    setInnerText("description", "Something went wrong when trying to update over USB.\nPlease select the 'RPI-RP2' device in File Explorer and agree to the popup dialog");
+                    hide("connectButton");
+                    setClickCallback("cancelUpdate", () => {
+                        programmer.disconnect(false);
+                        removeUrlParameter("screen");
+                        removeUrlParameter("type");
+                    });
+                }
+
                 programmer.onUpdateStart = () => {
                     setInnerText("description", "Updating...");
                     setInnerText("connectButton", "Disconnect");
                     hide("contactusButton");
                     setClickCallback("connectButton", () => {
-                        picoboot.disconnect(true);
+                        programmer.disconnect(true);
                     });
                     setClickCallback("cancelUpdate", () => {
-                        picoboot.disconnect(false);
+                        programmer.disconnect(false);
                         removeUrlParameter("screen");
                         removeUrlParameter("type");
                     });
@@ -442,14 +454,39 @@ if(window.location.pathname.indexOf("Update") != -1){
                     setScreen("update_complete");
                 }
 
+
+                // Get the firmware url and version information for all TVs
+                let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/binaries/update-page-info.json", {cache: 'no-store', pragma: 'no-cache'});
+                if(!response.ok){
+                    setInnerText("description", "Error fetching firmware information, please try contacting us");
+                    show("contactusButton");
+                    show("manualUpdateButton");
+                    hide("infoOutput");
+                    hide("connectButton");
+                    return;
+                }
+                let firmwareAndVersionInfo = JSON.parse(await response.text());
+
+                // Format the firmware URLs with the latest version information (this just makes it so that only one thing needs to be changed manually in the update-page-info.json)
+                firmwareAndVersionInfo["tinytv2"]["firmware-url"] = firmwareAndVersionInfo["tinytv2"]["firmware-url"].replace("_X_", firmwareAndVersionInfo["tinytv2"]["latest-version"][0]);
+                firmwareAndVersionInfo["tinytv2"]["firmware-url"] = firmwareAndVersionInfo["tinytv2"]["firmware-url"].replace("_Y_", firmwareAndVersionInfo["tinytv2"]["latest-version"][1]);
+                firmwareAndVersionInfo["tinytv2"]["firmware-url"] = firmwareAndVersionInfo["tinytv2"]["firmware-url"].replace("_Z_", firmwareAndVersionInfo["tinytv2"]["latest-version"][2]);
+
+                firmwareAndVersionInfo["tinytvmini"]["firmware-url"] = firmwareAndVersionInfo["tinytvmini"]["firmware-url"].replace("_X_", firmwareAndVersionInfo["tinytvmini"]["latest-version"][0]);
+                firmwareAndVersionInfo["tinytvmini"]["firmware-url"] = firmwareAndVersionInfo["tinytvmini"]["firmware-url"].replace("_Y_", firmwareAndVersionInfo["tinytvmini"]["latest-version"][1]);
+                firmwareAndVersionInfo["tinytvmini"]["firmware-url"] = firmwareAndVersionInfo["tinytvmini"]["firmware-url"].replace("_Z_", firmwareAndVersionInfo["tinytvmini"]["latest-version"][2]);
+
+                firmwareAndVersionInfo["tinytvdiy"]["firmware-url"] = firmwareAndVersionInfo["tinytvdiy"]["firmware-url"].replace("_X_", firmwareAndVersionInfo["tinytvdiy"]["latest-version"][0]);
+                firmwareAndVersionInfo["tinytvdiy"]["firmware-url"] = firmwareAndVersionInfo["tinytvdiy"]["firmware-url"].replace("_Y_", firmwareAndVersionInfo["tinytvdiy"]["latest-version"][1]);
+                firmwareAndVersionInfo["tinytvdiy"]["firmware-url"] = firmwareAndVersionInfo["tinytvdiy"]["firmware-url"].replace("_Z_", firmwareAndVersionInfo["tinytvdiy"]["latest-version"][2]);
+
+
                 if(tvtype == "tv2"){
-                    await programmer.connect();
-                    await programmer.update("/firmware/TinyTV-2-firmware-1.1.0.uf2");
+                    await programmer.connectUpdate(firmwareAndVersionInfo["tinytv2"]["firmware-url"]);
                 }else if(tvtype == "mini"){
-                    await programmer.connect();
-                    await programmer.update("/firmware/TinyTV-Mini-firmware.uf2");
+                    await programmer.connectUpdate(firmwareAndVersionInfo["tinytvmini"]["firmware-url"]);
                 }else if(tvtype == "tvdiy"){
-                    await programmer.connectUpdate("/firmware/TinyTV-DIY-firmware-1.1.0.bin");
+                    await programmer.connectUpdate(firmwareAndVersionInfo["tinytvdiy"]["firmware-url"]);
                 }
             });
         }else if(screen == "update_not_needed"){
@@ -511,7 +548,7 @@ if(window.location.pathname.indexOf("Update") != -1){
         serial.onDisconnect = () => {};
         await serial.disconnect();
 
-        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/versions.h?token=GHSAT0AAAAAABT2ZGV3TCXFNGTL55DVZUZSY7ZFPAA", {cache: 'no-store', pragma: 'no-cache'});
+        let response = await fetch("https://raw.githubusercontent.com/TinyCircuits/TinyCircuits-TinyTVs-Firmware/master/binaries/update-page-info.json", {cache: 'no-store', pragma: 'no-cache'});
         
         if(!response.ok){
             setInnerText("description", "Error fetching online versions, please contact us or try manually updating");
@@ -521,51 +558,14 @@ if(window.location.pathname.indexOf("Update") != -1){
             hide("connectButton");
             return;
         }
-        let text = await response.text();
-        text = text.split("\r\n");                     // Split into lines (assumes Windows line-endings)
 
-        let latestOnlineRequiredVersions = {
-            "TINYTV_2_VERSION_REQUIRED_MAJOR": 0,
-            "TINYTV_2_VERSION_REQUIRED_MINOR": 0,
-            "TINYTV_2_VERSION_REQUIRED_PATCH": 0,
-
-            "TINYTV_MINI_VERSION_REQUIRED_MAJOR": 0,
-            "TINYTV_MINI_VERSION_REQUIRED_MINOR": 0,
-            "TINYTV_MINI_VERSION_REQUIRED_PATCH": 0,
-
-            "TINYTV_DIY_VERSION_REQUIRED_MAJOR": 0,
-            "TINYTV_DIY_VERSION_REQUIRED_MINOR": 0,
-            "TINYTV_DIY_VERSION_REQUIRED_PATCH": 0
-        }
-
-        for(let ilx=0; ilx<text.length; ilx++){
-            let line = text[ilx];
-            if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_MAJOR") != -1){
-                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_MINOR ") != -1){
-                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_2_VERSION_REQUIRED_PATCH ") != -1){
-                latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_MAJOR") != -1){
-                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_MINOR") != -1){
-                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_MINI_VERSION_REQUIRED_PATCH") != -1){
-                latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_MAJOR") != -1){
-                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MAJOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_MINOR") != -1){
-                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MINOR"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }else if(line.indexOf("// TINYTV_DIY_VERSION_REQUIRED_PATCH") != -1){
-                latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_PATCH"] = parseInt(line.slice(line.indexOf(' ', 3)));
-            }
-        }
+        let firmwareAndVersionInfo = JSON.parse(await response.text());
 
         if(detectedTVType == TV_TYPES.TINYTV_2){
             insertUrlParameter("type", "tv2");
-            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MAJOR"] ||
-               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_MINOR"] ||
-               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_2_VERSION_REQUIRED_PATCH"]){
+            if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][0] ||
+               detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][1] ||
+               detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][2]){
                 // Need to update
                 setScreen("update_needed");
             }else{
@@ -574,9 +574,9 @@ if(window.location.pathname.indexOf("Update") != -1){
             }
         }else if(detectedTVType == TV_TYPES.TINYTV_MINI){
             insertUrlParameter("type", "tvmini");
-            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MAJOR"] ||
-               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_MINOR"] ||
-               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_MINI_VERSION_REQUIRED_PATCH"]){
+            if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][0] ||
+               detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][1] ||
+               detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][2]){
                 // Need to update
                 setScreen("update_needed");
             }else{
@@ -585,9 +585,9 @@ if(window.location.pathname.indexOf("Update") != -1){
             }
         }else if(detectedTVType == TV_TYPES.TINYTV_DIY){
             insertUrlParameter("type", "tvdiy");
-            if(detectedFirmwareVer["MAJOR"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MAJOR"] ||
-               detectedFirmwareVer["MINOR"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_MINOR"] ||
-               detectedFirmwareVer["PATCH"] < latestOnlineRequiredVersions["TINYTV_DIY_VERSION_REQUIRED_PATCH"]){
+            if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][0] ||
+               detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][1] ||
+               detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][2]){
                 // Need to update
                 setScreen("update_needed");
             }else{
