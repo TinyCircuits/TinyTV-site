@@ -22,7 +22,6 @@ class BasicPicoboot{
             // Do web side of getting the device
             this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
 
-            throw("An operation that changes interface state is in progress");
             await this.device.open();
 
             if(this.device.configuration === null){
