@@ -9,13 +9,13 @@ hide:
 <img src="../images/Banner-tinytv-mini.jpg" alt="TinyTV Mini banner vector image" />
 </center>
 
-**Charging** - To recharge your TinyTV, plug in a USB-C cable to the back of the TinyTV and the other end into a power source, like a computer or a USB wall charger.
+**充電** - TinyTVを充電するには、USB-CケーブルをTinyTVの背面に差し込み、もう一方の端をパソコンまたはUSB充電器等に接続してください。
 
-**Turn On / Off** - There are three buttons on the top, the middle button will turn the TV on and off. You can also use the Tiny Remote to turn the TV on and off.
+**電源オン/オフ** - 上には3つのボタンがあり、中央のボタンはテレビの電源をオン/オフにします。Tinyリモコンを使ってテレビの電源をオン/オフすることもできます。
 
-**Changing Volume** - The left button on the top of the TV will cycle between different volume settings.  
+**音量調整** - テレビの上部にある左側のボタンで音量設定を切り替えることができます。
 
-**Changing Channels** - The right button on the top of the TV will cycle between the different videos loaded on the TV.
+**チャンネルを変える** - テレビの上部にある右側のボタンで、テレビに読み込んだ動画を選択できます。
 
 ---
 
@@ -25,7 +25,7 @@ hide:
   }
 </style>
 
-#### Tech Specs
+#### 製品仕様
 
 <center>
 <img src="../images/banner-tech-specs.jpg" alt="TinyTV vector drawing of a TinyTV 2 entering an x-ray machine" />
@@ -35,15 +35,16 @@ hide:
 <img src="../images/TV-mini-hardware-drawing.png" alt="TinyTV Mini hardware drawing" />
 </center>
 
-* **Dimensions**: 26.3mm x 23.8mm x 21.9mm (1.0" x 0.94" x 0.86")
-* **Display**: 65K Color OLED, 15.2mm (0.6"), 64x64 pixels
-* **Battery**: Li-Polymer 3.7V, 50mAh, about 1 hour of video playback 
-* **Storage**: Built in 8GB, about 40 hours of video playback
-* **Audio**: Internal speaker
-* **Inputs**: Power Button, Volume button, Channel button on the top of the unit
-* **Remote**:  Can be controlled by an Infrared (IR) remote control
-* **Processor**: Raspberry Pi RP2040 Processor
-* **Connectivity**:  USB-C for uploading and battery charging 
+*	**寸法**：26.3mm x 23.8mm x 21.9mm (1.0インチ x 0.94インチ x 0.86インチ)
+*	**ディスプレイ**：65KカラーOLED、15.2mm (0.6インチ)、64x64ピクセル
+*	**バッテリー**：リチウムポリマー3.7V、50mAh、動画は約1時間再生可能 
+*	**ストレージ**：内蔵8GB、約40時間分の動画
+*	**オーディオ**：内蔵スピーカー
+*	**ボタン**：本体の上部に電源ボタン、音量ボタン、チャンネルボタンがあります。
+*	**リモコン**：赤外線（IR）リモコンで操作可能
+*	**プロセッサー**：Raspberry Pi RP2040プロセッサー
+*	**接続**：読み込み用と充電用のUSB-C ポート 
+
 
 <center>
 <img src="../images/Mini-TV-features-diagram.jpg" alt="TinyTV Mini photo features" />

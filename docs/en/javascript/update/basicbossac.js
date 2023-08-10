@@ -17,6 +17,7 @@ class BasicBossac{
         this.onUpdateProgress = (percentage) => {};
         this.onUpdateComplete = () => {};
         this.onConnectionCanceled = () => {};
+        this.onOpenFail = () => {};
         this.onError = () => {};
     }
 
