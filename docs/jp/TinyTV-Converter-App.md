@@ -24,7 +24,7 @@ _注意：<a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_bl
 
 === "Windows 版"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.2.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows 版ダウンロード**</a>（バージョン1.0.0、2023年6月27日更新、Windows 10 64ビット以降に対応） 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.3.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows 版ダウンロード**</a>（バージョン1.0.3、2023年6月27日更新、Windows 10 64ビット以降に対応） 
 
     上記のリンクをクリックして、ダウンロードが完了するまで待ってください。
 
@@ -35,7 +35,7 @@ _注意：<a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_bl
 
 === "MacOS 版"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.2.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 版ダウンロード**</a> バージョン1.0.1、2023年6月27日更新、IntelとApple Silicon、macOS 12.0.0以降に対応）
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.3.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 版ダウンロード**</a> バージョン1.0.3、2023年6月27日更新、IntelとApple Silicon、macOS 12.0.0以降に対応）
 
     TinyTVコンバーターアプリは現在署名されていないため、Finderでファイルを右クリックし、「開く」を選択し、警告ダイアログで再度「開く」をクリックしてください。
 
@@ -94,6 +94,12 @@ _注意：<a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_bl
 
 
 ## TinyTV Converter App version history:
+* v1.0.3
+    * Fix TSV output files for DIY Kit
+* v1.0.2
+    * Support macOS 12.0 and up
+* v1.0.1
+    * Bug fix for opening video files with chapters
 * v1.0.0
     * Initial release of app written in Python.
 * v0.1.2 

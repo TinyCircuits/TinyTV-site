@@ -24,7 +24,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "Windows"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.2.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.0, updated 6/27/2023, supports Windows 10 64-bit and newer) 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.3.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.3, updated 6/27/2023, supports Windows 10 64-bit and newer) 
 
     Click the above link and wait for the download to complete.
     
@@ -35,7 +35,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.2.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.1, updated 6/27/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.3.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.3, updated 6/27/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
 
     The TinyTV converter app is not currently signed so you will need to right-click the file in Finder and click **Open**, then click **Open** again in the warning dialog.
 
@@ -92,6 +92,12 @@ Once you have downloaded the correct application version for your system, you ca
 
 
 ## TinyTV Converter App version history:
+* v1.0.3
+    * Fix TSV output files for DIY Kit
+* v1.0.2
+    * Support macOS 12.0 and up
+* v1.0.1
+    * Bug fix for opening video files with chapters
 * v1.0.0
     * Initial release of app written in Python.
 * v0.1.2 
