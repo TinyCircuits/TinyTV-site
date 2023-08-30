@@ -60,3 +60,11 @@ The SD Card in the hardware is not detectable - this error occurs when no SD Car
 
 
 A few things can trigger a storage malfunction error. This error occurs when the SD Card is detected, but the filesystem is damaged or unrecognizable. This can also happen if your file names include unexpected, or special, characters - if you see this error, try changing the names of your files on the SD Card.
+
+---
+
+## "TV does not show up as a USB device on computer"
+
+Try the following:
+* Different cables. Some USB-C cables only allow for charging devices, try a cable that you know you have used for transfer files or pictures from another device.
+* Turn the TV on by pressing the top button for TinyTV 2 and the top middle button on TinyTV Mini

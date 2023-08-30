@@ -68,7 +68,7 @@ Once you have downloaded the correct application version for your system, you ca
 ## Upload Converted Videos
 
 - **Connect**
-    - For TinyTV 2 and Mini users plug the TV using a USB-C cable, after a few seconds an external storage drive will appear on your computer.<br>_Note: For TinyTV DIY Kit users, remove the SD card from your TV and insert it into your computer or card reader_
+    - For TinyTV 2 and Mini users, plug the TV in using a USB-C cable and turn it ON by quickly pressing the power button (top button on TinyTV 2 and middle top button on the Mini). after a few seconds an external storage drive will appear on your computer.<br>_Note: For TinyTV DIY Kit users, remove the SD card from your TV and insert it into your computer or card reader_
 <br>
 - **Copy**
     - Copy and paste or drag converted _.avi_ files to the external drive. Wait for the copy to complete, it may take a few moments
@@ -82,7 +82,7 @@ Once you have downloaded the correct application version for your system, you ca
 
 ## Troubleshooting
 
-- If the TinyTV 2 or TinyTV Mini USB device does not appear on your computer - your USB-C cable may not have the necessary data connections required for transferring data. Try using other USB-C cables.
+- If the TinyTV 2 or TinyTV Mini USB device does not appear on your computer - your USB-C cable may not have the necessary data connections required for transferring data. Try using other USB-C cables. Also make sure the TV is ON by quickly pressing the power button.
 - If you cannot see the resulting converted video, refresh your file explorer in the directory you saved the file. _Try pressing the convert button again if the video is not present._
 
 
