@@ -66,5 +66,6 @@ A few things can trigger a storage malfunction error. This error occurs when the
 ## "TV does not show up as a USB device on computer"
 
 Try the following:
-* Different cables. Some USB-C cables only allow for charging devices, try a cable that you know you have used for transfer files or pictures from another device.
-* Turn the TV on by pressing the top button for TinyTV 2 and the top middle button on TinyTV Mini
+
+  * Different cables. Some USB-C cables only allow for charging devices, try a cable that you know you have used for transfer files or pictures from another device.
+  * Turn the TV on by pressing the top button for TinyTV 2 and the top middle button on TinyTV Mini
