@@ -233,7 +233,11 @@ hide:
 
     </div>
 
-    <div id="buttonContainer" class="tx-hero" style="display:flex; flex-direction:column; justify-content:center; align-items:center">
+    <div id="buttonContainer" class="tx-hero" style="display:flex; flex-direction:row; justify-content:center; align-items:center">
+      <button id="formatButton" title="erase all videos and reformat internal SD card" style="margin-right:10px; background-color:red; border-color:red; visibility:hidden; position:absolute;" alt="Button that asks if user wants to format TV and erase all videos"
+        class="md-button md-button--primary">
+        Format TV
+      </button>
       <button id="connectButton" title="update connect button" alt="Button brings up dialog to manually connect TV"
         class="md-button md-button--primary">
         Connect TV

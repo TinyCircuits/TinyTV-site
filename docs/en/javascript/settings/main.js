@@ -2,7 +2,7 @@ import { Serial } from "../serial.js";
 import { show, hide, disable, setClickCallback, setInnerText } from "../common.js";
 
 
-// Only perform the update page logic if actually on the settings page
+// Only perform the settings page logic if actually on the settings page
 if(window.location.pathname.indexOf("Settings") != -1){
     // Check if serial is available in this browser
     if(!("serial" in navigator)){
@@ -17,6 +17,12 @@ if(window.location.pathname.indexOf("Settings") != -1){
 
     let set = async (value) => {
         let sendStr = "{\"SET\":\"" + value + "\"}" ;
+        console.log("SENT: " + sendStr);
+        await serial.write(sendStr, true);
+    }
+
+    let format = async () => {
+        let sendStr = "{\"FORMAT\":\"" + "SDFAT" + "\"}" ;
         console.log("SENT: " + sendStr);
         await serial.write(sendStr, true);
     }
@@ -38,6 +44,7 @@ if(window.location.pathname.indexOf("Settings") != -1){
     let setup = async () => {
         // Now show settings since we got a response
         show("settings");
+        show("formatButton", false);
 
         setInnerText("description", "Change settings on TinyTV 2, Mini, or DIY Kit");
 
@@ -121,6 +128,7 @@ if(window.location.pathname.indexOf("Settings") != -1){
     }
     serial.onDisconnect = () => {
         hide("settings");
+        hide("formatButton");
         setInnerText("connectButton", "Connect TV");
         setInnerText("description", "Change settings on TinyTV 2, Mini, or DIY Kit");
 
@@ -180,4 +188,11 @@ if(window.location.pathname.indexOf("Settings") != -1){
     document.getElementById("alphabetizePlaybackOrderOn").oninput = (event) => {
         set("alphabetize=true");
     }
+
+    setClickCallback("formatButton", () => {
+        if(confirm("Are you sure you want to format the TV? All files will be erased!\n\n* If you're having playback/file issues, try turning the TV off and on (hold the power button down for 10s to turn it off)\n* Try charging the TV for a few minutes and check if the issues go away\n\nTinyTV 2 and Mini will turn off, press the power button to turn it back on. DIY will stay on, the SD card will need to be removed to upload videos")){
+            // Format the TV and erase all of its files
+            format();
+        }
+    });
 }

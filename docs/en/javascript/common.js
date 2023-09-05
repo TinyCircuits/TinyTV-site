@@ -11,6 +11,9 @@ let show = (element, showChildren=true) => {
 
     element.classList.remove("invisible");
 
+    element.style.position = null;
+    element.style.visibility = null;
+
     // Don't want to show children, infinite loop otherwise
     if(element.parentElement) show(element.parentElement, false);
 

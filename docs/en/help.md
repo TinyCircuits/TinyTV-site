@@ -64,8 +64,30 @@ A few things can trigger a storage malfunction error. This error occurs when the
 ---
 
 ## "TV does not show up as a USB device on computer"
-
 Try the following:
 
-  * Different cables. Some USB-C cables only allow for charging devices, try a cable that you know you have used for transfer files or pictures from another device.
+  * Different cables. Some USB-C cables only allow for charging devices, try a cable that you know you have used for transferring files or pictures from another device.
   * Turn the TV on by pressing the top button for TinyTV 2 and the top middle button on TinyTV Mini
+
+---
+
+## "How are files sorted?"
+Files are sorted like in Windows in ascending order. Numbers at the start of a filename are prioritized over filenames with just letters. For example:
+0.avi
+1.avi
+22.avi
+A.avi
+B.avi
+L.avi
+
+---
+
+## "How many videos can I put on my TV?"
+  * **TinyTV 2 and Mini**: 100 videos
+  * **TinyTV DIY Kit**: 25 videos
+
+---
+
+## "How long can filenames be?"
+  * **TinyTV 2 and Mini**: 150 characters
+  * **TinyTV DIY Kit**: 50 characters
