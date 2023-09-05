@@ -137,6 +137,11 @@ if(window.location.pathname.indexOf("Settings") != -1){
 
     serial.onData = (data) => {
         received += decoder.decode(data);
+
+        if(received.indexOf("Sd Format Success") != -1){
+            alert("Format successful!");
+            received = "";
+        }
     }
     setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
 
