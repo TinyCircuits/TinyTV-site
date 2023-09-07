@@ -119,7 +119,7 @@ class Serial{
         let endIndex = this.received.indexOf(this.endWaitForStr);
         if(startIndex != -1 && endIndex != -1){
 
-            // Found the start and end enclosing strings, not see if the sub string is between them if not undefined
+            // Found the start and end enclosing strings, now see if the sub string is between them if not undefined
             if(this.subStr != undefined){
                 let subIndex = this.received.indexOf(this.subStr, startIndex);
 

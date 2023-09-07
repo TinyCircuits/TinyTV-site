@@ -25,9 +25,23 @@ if(window.location.pathname.indexOf("Settings") != -1){
         let sendStr = "{\"FORMAT\":\"" + "SDFAT" + "\"}" ;
         console.log("SENT: " + sendStr);
         await serial.write(sendStr, true);
+
+        try{
+            let result = await serial.waitFor("Unhandled ", "key", "JSON");
+
+            // If waited for and find "Unhandled JSON key" then
+            // feature not supported, alert the user
+            if(result != undefined){
+                alert("Could not format! Please update TV for format support!");
+            }
+        }catch{
+            // If times out waiting for "Unhandled JSON key" then format
+            // feature was supported and likely worked, tell the user
+            alert("Format successful!");
+        }
     }
 
-    let get = async (value) => {
+    let get = async (value, ignoreUnsupportedSettingsWarning=true) => {
         received = "";
 
         let sendStr = "{\"GET\":\"" + value + "\"}";
@@ -35,7 +49,13 @@ if(window.location.pathname.indexOf("Settings") != -1){
         await serial.write(sendStr, true);
 
         try{
-            return await serial.waitFor("{", "}", value);
+            let result = await serial.waitFor("{", "}", value);
+            if(ignoreUnsupportedSettingsWarning == false){
+                if(result.indexOf("none") != -1){
+                    alert("Getting '" + value + "' unsupported! Please update your TV!")
+                }
+            }
+            return result;
         }catch{
             // Did not find response string in time
         }
@@ -137,11 +157,6 @@ if(window.location.pathname.indexOf("Settings") != -1){
 
     serial.onData = (data) => {
         received += decoder.decode(data);
-
-        if(received.indexOf("Sd Format Success") != -1){
-            alert("Format successful!");
-            received = "";
-        }
     }
     setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
 
