@@ -490,34 +490,46 @@ if(window.location.pathname.indexOf("Update") != -1){
                 }
             });
         }else if(screen == "update_not_needed"){
-            setInnerText("description", "Your TV is up to date. Would you still like to update?");
+            let detectedVersion = getUrlParameter("detected_tv_fw_version");
+            let latestVersion = getUrlParameter("latest_tv_fw_version");
+            setInnerText("description", "Your TV is up to date. Would you still like to update?\n\n Detected Version: " + detectedVersion + "\nAvailable Version: " + latestVersion);
             setInnerText("nextButton", "Update");
             show("description");
             show("cancelUpdate");
             show("nextButton");
 
             setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("detected_tv_fw_version");
+                removeUrlParameter("latest_tv_fw_version");
                 removeUrlParameter("screen");
                 removeUrlParameter("type");
             });
             setClickCallback("nextButton", async () => {
                 serial.autoReset(() => {
+                    removeUrlParameter("detected_tv_fw_version");
+                    removeUrlParameter("latest_tv_fw_version");
                     setScreen("update");
                 });
             });
         }else if(screen == "update_needed"){
-            setInnerText("description", "Your TV is out of date! Would you like to update?");
+            let detectedVersion = getUrlParameter("detected_tv_fw_version");
+            let latestVersion = getUrlParameter("latest_tv_fw_version");
+            setInnerText("description", "Your TV is out of date! Would you like to update?\n\n Detected Version: " + detectedVersion + "\nAvailable Version: " + latestVersion);
             setInnerText("nextButton", "Yes");
             show("description");
             show("cancelUpdate");
             show("nextButton");
 
             setClickCallback("cancelUpdate", () => {
+                removeUrlParameter("detected_tv_fw_version");
+                removeUrlParameter("latest_tv_fw_version");
                 removeUrlParameter("screen");
                 removeUrlParameter("type");
             });
             setClickCallback("nextButton", async () => {
                 serial.autoReset(() => {
+                    removeUrlParameter("detected_tv_fw_version");
+                    removeUrlParameter("latest_tv_fw_version");
                     setScreen("update");
                 });
             });
@@ -561,8 +573,13 @@ if(window.location.pathname.indexOf("Update") != -1){
 
         let firmwareAndVersionInfo = JSON.parse(await response.text());
 
+        insertUrlParameter("detected_tv_fw_version", detectedFirmwareVer["MAJOR"] + "." + detectedFirmwareVer["MINOR"] + "." + detectedFirmwareVer["PATCH"]);
+
         if(detectedTVType == TV_TYPES.TINYTV_2){
             insertUrlParameter("type", "tv2");
+            insertUrlParameter("latest_tv_fw_version", firmwareAndVersionInfo["tinytv2"]["latest-version"][0] + "." +
+                                                       firmwareAndVersionInfo["tinytv2"]["latest-version"][1] + "." +
+                                                       firmwareAndVersionInfo["tinytv2"]["latest-version"][2]);
             if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][0] ||
                detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][1] ||
                detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytv2"]["latest-version"][2]){
@@ -574,6 +591,9 @@ if(window.location.pathname.indexOf("Update") != -1){
             }
         }else if(detectedTVType == TV_TYPES.TINYTV_MINI){
             insertUrlParameter("type", "tvmini");
+            insertUrlParameter("latest_tv_fw_version", firmwareAndVersionInfo["tinytvmini"]["latest-version"][0] + "." +
+                                                       firmwareAndVersionInfo["tinytvmini"]["latest-version"][1] + "." +
+                                                       firmwareAndVersionInfo["tinytvmini"]["latest-version"][2]);
             if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][0] ||
                detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][1] ||
                detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytvmini"]["latest-version"][2]){
@@ -585,6 +605,9 @@ if(window.location.pathname.indexOf("Update") != -1){
             }
         }else if(detectedTVType == TV_TYPES.TINYTV_DIY){
             insertUrlParameter("type", "tvdiy");
+            insertUrlParameter("latest_tv_fw_version", firmwareAndVersionInfo["tinytvdiy"]["latest-version"][0] + "." +
+                                                       firmwareAndVersionInfo["tinytvdiy"]["latest-version"][1] + "." +
+                                                       firmwareAndVersionInfo["tinytvdiy"]["latest-version"][2]);
             if(detectedFirmwareVer["MAJOR"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][0] ||
                detectedFirmwareVer["MINOR"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][1] ||
                detectedFirmwareVer["PATCH"] < firmwareAndVersionInfo["tinytvdiy"]["latest-version"][2]){
