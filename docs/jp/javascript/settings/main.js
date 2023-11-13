@@ -41,7 +41,7 @@ if(window.location.pathname.indexOf("Settings") != -1){
         }
     }
 
-    let get = async (value, ignoreUnsupportedSettingsWarning=true) => {
+    let get = async (value, ignoreUnsupportedSettingsWarning=false) => {
         received = "";
 
         let sendStr = "{\"GET\":\"" + value + "\"}";
@@ -116,6 +116,13 @@ if(window.location.pathname.indexOf("Settings") != -1){
         let showVolume = JSON.parse(received)["showVolume"];
         document.getElementById("showVolumeOn").checked = showVolume;
         document.getElementById("showVolumeOff").checked = !showVolume;
+
+        // Get show volume setting
+        received = await get("randStartTime");
+        console.warn(received);
+        let randStartTime = JSON.parse(received)["randStartTime"];
+        document.getElementById("randStartTimeOn").checked = randStartTime;
+        document.getElementById("randStartTimeOff").checked = !randStartTime;
     }
 
     serial.onConnectionCanceled = () => {
@@ -193,6 +200,13 @@ if(window.location.pathname.indexOf("Settings") != -1){
     }
     document.getElementById("showVolumeOn").oninput = (event) => {
         set("showVolume=true");
+    }
+
+    document.getElementById("randStartTimeOff").oninput = (event) => {
+        set("randStartTime=false");
+    }
+    document.getElementById("randStartTimeOn").oninput = (event) => {
+        set("randStartTime=true");
     }
 
     document.getElementById("showChannelNumberOff").oninput = (event) => {

@@ -125,7 +125,10 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row; border-bottom: 1px solid var(--md-default-fg-color)">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="The current volume of the TV" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Set the current volume of the TV" style="width:100%; flex:1; display:flex; text-wrap:nowrap; flex-wrap:nowrap; flex-flow:row; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Volume:
           </div>
           <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: start; align-items: center;">
@@ -137,14 +140,17 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Make the videos loop over and over without switching to the next automatically" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Make videos loop without switching to the next automatically" style="width:100%; flex:1; display:flex; flex-wrap:nowrap; text-wrap:nowrap; flex-flow:row; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Loop Video:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="loopVideoOff" name="loopVideo" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="loopVideoOn" name="loopVideo" style="width:17px; height:17px">
           </div>
@@ -153,14 +159,17 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Make all videos play in the background. When off, videos pause until switched back to" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Make all videos play in the background. When off, videos pause until switched back to" style="width:100%; flex:1; display:flex; text-wrap:nowrap; flex-flow:row; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Live Video:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="liveVideoOff" name="liveVideo" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="liveVideoOn" name="liveVideo" style="width:17px; height:17px">
           </div>
@@ -169,14 +178,17 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Toggle ordering the video playlist by name (or number)" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
-            Alphabetize Playback Order:
+          <div title="Toggle ordering the video playlist by name (or number)" style="width:100%; flex:1; display:flex; flex-flow:row; text-wrap:nowrap; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            Alphabetize Playback:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="alphabetizePlaybackOrderOff" name="playbackOrder" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="alphabetizePlaybackOrderOn" name="playbackOrder" style="width:17px; height:17px">
           </div>
@@ -185,14 +197,17 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Toggle static effects that occur when the channel changes or the TV turns on" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle static effects that occur when the channel changes or the TV turns on" style="width:100%; flex:1; display:flex; text-wrap:nowrap; flex-flow:row; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Static Effect:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="staticEffectOff" name="static" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="staticEffectOn" name="static" style="width:17px; height:17px">
           </div>
@@ -201,14 +216,17 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Toggle the channel number that's shown when the channel is changed" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle the channel number that's shown when the channel is changed" style="width:100%; flex:1; display:flex; flex-flow:row; text-wrap:nowrap; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Show Channel Number:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="showChannelNumberOff" name="channelNumber" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="showChannelNumberOn" name="channelNumber" style="width:17px; height:17px">
           </div>
@@ -217,16 +235,38 @@ hide:
 
       <div style="width:100%; flex:1; display:flex; flex-flow:row;">
         <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
-          <div title="Toggle showing the volume slider that appears when the volume is changed" style="width:100%; flex:1; display:flex; flex-flow:column; justify-content: center; align-items: start; font-weight: bold;">
+          <div title="Toggle showing the volume slider that appears when the volume is changed" style="width:100%; flex:1; display:flex; flex-flow:row; text-wrap:nowrap; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
             Show Volume:
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             Off
             <input type="radio" id="showVolumeOff" name="showVolume" style="width:17px; height:17px">
           </div>
-          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: center; align-items: center;">
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
             On
             <input type="radio" id="showVolumeOn" name="showVolume" style="width:17px; height:17px">
+          </div>
+        </div>
+      </div>
+
+      <div style="width:100%; flex:1; display:flex; flex-flow:row;">
+        <div style="width:100%; flex:1; margin:16px; display:flex; flex-flow:row;">
+          <div title="Toggle between videos starting at a random spot on TV start up otherwise start at beginning of video" style="width:100%; flex:1; display:flex; text-wrap:nowrap; flex-wrap:nowrap; justify-content:start; align-items:center; font-weight:bold;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="min-width:20px; min-height:20px; width:20px; height:20px; margin:4px">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+            Random Start Time:
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
+            Off
+            <input type="radio" id="randStartTimeOff" name="randStartTime" style="width:17px; height:17px">
+          </div>
+          <div style="width:100%; flex:1; display:flex; flex-flow:row; justify-content: end; align-items: center;">
+            On
+            <input type="radio" id="randStartTimeOn" name="randStartTime" style="width:17px; height:17px">
           </div>
         </div>
       </div>

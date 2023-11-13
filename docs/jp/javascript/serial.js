@@ -66,7 +66,7 @@ class Serial{
 
 
     async write(data, encode=true){
-        if(this.writer){
+        if(this.writer && this.connected){
             if(encode){
                 await this.writer.write(this.encoder.encode(data));
             }else{
@@ -178,15 +178,21 @@ class Serial{
 
     async disconnect(fireCallback=true){
         if(this.connected){
+            this.connected = false;
+
             this.reader.releaseLock();
             this.writer.releaseLock();
-            this.port.close();
+
+            try{
+                await this.port.close();
+            }catch(error){
+                console.log("Port may be already closed:", error)
+            }
 
             this.reader = undefined;
             this.writer = undefined;
             this.port = undefined;
 
-            this.connected = false;
             if(fireCallback) this.onDisconnect();
 
             console.log("Serial disconnected!");
