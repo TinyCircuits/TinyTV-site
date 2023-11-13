@@ -70,6 +70,12 @@ class JPEGStreamer{
     #onSerialDisconnect(){
         this.onSerialDisconnect();
         this.#teardownStream();
+
+        // Set to undefined so that it is not sent on next connection
+        if (this.keepAliveLastFrame != undefined){
+            this.keepAliveLastFrame.close();
+            this.keepAliveLastFrame = undefined;
+        }
     }
 
 
@@ -81,6 +87,7 @@ class JPEGStreamer{
                 try{
                     // Clone the keep alive frame since it will be closed after the worker uses it
                     let tempFrameClone = this.keepAliveLastFrame.clone();
+                    console.log('Sending keepalive frame!');
                     this.convertWorker.postMessage({messageType: "frame", frame: this.keepAliveLastFrame}, [this.keepAliveLastFrame]);
                     this.keepAliveTimeAtLastFrameMS = performance.now();
 
@@ -97,6 +104,8 @@ class JPEGStreamer{
 
 
     async #processCapturedFrames(videoFrame, controller){
+        console.log("Getting frame ready to send!");
+
         if(this.lastFrameSent){
             // Keep a clone frame just in case so that it can be resent to keep TV in live mode
             this.keepAliveTimeAtLastFrameMS = performance.now();
@@ -122,6 +131,8 @@ class JPEGStreamer{
         return new Promise((resolve, reject) => {
             navigator.mediaDevices.getDisplayMedia(this.DISPLAY_MEDIA_OPTIONS)
             .then((stream) => {
+                console.log("Setting up stream!");
+
                 this.streamCapture = stream;
 
                 // Handle the case of a user stopping a stream some other way other than the STOP button
@@ -142,6 +153,7 @@ class JPEGStreamer{
                 resolve();
             })
             .catch((reason) => {
+                console.error(reason);
                 reject(reason);
             });
         });
@@ -149,8 +161,20 @@ class JPEGStreamer{
 
 
     #teardownStream(){
-        if(this.streamVideoTrack != undefined) this.streamVideoTrack.stop();
+        console.log("Tearing down stream!");
+
+        if(this.streamVideoTrack != undefined){
+            this.streamVideoTrack.stop();
+            this.streamVideoTrack = null;
+        }
+
+        if(this.streamCapture != undefined){
+            this.streamCapture.removeEventListener("inactive", this.#handleStreamStop.bind(this));
+        }
+
         this.lastFrameSent = true;
+
+        window.location.reload(true);
     }
 
 
