@@ -14,9 +14,6 @@ hide:
 
 The TinyTV Converter App is used to convert and scale videos for TinyCircuits TinyTV devices. Our TinyTVs are small and require specific video formats, so you will need to convert all videos you want on your TinyTV using the App from this tutorial. 
 
-_Note: If you are looking to convert videos to load onto the <a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_blank" alt="TinyTV Kit product page">**TinyTV DIY Kit**</a> (shipped before Summer 2023) please refer to the <a href="../TinyTV-DIY-Kit/TSV-Converter-Tutorial/" target="_blank" alt="TinyCircuits TSV Converter tutorial">**TSV Converter**</a> application tutorial._
-
-
 
 <div class="grid" markdown>
 
@@ -24,7 +21,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "Windows"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.3.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.3, updated 8/15/2023, supports Windows 10 64-bit and newer) 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.4.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.4, updated 12/19/2023, supports Windows 10 64-bit and newer) 
 
     Click the above link and wait for the download to complete.
     
@@ -35,7 +32,8 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.3.zip" download target="_blank" alt="Mac Intel Installer">**MacOS Download**</a> (1.0.3, updated 8/15/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.4.zip" download target="_blank" alt="Mac Intel Installer">**Mac OS Download**</a> (1.0.4, updated 12/19/2023, supports Intel and Apple Silicon, macOS 12.0.0 and newer)
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOSX1.0.4.zip" download target="_blank" alt="Mac Intel Installer">**Mac OS X Download**</a> (1.0.4, updated 12/19/2023, supports macOS 10.13.6 and newer)
 
     The TinyTV converter app is not currently signed so you will need to right-click the file in Finder and click **Open**, then click **Open** again in the warning dialog.
 
@@ -43,9 +41,7 @@ _Note: If you are looking to convert videos to load onto the <a href="https://ti
 </div>
     
 
-
 ---
-
 
 
 ## Using TinyTV Converter
@@ -68,7 +64,7 @@ Once you have downloaded the correct application version for your system, you ca
 ## Upload Converted Videos
 
 - **Connect**
-    - For TinyTV 2 and Mini users, plug the TV in using a USB-C cable and turn it ON by quickly pressing the power button (top button on TinyTV 2 and middle top button on the Mini). after a few seconds an external storage drive will appear on your computer.<br>_Note: For TinyTV DIY Kit users, remove the SD card from your TV and insert it into your computer or card reader_
+    - For TinyTV 2 and Mini users, plug the TV in using a USB-C cable and turn it ON by quickly pressing the power button (top button on TinyTV 2 and middle top button on the Mini). After a few seconds an external storage drive will appear on your computer.<br>_Note: For TinyTV DIY Kit users, remove the SD card from your TV and insert it into your computer or card reader_
 <br>
 - **Copy**
     - Copy and paste or drag converted _.avi_ files to the external drive. Wait for the copy to complete, it may take a few moments
@@ -92,6 +88,10 @@ Once you have downloaded the correct application version for your system, you ca
 
 
 ## TinyTV Converter App version history:
+* v1.0.4
+    * Add option to normalize audio volume
+    * Fix conversions of videos with audio formats that resulted in incorrect playback speed
+    * Fix conversions of some videos with different pixel formats causing color issues or blank frames
 * v1.0.3
     * Fix TSV output files for DIY Kit
 * v1.0.2

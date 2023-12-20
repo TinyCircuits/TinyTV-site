@@ -22,7 +22,9 @@ All TinyTVs come with an 8GB micro SD Card pre-loaded with some demo videos. The
 TinyTV 2 and Mini can only be turned on using the remote for up to two minutes after quickly pressing the power button. There are two "off modes" the TVs have, soft off and hard off:
 
   * **Soft off**: When quickly pressing the power button to turn the TV off it goes into **soft off** mode. The remote can be used for up to two minutes to turn it back on.
-  * **Hard off**: After two minutes in **soft off** mode the TV cannot be turned back on using the remote. This mode conserves the most battery life. Quickly press the power button to turn it back on.
+  * **Hard off**: After five minutes in **soft off** mode the TV cannot be turned back on using the remote. This mode conserves the most battery life. Quickly press the power button to turn it back on.
+
+  _NOTE: Before version 1.2.1 TinyTV 2 and Mini would shutoff in two minutes. The time it takes to automatically shutoff in 'Soft Off' mode can be adjusted in the 'settings.txt' file on the TV using 'powerOffSecs'_
 
 ---
 
