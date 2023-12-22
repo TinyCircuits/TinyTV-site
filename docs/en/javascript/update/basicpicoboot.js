@@ -50,14 +50,14 @@ class BasicPicoboot{
                 try{
                     dirHandle = await showDirectoryPicker({id: 0, mode: "readwrite", startIn: "downloads"});
                 }catch(error){
-                    this.onError(error.toString());
+                    this.onError("Error during getting directory... " + error.toString());
                 }
                 
                 if(dirHandle != undefined && dirHandle.name == "\\"){
                     this.onUpdateStart();
                     const response = await fetch(firmwareURL, {cache: 'no-store', pragma: 'no-cache'});
                     if(response.ok == false){
-                        this.onError("404: firmware file not found " + firmwareURL);
+                        this.onError("404: firmware file not found... " + firmwareURL);
                         return;
                     }
                     const uf2Data = await (response).arrayBuffer();
@@ -97,7 +97,7 @@ class BasicPicoboot{
 
         const response = await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'});
         if(response.ok == false){
-            this.onError("404: firmware file not found " + firmwarePath);
+            this.onError("404: firmware file not found... " + firmwarePath);
             return;
         }
         const uf2Data = await (response).arrayBuffer();
@@ -261,7 +261,7 @@ class BasicPicoboot{
                 }
             }catch(error){
                 console.warn("Error, maybe disconnected?");
-                if(!this.showErrorMsg) this.onError();
+                if(!this.showErrorMsg) this.onError("Error during flash erase...");
             }
         });
     }
@@ -300,7 +300,7 @@ class BasicPicoboot{
                 }
             }catch(error){
                 console.warn("Error, maybe disconnected?");
-                if(!this.showErrorMsg) this.onError();
+                if(!this.showErrorMsg) this.onError("Error during flash writing...");
             }
         });
     }

@@ -400,7 +400,7 @@ if(window.location.pathname.indexOf("Update") != -1){
             show("cancelUpdate");
 
             setClickCallback("connectButton", async () => {
-                programmer.onError = (message="") => {
+                programmer.onError = (message) => {
                     setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the update process, contact us, or cancel?\n" + message);
                     setInnerText("connectButton", "Restart");
                     hide("progressBar");
@@ -449,7 +449,6 @@ if(window.location.pathname.indexOf("Update") != -1){
                 }
 
                 programmer.onUpdateComplete = () => {
-                    removeUrlParameter("screen");
                     removeUrlParameter("type");
                     setScreen("update_complete");
                 }
