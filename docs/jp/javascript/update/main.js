@@ -180,6 +180,13 @@ if(window.location.pathname.indexOf("Update") != -1){
 
                 onTVTypeAndVersionDetected();
             }
+        }else if(screen == "copy_update"){
+            setClickCallback("connectButton", serial.connect.bind(serial, 2000000, 2048));
+            setInnerText("connectButton", "Connect TV");
+
+            setInnerText("infoOutput", "Manually choose your TV");
+            show("infoOutput");
+            show("connectButton");
         }else if(screen == "manual_update"){
             setInnerText("infoOutput", "Manually choose your TV");
             show("manualChoice");
@@ -400,7 +407,7 @@ if(window.location.pathname.indexOf("Update") != -1){
             show("cancelUpdate");
 
             setClickCallback("connectButton", async () => {
-                programmer.onError = (message="") => {
+                programmer.onError = (message) => {
                     setInnerText("description", "Error, cannot continue update. Was the device disconnected?\nWould you like to restart the update process, contact us, or cancel?\n" + message);
                     setInnerText("connectButton", "Restart");
                     hide("progressBar");
@@ -449,7 +456,6 @@ if(window.location.pathname.indexOf("Update") != -1){
                 }
 
                 programmer.onUpdateComplete = () => {
-                    removeUrlParameter("screen");
                     removeUrlParameter("type");
                     setScreen("update_complete");
                 }

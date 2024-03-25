@@ -15,6 +15,47 @@ class BasicPicoboot{
     }
 
 
+    async wait(timeMS){
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve();
+            }, timeMS)
+        });
+    }
+
+
+    async copyUpdate(firmwareURL){
+        // Get the directory
+
+        let dirHandle = undefined;
+        try{
+            dirHandle = await showDirectoryPicker({id: 0, mode: "readwrite", startIn: "downloads"});
+        }catch(error){
+            this.onError("Error during getting directory... " + error.toString());
+        }
+        
+        if(dirHandle != undefined && dirHandle.name == "\\"){
+            this.onUpdateStart();
+            const response = await fetch(firmwareURL, {cache: 'no-store', pragma: 'no-cache'});
+            if(response.ok == false){
+                this.onError("404: firmware file not found... " + firmwareURL);
+                return;
+            }
+            const uf2Data = await (response).arrayBuffer();
+
+            const fileHandle = await dirHandle.getFileHandle("firmware.uf2", {create: true});
+            const writable = await fileHandle.createWritable();
+            this.onUpdateProgress(35);
+            await writable.write(uf2Data);
+            this.onUpdateProgress(75);
+            await writable.close();
+            this.onUpdateComplete();
+        }else{
+            this.onError("It looks like the wrong directory was selected (or none at all)...");
+        }
+    }
+
+
     async connectUpdate(firmwareURL){
         try{
             this.showErrorMsg = false;
@@ -30,12 +71,15 @@ class BasicPicoboot{
 
             await this.device.claimInterface(1);
             this.connected = true;
+            await this.wait(1);
 
             // Get USB exclusive control according to the datasheet PICOBOOT interface commands
             await this.#exclusive();
+            await this.wait(1);
 
             // Wireshark does this after every erase and write but it seems to work by just doing it once
             await this.#exitxip();
+            await this.wait(1);
 
             await this.update(firmwareURL);
         }catch(error){
@@ -44,34 +88,7 @@ class BasicPicoboot{
             if(error.toString().indexOf("An operation that changes interface state is in progress") != -1){
                 this.onOpenFail();
 
-                // Get the directory
-
-                let dirHandle = undefined;
-                try{
-                    dirHandle = await showDirectoryPicker({id: 0, mode: "readwrite", startIn: "downloads"});
-                }catch(error){
-                    this.onError("Error during getting directory... " + error.toString());
-                }
-                
-                if(dirHandle != undefined && dirHandle.name == "\\"){
-                    this.onUpdateStart();
-                    const response = await fetch(firmwareURL, {cache: 'no-store', pragma: 'no-cache'});
-                    if(response.ok == false){
-                        this.onError("404: firmware file not found... " + firmwareURL);
-                        return;
-                    }
-                    const uf2Data = await (response).arrayBuffer();
-
-                    const fileHandle = await dirHandle.getFileHandle("firmware.uf2", {create: true});
-                    const writable = await fileHandle.createWritable();
-                    this.onUpdateProgress(35);
-                    await writable.write(uf2Data);
-                    this.onUpdateProgress(75);
-                    await writable.close();
-                    this.onUpdateComplete();
-                }else{
-                    this.onError("It looks like the wrong directory was selected (or none at all)...");
-                }
+                this.copyUpdate(firmwareURL);
             }else{
                 // User did not select anything and closed browser dialog
                 this.onConnectionCanceled();
@@ -118,7 +135,11 @@ class BasicPicoboot{
 
             if(ipx+1 == (flashSectorSize/uf2BlockPayloadSize) || ibx+1 == uf2BlockCount){
                 await this.#flasherase(uf2FlashStartAddress+flashAddressOffset, flashSectorSize);
+                await this.wait(10);
+
                 await this.#flashwrite(uf2FlashStartAddress+flashAddressOffset, flashSectorSize, uf2Payload);
+                await this.wait(10);
+
                 uf2Payload = new Uint8Array(flashSectorSize);
                 ipx = -1;
                 flashAddressOffset += flashSectorSize;
@@ -154,6 +175,7 @@ class BasicPicoboot{
             dataView.setUint8(0x10, 0x02);                // Exclusive, no MSC
 
             await this.device.transferOut(3, new Uint8Array(packet));
+            await this.wait(10);
 
             let data = await this.device.transferIn(4, 64);
             if(data.status != "ok"){
@@ -187,6 +209,7 @@ class BasicPicoboot{
             dataView.setUint32(0x18 , 0x00005631, true);  // ms Delay (needs to be something other than 0! Copied from Wireshark picotool output)
 
             await this.device.transferOut(3, new Uint8Array(packet));
+            await this.wait(10);
 
             let data = await this.device.transferIn(4, 64);
             if(data.status != "ok"){
@@ -217,6 +240,7 @@ class BasicPicoboot{
             dataView.setUint32(0x0c , 0x00000000, true);  // Transfer length
 
             await this.device.transferOut(3, new Uint8Array(packet));
+            await this.wait(10);
 
             let data = await this.device.transferIn(4, 64);
             if(data.status != "ok"){
@@ -250,6 +274,7 @@ class BasicPicoboot{
 
             try{
                 await this.device.transferOut(3, new Uint8Array(packet));
+                await this.wait(10);
                 let data = await this.device.transferIn(4, 64);
 
                 if(data.status != "ok"){
@@ -287,7 +312,10 @@ class BasicPicoboot{
 
             try{
                 await this.device.transferOut(3, new Uint8Array(packet));
+                await this.wait(10);
+
                 await this.device.transferOut(3, new Uint8Array(payload));
+                await this.wait(10);
 
                 let data = await this.device.transferIn(4, 64);
 

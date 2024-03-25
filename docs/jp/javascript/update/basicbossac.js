@@ -77,7 +77,7 @@ class BasicBossac{
             this.serial.onConnectionCanceled = this.onConnectionCanceled.bind(this);
             this.serial.onDisconnect = () => {
                 this.connected = false;
-                this.onError();
+                this.onError("Error while connecting, serial disconnected...");
             }
             this.serial.onConnect = () => {
                 this.connected = true;
@@ -144,11 +144,17 @@ class BasicBossac{
 
             const response = await fetch(firmwarePath, {cache: 'no-store', pragma: 'no-cache'});
             if(response.ok == false){
-                this.onError("404: firmware file not found " + firmwarePath);
+                this.onError("404: firmware file not found... " + firmwarePath);
                 return;
             }
             const binData = new Uint8Array(await (response).arrayBuffer());
             const packetCount = Math.ceil(binData.byteLength/this.uploadPacketSize); // Round up since .slice() will figure out the end
+
+            // Show error if disconnect during update
+            this.serial.onDisconnect = () => {
+                this.connected = false;
+                this.onError("Error while updating, serial disconnected...");
+            }
 
             this.onUpdateStart();
 
@@ -167,10 +173,15 @@ class BasicBossac{
                 }
             }
 
+            // Show error if disconnect during update
+            this.serial.onDisconnect = () => {
+                this.connected = false;
+            }
+
             await this.#reboot();
             this.onUpdateComplete();
         }catch(error){
-            this.onError(error);
+            this.onError("Error during update... " + error.toString());
         }
     }
 }

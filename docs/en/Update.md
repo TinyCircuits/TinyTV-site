@@ -170,7 +170,7 @@ hide:
 
 <!-- NOTE: elements in this page are referenced by javascript in project folder /docs/javascripts/update/main.js -->
 <body>
-  <div style="position:absolute; left:10px; bottom:10px; color:rgb(97, 101, 117)">1.0.0</div>
+  <div style="position:absolute; left:10px; bottom:10px; color:rgb(97, 101, 117)">1.0.1</div>
 
   <section id="updateSection" class="tx-container flex-center" style="width:100%; height:100%">
     <h2>TV Updating</h2>

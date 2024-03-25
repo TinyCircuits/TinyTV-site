@@ -24,7 +24,7 @@ _注意：<a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_bl
 
 === "Windows 版"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.3.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows 版ダウンロード**</a>（バージョン1.0.3、2023年8月15日更新、Windows 10 64ビット以降に対応） 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.4.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows 版ダウンロード**</a>（バージョン1.0.3、2023年12月19日更新、Windows 10 64ビット以降に対応） 
 
     上記のリンクをクリックして、ダウンロードが完了するまで待ってください。
 
@@ -35,11 +35,9 @@ _注意：<a href="https://tinycircuits.com/products/tinytv-diy-kit" target="_bl
 
 === "MacOS 版"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.3.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 版ダウンロード**</a> バージョン1.0.3、2023年8月15日更新、IntelとApple Silicon、macOS 12.0.0以降に対応）
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.5.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 版ダウンロード**</a> バージョン1.0.5、2024年3月25日更新、IntelとApple Silicon、macOS 10.13.6以降に対応）
 
-    TinyTVコンバーターアプリは現在署名されていないため、Finderでファイルを右クリックし、「開く」を選択し、警告ダイアログで再度「開く」をクリックしてください。
-
-    <center><img width="75%" height="75%" src="../images/Mac-double-open-menus.jpg" /></center>
+    ダウンロードしたファイルをダブルクリックし、MacOS のプロンプトに従ってアプリを開きます
 </div>
     
 

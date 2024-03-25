@@ -97,7 +97,7 @@ class Serial{
 
                     // If data defined, stream it to onData
                     if(value){
-                        console.log(this.decoder.decode(value))
+                        console.log(this.decoder.decode(value));
                         // If we're waiting on a specific string, add this chunk
                         // to all teh received so it can be searched through
                         if(this.waiting){
