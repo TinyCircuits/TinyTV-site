@@ -60,35 +60,60 @@ class BasicPicoboot{
         try{
             this.showErrorMsg = false;
 
+            let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
+            //let platform = 'Windows'
+
+            console.log(platform);
+
+            if((platform != 'macOS') && (platform != 'Linux')) {
+              throw new Error('Fallback');
+            }
+
             // Do web side of getting the device
             this.device = await navigator.usb.requestDevice({ filters: [{vendorId: 0x2E8A, productId: 0x0003}]});
 
             await this.device.open();
 
             if(this.device.configuration === null){
-                await device.selectConfiguration(1);
+                console.log("Selecting device configuration...");
+                await this.device.selectConfiguration(1);
             }
 
             await this.device.claimInterface(1);
-            this.connected = true;
-            await this.wait(1);
+            try {
+              console.log("Connected!");
+              this.connected = true;
+              await this.wait(1);
 
-            // Get USB exclusive control according to the datasheet PICOBOOT interface commands
-            await this.#exclusive();
-            await this.wait(1);
+              console.log("Getting #exclusive control...");
+              // Get USB exclusive control according to the datasheet PICOBOOT interface commands
+              await this.#exclusive();
+              await this.wait(1);
 
-            // Wireshark does this after every erase and write but it seems to work by just doing it once
-            await this.#exitxip();
-            await this.wait(1);
+              console.log("Writing #exitxip...");
+              // Wireshark does this after every erase and write but it seems to work by just doing it once
+              await this.#exitxip();
+              await this.wait(1);
 
-            await this.update(firmwareURL);
+              console.log("this.update...");
+              await this.update(firmwareURL);
+              console.log("Done!");
+            } finally {
+              await this.device.releaseInterface(1);
+            }
         }catch(error){
             console.log(error);
 
             if(error.toString().indexOf("An operation that changes interface state is in progress") != -1){
-                this.onOpenFail();
+                console.log("Open fail!");
+                this.onOpenFail(false);
 
                 this.copyUpdate(firmwareURL);
+            }else if(error.toString().indexOf("Fallback") != -1) {
+              console.log("Not Darwin or Linux! Using fallback");
+              this.onOpenFail(true);
+
+              this.copyUpdate(firmwareURL);
             }else{
                 // User did not select anything and closed browser dialog
                 this.onConnectionCanceled();

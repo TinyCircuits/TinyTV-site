@@ -174,7 +174,7 @@ hide:
 
   <section id="updateSection" class="tx-container flex-center" style="width:100%; height:100%">
     <h2>TV Updating</h2>
-    
+
     <p id="description" style="display:flex; text-align: center;">Update software on TinyTV 2, Mini, or DIY Kit</p>
     <div id="mainScreenBulletList">
       <ul style="list-style-type:decimal">
@@ -251,6 +251,10 @@ hide:
       </video>
     </div>
 
+    <div id="fallbackSelectImageContainer" style="height:60%; aspect-ratio:2/1; display:flex; flex-direction:row; justify-content:center; align-items:center;" class="invisible">
+      <center><img src="../images/fallbackDeviceSelect.png" alt="RPI-RP2 directory" style="height:350px; margin-bottom:0px; margin-top:0px; object-fit:scale-down;"/></center>
+    </div>
+
 
     <div id="manualChoice" class="invisible" style="width:100%; display:flex; flex-flow:column; align-items:center; justify-content:center;">
       <h3 id="infoOutput" class="invisible" style="margin-bottom:0px; margin-top:20px;">Detecting TV...</h3>
@@ -261,7 +265,7 @@ hide:
             <center><img src="../images/tinytvmini.svg" alt="TinyTV Mini" style="height:100px; object-fit:scale-down;" class="filter-svg"/></center>
           </a>
         </div>
-      
+
         <div class="item-parent">
           <a id="chose2" class="item-child">
             <center><h2>TinyTV 2 </h2></center>

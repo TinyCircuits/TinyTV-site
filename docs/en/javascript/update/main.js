@@ -393,12 +393,37 @@ if(window.location.pathname.indexOf("Update") != -1){
             const tvtype = getUrlParameter("type");
             let programmer = undefined;
 
-            if(tvtype == "tv2" || tvtype == "tvmini"){
-                programmer = picoboot;
-                setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select the 'RP2 Boot' device");
-            }else{
-                programmer = bossac;
-                setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select 'USB Serial Device'");
+            let platform = navigator?.userAgentData?.platform || navigator?.platform || 'unknown'
+            //let platform = 'Windows'
+
+            console.log(platform);
+
+            if((platform == 'macOS') || (platform == 'Linux')) {
+              if(tvtype == "tv2" || tvtype == "tvmini"){
+                  programmer = picoboot;
+                  console.log("Using picoboot programmer!");
+                  setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select the 'RP2 Boot' device");
+                  setInnerText("connectButton", "Connect");
+              }else{
+                  programmer = bossac;
+                  console.log("Using bossac programmer!");
+                  setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select 'USB Serial Device'");
+                  setInnerText("connectButton", "Connect");
+              }
+            } else {
+              if(tvtype == "tv2" || tvtype == "tvmini"){
+                  programmer = picoboot;
+                  console.log("Using picoboot programmer!");
+                  show("fallbackSelectImageContainer");
+                  setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and navigate to RPI-RP2 directory");
+                  setInnerText("connectButton", "Open RPI-RP2");
+              }else{
+                  programmer = bossac;
+                  console.log("Using bossac programmer!");
+                  setInnerText("description", "The TV should now be in update mode and ready to connect to!\nClick the button below and select 'USB Serial Device'");
+                  setInnerText("connectButton", "Connect");
+              }
+
             }
 
             setInnerText("connectButton", "Connect");
@@ -422,11 +447,16 @@ if(window.location.pathname.indexOf("Update") != -1){
                 programmer.onConnectionCanceled = () => {
                     setInnerText("description", "No device selected or something is using it, could not connect and update.\nWould you like to try connecting again, contacting us, or canceling?");
                     setInnerText("connectButton", "Try again");
+                    hide("fallbackSelectImageContainer");
                     show("contactusButton");
                 }
 
-                programmer.onOpenFail = () => {
-                    setInnerText("description", "Something went wrong when trying to update over USB.\nPlease select the 'RPI-RP2' device in File Explorer and agree to the popup dialog");
+                programmer.onOpenFail = (isWindows = false) => {
+                    if(isWindows) {
+                      setInnerText("description", "Please select the 'RPI-RP2' device in File Explorer and agree to the popup dialog");
+                    } else {
+                      setInnerText("description", "Something went wrong when trying to update over USB.\nPlease select the 'RPI-RP2' device in File Explorer and agree to the popup dialog");
+                    }
                     hide("connectButton");
                     setClickCallback("cancelUpdate", () => {
                         programmer.disconnect(false);
@@ -439,6 +469,7 @@ if(window.location.pathname.indexOf("Update") != -1){
                     setInnerText("description", "Updating...");
                     setInnerText("connectButton", "Disconnect");
                     hide("contactusButton");
+                    hide("fallbackSelectImageContainer");
                     setClickCallback("connectButton", () => {
                         programmer.disconnect(true);
                     });
@@ -493,6 +524,8 @@ if(window.location.pathname.indexOf("Update") != -1){
                     await programmer.connectUpdate(firmwareAndVersionInfo["tinytvmini"]["firmware-url"]);
                 }else if(tvtype == "tvdiy"){
                     await programmer.connectUpdate(firmwareAndVersionInfo["tinytvdiy"]["firmware-url"]);
+                } else {
+                    console.log("No tv type!!");
                 }
             });
         }else if(screen == "update_not_needed"){
