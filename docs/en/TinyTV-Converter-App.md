@@ -32,9 +32,13 @@ The TinyTV Converter App is used to convert and scale videos for TinyCircuits Ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.5.zip" download target="_blank" alt="Mac Intel Installer">**Mac OS Download**</a> (1.0.5, updated 03/25/2024, supports Intel and Apple Silicon, macOS 10.13.6 and newer)
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.5.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 12.7.6+ Download**</a> (1.0.5, updated 03/25/2024, supports Intel and Apple Silicon processors)
 
     Double click on the downloaded file and follow the MacOS prompts to open the app.
+
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.4.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 10.13.6+ Download**</a> (1.0.4, updated 03/20/2024, supports Intel processors)
+
+    Double click on the downloaded file - if macOS does not allow you to open the app, you may need to follow instructions from Apple to run this unsigned app <a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac" download target="_blank" alt="Unsigned App Install">**here**</a>
 </div>
     
 
@@ -85,6 +89,8 @@ Once you have downloaded the correct application version for your system, you ca
 
 
 ## TinyTV Converter App version history:
+* v1.0.5
+    * App signed for MacOS to avoid security warnings, no feature changes
 * v1.0.4
     * Add option to normalize audio volume
     * Fix conversions of videos with audio formats that resulted in incorrect playback speed
