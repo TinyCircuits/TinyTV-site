@@ -21,7 +21,7 @@ The TinyTV Converter App is used to convert and scale videos for TinyCircuits Ti
 
 === "Windows"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.0.4.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.0.4, updated 12/19/2023, supports Windows 10 64-bit and newer) 
+    - <a href="https://files.tinycircuits.com/TinyTVConverterWindows1.1.0.zip" download target="_blank" alt="Windows 64 bit Installer">**Windows Download**</a> (1.1.0, updated 03/25/2026, supports Windows 10 64-bit and newer) 
 
     Click the above link and wait for the download to complete.
     
@@ -32,13 +32,10 @@ The TinyTV Converter App is used to convert and scale videos for TinyCircuits Ti
 
 === "MacOS"
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.5.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 12.7.6+ Download**</a> (1.0.5, updated 03/25/2024, supports Intel and Apple Silicon processors)
+    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.1.0.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 12.7.6+ Download**</a> (1.1.0, updated 03/25/2026, supports Intel and Apple Silicon processors)
 
     Double click on the downloaded file and follow the MacOS prompts to open the app.
 
-    - <a href="https://files.tinycircuits.com/TinyTVConverterMacOS1.0.4.zip" download target="_blank" alt="Mac Intel Installer">**MacOS 10.13.6+ Download**</a> (1.0.4, updated 03/20/2024, supports Intel processors)
-
-    Double click on the downloaded file - if macOS does not allow you to open the app, you may need to follow instructions from Apple to run this unsigned app <a href="https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac" download target="_blank" alt="Unsigned App Install">**here**</a>
 </div>
     
 
@@ -49,7 +46,7 @@ The TinyTV Converter App is used to convert and scale videos for TinyCircuits Ti
 
 Once you have downloaded the correct application version for your system, you can start converting videos!
 
-<center><img width="60%" height="60%" src="../images/Converter-screen.JPG" /></center>
+<center><img width="60%" height="60%" src="../images/Converter-screen.png" /></center>
 
 1. Click the **Open Video** button and choose a video file to convert.
 2. Select the TV type that you want to convert videos for
@@ -89,6 +86,11 @@ Once you have downloaded the correct application version for your system, you ca
 
 
 ## TinyTV Converter App version history:
+* v1.1.0
+    * Updated UI
+    * Add MP4 output format for improved compression with newer firmware
+    * Add batch directory conversion
+    * Add instruction manual for new users
 * v1.0.5
     * App signed for MacOS to avoid security warnings, no feature changes
 * v1.0.4
