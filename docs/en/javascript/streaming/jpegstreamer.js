@@ -21,7 +21,7 @@ class JPEGStreamer{
         this.streamProcessor = undefined;
         this.streamGenerator = undefined;
         this.streamTransformer = undefined;
-        
+
         // Web worker
         this.convertWorker = new Worker("/javascript/streaming/jpegstreamerWorker.js", {
             type: 'module'
@@ -139,7 +139,7 @@ class JPEGStreamer{
                 this.streamCapture.addEventListener("inactive", this.#handleStreamStop.bind(this));
 
                 this.streamVideoTrack = this.streamCapture.getVideoTracks()[0];
-    
+
                 this.streamProcessor = new MediaStreamTrackProcessor({ track: this.streamVideoTrack });
                 this.streamGenerator = new MediaStreamTrackGenerator({ kind: 'video' });
                 this.streamTransformer = new TransformStream({
@@ -147,7 +147,7 @@ class JPEGStreamer{
                     writableStrategy: {highWaterMark: 1},
                     readableStrategy: {highWaterMark: 1}
                 });
-    
+
                 this.streamProcessor.readable.pipeThrough(this.streamTransformer).pipeTo(this.streamGenerator.writable);
 
                 resolve();
@@ -209,11 +209,11 @@ class JPEGStreamer{
                 return;
             }
         });
-        
+
         // No device, make the user pair one for the worker to auto connect to
         if(!portFound){
             try{
-                await navigator.serial.requestPort({filters: [{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]});
+                await navigator.serial.requestPort({filters: [{usbVendorId:0x239A, usbProductId:0xCAFE}, {usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]});
                 portFound = true;
             }catch(err){
                 portFound = false;

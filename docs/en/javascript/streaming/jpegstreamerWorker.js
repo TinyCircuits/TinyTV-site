@@ -93,7 +93,7 @@ self.offscreenCanvasCtx = self.offscreenCanvas.getContext("2d");
 self.offscreenOutputCanvas = undefined;
 self.offscreenOutputCanvasCtx = undefined;
 
-self.serial = new Serial([{usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]);
+self.serial = new Serial([{usbVendorId:0x239A, usbProductId:0xCAFE}, {usbVendorId:11914, usbProductId:10}, {usbVendorId:0x03EB, usbProductId: 0x8008}, {usbVendorId:0x03EB, usbProductId: 0x8009}]);
 self.serial.onConnect = () => {
     self.postMessage({messageType: "connected", messageData: []});
 
@@ -150,7 +150,7 @@ self.sendFrame = async (frameBlob) => {
         let sendStr = "{\"FRAME\":" + frameBlob.size + "}";
         console.log("SENT: " + sendStr);
         await self.serial.write(sendStr, true);
-        
+
         // Write the actual jpeg frame
         await self.serial.write(new Uint8Array(await frameBlob.arrayBuffer()), false);
     }
@@ -172,10 +172,10 @@ self.onmessage = async (message) => {
 
         // Convert to jpeg blob
         const blob = await self.offscreenCanvas.convertToBlob({type: "image/jpeg", quality: self.currentJPEGQuality});
-        
+
         // Send the frame to the TV
         await self.sendFrame(blob);
-        
+
         // Convert jpeg to bitmap for preview (want to show the compression in the preview) and display it
         const bitmap = await createImageBitmap(blob, 0, 0, self.offscreenCanvas.width, self.offscreenCanvas.height);
         self.offscreenOutputCanvas.width = self.offscreenCanvas.width;
